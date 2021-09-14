@@ -1,0 +1,114 @@
+initialize() {
+
+    setwd("CURRENT_WORKDIR");
+
+    defineConstant("this_seed", INITIAL_SEED); 
+    defineConstant("simplification_interval", SIMPLIFICATION_INTERVAL);
+    defineConstant("burnin_file", "BURNIN_TREES_FILE");
+    defineConstant("save_file", "SAVE_TREES_FILE");
+    defineConstant("output_file", "OUTPUT_TREES_FILE");
+    defineConstant("metrics_output", "METRICS_OUTPUT_FILE");
+    defineConstant("restart_limit", RESTARTS_LIMIT);
+    defineConstant("h", DOMINANCE_COEFFICIENT);
+    defineConstant("L", LOCUS_SIZE);
+    defineConstant("r", RECOMBINATION_RATE);
+    defineConstant("selection_coordinate", SELECTION_COORDINATE);
+    defineConstant("f0", FREQUENCY_AT_SELECTION);
+    defineConstant("s", SELECTION_COEFFICIENT);
+    defineConstant("f_desired", FREQUENCY_AT_SAMPLING);
+
+    setSeed(this_seed);
+    initializeTreeSeq(simplificationInterval=simplification_interval);
+    initializeMutationRate(0);
+    initializeMutationType('m1', h, 'f', 0);
+    m1.convertToSubstitution = F;
+    initializeMutationType('m2', 0.5, 'f', 0); // Marker mutation for lineages
+    m2.convertToSubstitution = F;
+    initializeGenomicElementType('g1', m1, 1.0);
+    initializeGenomicElement(g1, 0, L);
+    initializeRecombinationRate(r);
+}
+
+1 late() {
+    sim.readFromPopulationFile(burnin_file);
+    sim.setValue('num_restarts', 0);
+}
+
+SELECTION_GENERATION late() {
+    origin = sample(sim.subpopulations.genomes, 1);
+    origin.addNewDrawnMutation(m1, selection_coordinate);
+    sim.treeSeqOutput(save_file);
+}
+
+SELECTION_GENERATION: late() {
+    mut = sim.mutationsOfType(m1);
+    freq = mutfreq();
+    if (size(mut) == 1) {
+        if (freq >= f0) {
+            cat("Established at " + freq + " - converting to beneficial\n");
+            defineConstant("establfreq", freq);
+            mut.setSelectionCoeff(s);
+            // Add marker mutations to track lineages
+            genomes = sim.subpopulations.genomes[sim.subpopulations.genomes.containsMutations(mut)];
+            for (genome in genomes) {
+                genome.addNewDrawnMutation(m2, selection_coordinate);
+            }
+            defineConstant("init_lineages", length(genomes));
+            sim.treeSeqOutput(save_file);
+            sim.deregisterScriptBlock(self);
+        }
+    } else {
+        cat("Lost before establishment; restarting.\n");
+        restart_sim(updates=F);
+    }
+}
+
+SELECTION_GENERATION:LAST_GENERATION late() {
+    freq = mutfreq();
+    if (freq >= f_desired) {
+      cat("Reached frequency " + freq + " >= " + f_desired + "; sampling.\n");
+        finalize_sim();
+    } else if (freq == 0) {
+     cat("Lost focus mutation; restarting.\n");
+        restart_sim(updates=T);
+    }
+}
+
+LAST_GENERATION late() {
+    cat("Still segregating at generation " + LAST_GENERATION + "; restarting.\n");
+    restart_sim(updates=T);
+}
+
+function (float)mutfreq(void) {
+    mut = sim.mutationsOfType(m1);
+    freq = sim.mutationFrequencies(NULL, mut);
+    return sum(freq);
+}
+
+function (void)restart_sim([logical$ updates = T]) {
+    sim.readFromPopulationFile(save_file);
+    setSeed(getSeed() + 1);
+    if (updates) {
+        mut = sim.mutationsOfType(m1);
+        mut.setSelectionCoeff(s);
+    }
+    sim.setValue('num_restarts', sim.getValue('num_restarts') + 1);
+    if (sim.getValue('num_restarts') > restart_limit) {
+        cat("Restarted more than " + restart_limit + " times; aborting.\n");
+        writeFile(strsplit(output_file, '.')[0] + ".failed", "");
+        sim.simulationFinished();
+    }
+}
+
+function (void)finalize_sim(void) {
+    sim.treeSeqOutput(output_file);
+    current_gen_record = paste(c('slim_generations =', sim.generation));
+    establishment_record = paste(c('frequency_at_selection =', establfreq));
+    num_rest_record = paste(c('num_restarts =', sim.getValue('num_restarts')));
+    num_final_lineages = paste(c('num_surviving_lineages =', sim.countOfMutationsOfType(m2)));
+    num_start_lineages = paste(c('num_starting_lineages =', init_lineages));
+    end_freq = paste(c('frequency_at_sampling =', mutfreq()));
+    records = c(current_gen_record, establishment_record, num_rest_record, num_start_lineages, num_final_lineages, end_freq);
+    writeFile(metrics_output, records, append=T);
+    sim.simulationFinished();
+}

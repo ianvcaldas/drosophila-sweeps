@@ -23,7 +23,7 @@ echo "Copying analysis scripts."
 cp -r ~/drosophila-sweeps/* .
 echo "Linking SLiM executable."
 mkdir bin
-ln -s ~/bin/slim3.6 bin/slim
+ln -s ~/bin/slim3.6 bin/slim3.6
 
 # We need this for conda environments to work in a script.
 echo "Activating conda environment."

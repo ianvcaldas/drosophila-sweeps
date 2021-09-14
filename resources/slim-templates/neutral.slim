@@ -1,0 +1,31 @@
+initialize() {
+
+    setwd("CURRENT_WORKDIR");
+
+    defineConstant("this_seed", INITIAL_SEED); 
+    defineConstant("simplification_interval", SIMPLIFICATION_INTERVAL);
+    defineConstant("burnin_file", "BURNIN_TREES_FILE");
+    defineConstant("output_file", "OUTPUT_TREES_FILE");
+    defineConstant("metrics_output", "METRICS_OUTPUT_FILE");
+    defineConstant("L", LOCUS_SIZE);
+    defineConstant("r", RECOMBINATION_RATE);
+
+    setSeed(this_seed);
+    initializeTreeSeq(simplificationInterval=simplification_interval);
+    initializeMutationRate(0);
+    initializeMutationType('m1', 0, 'f', 0);
+    initializeGenomicElementType('g1', m1, 1.0);
+    initializeGenomicElement(g1, 0, L);
+    initializeRecombinationRate(r);
+}
+
+1 late() {
+    sim.readFromPopulationFile(burnin_file);
+}
+
+LAST_GENERATION late() {
+    sim.treeSeqOutput(output_file);
+    current_gen_record = paste(c('slim_generations =', sim.generation));
+    writeFile(metrics_output, current_gen_record, append=T);
+    sim.simulationFinished();
+}

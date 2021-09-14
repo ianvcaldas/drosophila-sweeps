@@ -1,0 +1,98 @@
+initialize() {
+
+    setwd("CURRENT_WORKDIR");
+
+    defineConstant("this_seed", INITIAL_SEED); 
+    defineConstant("simplification_interval", SIMPLIFICATION_INTERVAL);
+    defineConstant("burnin_file", "BURNIN_TREES_FILE");
+    defineConstant("save_file", "SAVE_TREES_FILE");
+    defineConstant("output_file", "OUTPUT_TREES_FILE");
+    defineConstant("metrics_output", "METRICS_OUTPUT_FILE");
+    defineConstant("restart_limit", RESTARTS_LIMIT);
+    defineConstant("h", DOMINANCE_COEFFICIENT);
+    defineConstant("L", LOCUS_SIZE);
+    defineConstant("r", RECOMBINATION_RATE);
+    defineConstant("selection_coordinate", SELECTION_COORDINATE);
+    defineConstant("s", SELECTION_COEFFICIENT);
+    defineConstant("f_desired", FREQUENCY_AT_SAMPLING);
+    defineConstant("muA", ADAPTIVE_MUTATION_RATE);
+    defineConstant("end_neutral_region", END_NEUTRAL_REGION);
+    defineConstant("end_adaptive_region", END_ADAPTIVE_REGION);
+
+    setSeed(this_seed);
+    initializeTreeSeq(simplificationInterval=simplification_interval);
+    initializeMutationType('m1', h, 'f', s);
+    m1.convertToSubstitution = F;
+    m1.mutationStackPolicy = "f";
+    initializeGenomicElementType('g1', m1, 1.0);
+    initializeGenomicElement(g1, 0, L);
+    initializeRecombinationRate(r);
+    initializeMutationRate(0);
+}
+
+1 late() {
+    sim.readFromPopulationFile(burnin_file);
+    sim.setValue('num_restarts', 0);
+}
+
+SELECTION_GENERATION late() {
+    origin = sample(sim.subpopulations.genomes, 1);
+    origin.addNewDrawnMutation(m1, selection_coordinate);
+    sim.chromosome.setMutationRate(c(0, muA, 0), c(end_neutral_region, end_adaptive_region, L));
+    sim.treeSeqOutput(save_file);
+}
+
+SELECTION_GENERATION:LAST_GENERATION late() {
+    freq = mutfreq();
+    if (freq >= f_desired) {
+        cat("Reached combined frequency " + freq + " >= " + f_desired + "; sampling.\n");
+        finalize_sim();
+    } else {
+        if (sum(sim.mutations.id == 0) == 0) {
+            cat("Focus mutation lost; restarting.\n");
+            restart_sim();
+        }
+    }
+}
+
+LAST_GENERATION late() {
+    cat("Still segregating at generation " + LAST_GENERATION + "; restarting.\n");
+    restart_sim();
+}
+
+function (float)mutfreq(void) {
+    mut = sim.mutationsOfType(m1);
+    freq = sim.mutationFrequencies(NULL, mut);
+    return sum(freq);
+}
+
+function (void)restart_sim(void) {
+    sim.readFromPopulationFile(save_file);
+    setSeed(getSeed() + 1);
+    sim.setValue('num_restarts', sim.getValue('num_restarts') + 1);
+    if (sim.getValue('num_restarts') > restart_limit) {
+        cat("Restarted more than " + restart_limit + " times; aborting.\n");
+        writeFile(strsplit(output_file, '.')[0] + ".failed", "");
+        sim.simulationFinished();
+    }
+}
+
+function (void)finalize_sim(void) {
+    total_muts = size(sim.mutations);
+    cat("\nTotal mutations: " + size(sim.mutations) + "\n\n");
+    freqs = NULL;
+    for (mut in sortBy(sim.mutations, "originGeneration")) {
+        mutFreq = mean(asInteger(sim.subpopulations.genomes.containsMutations(mut)));
+        cat("Origin " + mut.originGeneration+ ": " + mutFreq + "\n");
+        freqs = c(freqs, mutFreq);
+    }
+    sim.treeSeqOutput(output_file);
+    current_gen_record = paste(c('slim_generations =', sim.generation));
+    muts_record = paste(c('swept_mutations =', total_muts));
+    freqs_record = paste(c('swept_frequencies =', paste(freqs)));
+    num_rest_record = paste(c('num_restarts =', sim.getValue('num_restarts')));
+    end_freq = paste(c('frequency_at_sampling =', mutfreq()));
+    records = c(current_gen_record, muts_record, freqs_record, num_rest_record, end_freq);
+    writeFile(metrics_output, records, append=T);
+    sim.simulationFinished();
+}
