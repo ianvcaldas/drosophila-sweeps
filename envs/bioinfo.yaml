@@ -1,0 +1,11 @@
+
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - jupyter=1.0.0
+  - numpy=1.21.0
+  - pandas=1.2.5
+  - python=3.9
+  - scipy=1.7.0
+  - vcftools=0.1.16

@@ -1,0 +1,16 @@
+
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - jupyter=1.0.0
+  - msprime=1.0.1
+  - numpy=1.21.0
+  - pandas=1.2.5
+  - pip
+  - python=3.9
+  - scipy=1.7.0
+  - tskit=0.3.6
+  - vcftools=0.1.16
+  - pip:
+      - pyslim==0.600

@@ -1,0 +1,12 @@
+
+benchmarks
+bin
+fig
+logs
+output
+resources
+
+.DS_Store
+.ipynb_checkpoints
+.snakemake
+__pycache__
