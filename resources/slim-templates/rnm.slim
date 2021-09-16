@@ -20,6 +20,7 @@ initialize() {
     defineConstant("end_adaptive_region", END_ADAPTIVE_REGION);
 
     setSeed(this_seed);
+    cat("Initial random seed set to " + getSeed());
     initializeTreeSeq(simplificationInterval=simplification_interval);
     initializeMutationType('m1', h, 'f', s);
     m1.convertToSubstitution = F;

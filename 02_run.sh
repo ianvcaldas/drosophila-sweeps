@@ -1,5 +1,5 @@
 
-CONFIGFILE=02_configs/testing.yaml
+CONFIGFILE=02_configs/testing-sgv.yaml
 
 snakemake -c4 --use-conda --snakefile 02_simulate.smk --configfile ${CONFIGFILE} "$@" --config slim=bin/slim3.6 normalization_stats=resources/normalization-stats.tsv
 

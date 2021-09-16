@@ -49,7 +49,7 @@ def successful_metrics(wildcards):
         OUTDIR/"{sim_id}_{param_file}",
         sim_id=successful_sim_ids,
         param_file=["slim-metrics.txt", "msprime-metrics.txt"]
-    )
+    ) + successful_npy(wildcards)
     return desired_inputs
 
 def successful_features(wildcards):

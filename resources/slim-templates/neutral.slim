@@ -11,6 +11,7 @@ initialize() {
     defineConstant("r", RECOMBINATION_RATE);
 
     setSeed(this_seed);
+    cat("Initial random seed set to " + getSeed());
     initializeTreeSeq(simplificationInterval=simplification_interval);
     initializeMutationRate(0);
     initializeMutationType('m1', 0, 'f', 0);

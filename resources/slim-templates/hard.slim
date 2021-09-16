@@ -17,6 +17,7 @@ initialize() {
     defineConstant("f_desired", FREQUENCY_AT_SAMPLING);
     
     setSeed(this_seed);
+    cat("Initial random seed set to " + getSeed());
     initializeTreeSeq(simplificationInterval=simplification_interval);
     initializeMutationRate(0);
     initializeMutationType('m1', h, 'f', s);

@@ -16,7 +16,7 @@ simulation-parameters:
   selection-coordinate: 500
   frequency-at-sampling: 1.0
   frequency-at-selection: 0.01
-  restarts-limit: 0
+  restarts-limit: 4
   demography:
     - kind: size-change
       generation: 10
