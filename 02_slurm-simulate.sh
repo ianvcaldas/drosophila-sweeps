@@ -32,7 +32,7 @@ conda activate python39
 
 echo "Running simulations."
 
-snakemake -c1 --use-conda --snakefile 02_simulate.smk "$@" --config slim=bin/slim3.6 normalization_stats=resources/normalization-stats.tsv
+snakemake -c1 --use-conda --snakefile 02_simulate.smk "$@" --config slim=bin/slim3.6 normalization_stats=resources/normalization-stats.tsv --conda-prefix ~/drosophila-sweeps-conda
 
 echo "Deactivating conda."
 conda deactivate
@@ -41,9 +41,12 @@ echo "Moving results into storage."
 mkdir -p ${RESULTSHOME}/data
 mkdir -p ${RESULTSHOME}/features
 mkdir -p ${RESULTSHOME}/parameters
+mkdir -p ${RESULTSHOME}/logs
 mv output/simulations/data.tar ${RESULTSHOME}/data/data_${SLURM_ARRAY_TASK_ID}.tar
 mv output/simulations/features.tar.gz ${RESULTSHOME}/features/features_${SLURM_ARRAY_TASK_ID}.tar.gz
 mv output/simulations/parameters.tsv ${RESULTSHOME}/parameters/parameters_${SLURM_ARRAY_TASK_ID}.tsv
+tar -czf logs.tar.gz logs/simulations
+mv logs.tar.gz ${RESULTSHOME}/logs/logs_${SLURM_ARRAY_TASK_ID}.tar.gz
 
 echo "Cleaning up working directory..."
 rm -r $WORKDIR
