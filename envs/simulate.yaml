@@ -4,6 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - jupyter=1.0.0
+  - jupyter_client<7
   - msprime=1.0.1
   - numpy=1.21.0
   - pandas=1.2.5

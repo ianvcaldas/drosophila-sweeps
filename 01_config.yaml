@@ -1,6 +1,6 @@
 
 # Raw data files
-dgrp2-location: "resources/dgrp2.vcf.gz"
+dgrp2-location: "raw-data/dgrp2.vcf.gz"
 jiggins-data: "resources/jiggins-data.txt"
 
 # Summary statistic normalization boundaries

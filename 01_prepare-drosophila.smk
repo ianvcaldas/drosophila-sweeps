@@ -1,5 +1,6 @@
 
 configfile: '01_config.yaml'
+report: 'captions/prepare-drosophila.rst'
 
 
 def wait_for_empirical_npy(wildcards):
@@ -36,7 +37,7 @@ rule selection_scan_features:
         features = 'output/selection-scan/{chrom}-features.tsv',
         stats = 'output/selection-scan/{chrom}-features-stats.tsv',
         ms = temp('output/selection-scan/{chrom}.ms')
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     benchmark: 'benchmarks/selection-scan-features/{chrom}.tsv'
     notebook: 'notebooks/prepare-drosophila/selection-scan.py.ipynb'
 
@@ -44,7 +45,7 @@ rule selection_scan_features:
 rule genotypes_2R:
     input: 'output/dgrp2/imputed.vcf.gz'
     output: temp('output/selection-scan/2R.012')
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input} "
         "--chr 2R "
@@ -58,7 +59,7 @@ rule genotypes_3R:
         vcf = 'output/dgrp2/imputed.vcf.gz',
         ace_pos = 'output/resistant-lines/ace-genotype.012.pos'
     output: temp('output/selection-scan/3R.012')
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input.vcf} "
         "--chr 3R "
@@ -79,7 +80,7 @@ rule empirical_window_features:
         stats = 'output/empirical-windows/features/{window}-stats.tsv',
     params:
         outdir = 'output/empirical-windows/npy'
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     benchmark: 'benchmarks/empirical-window-features/{window}.tsv'
     notebook: 'notebooks/prepare-drosophila/empirical-window-features.py.ipynb'
 
@@ -87,7 +88,7 @@ rule empirical_window_features:
 rule extract_empirical_windows:
     input: 'output/empirical-windows/commands/{window}.command'
     output: temp('output/empirical-windows/genotypes/{window}.012')
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "bash {input}"
 
@@ -99,7 +100,7 @@ checkpoint empirical_windows_commands:
         # Notebook as input re-runs the rule if we decide to change empirical windows.
         'notebooks/prepare-drosophila/empirical-windows-commands.py.ipynb'
     output: directory('output/empirical-windows/commands')
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     benchmark: 'benchmarks/empirical-windows-commands.tsv'
     log:
         notebook = 'logs/prepare-drosophila/empirical-windows-commands.py.ipynb'
@@ -120,7 +121,7 @@ rule resistant_lines:
             locus=['ace', 'chkov', 'cyp']
         ),
         'output/resistant-lines/dgrp1-dgrp2-lines-comparison.txt'
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     benchmark: 'benchmarks/resistant-lines.tsv'
     log:
         notebook = 'logs/prepare-drosophila/resistant-lines.py.ipynb'
@@ -132,7 +133,7 @@ rule dgrp_stats:
     output:
         'output/dgrp2/imputed-counts.frq.count',
         'output/dgrp2/imputed-heteroz.sites.pi'
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input} "
         "--counts "
@@ -145,7 +146,7 @@ rule dgrp_stats:
 rule beagle_impute:
     input: 'output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz'
     output: 'output/dgrp2/imputed.vcf.gz'
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     threads: 8
     params:
         beagle = config['beagle-location']
@@ -160,7 +161,7 @@ rule cyp_resistant_lines:
             'output/resistant-lines/cyp-genotype',
             '.012', '.012.indv', '.012.pos'
         )
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input} "
         "--012 "
@@ -175,7 +176,7 @@ rule ace_resistant_lines:
             'output/resistant-lines/ace-genotype',
             '.012', '.012.indv', '.012.pos'
         )
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input} "
         "--012 "
@@ -188,7 +189,7 @@ rule ace_resistant_lines:
 rule filter_dgrp:
     input: config['dgrp2-location']
     output: 'output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz'
-    conda: 'envs/bioinfo.yaml'
+    conda: 'envs/simulate.yaml'
     shell:
         "vcftools --gzvcf {input} "
         "--mac 1 "

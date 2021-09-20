@@ -9,8 +9,8 @@ echo "Workstation is ${HOSTNAME}, partition is ${SLURM_JOB_PARTITION}."
 
 # Create working directory and the destination folder for results.
 WORKDIR=/workdir/$USER/${SLURM_JOB_ID}
-DATAHOME=/fs/cbsuclarkfs1/storage/ivc2/sweeps
-RESULTSHOME=${DATAHOME}/results/${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}
+DATAHOME=/fs/cbsuclarkfs1/storage/ivc2/drosophila-sweeps
+RESULTSHOME=${DATAHOME}/raw-simulations/${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}
 
 # Create relevant directory structure
 mkdir -p ${WORKDIR}
