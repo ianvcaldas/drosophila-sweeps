@@ -30,7 +30,6 @@ default_simulation_parameters = {
     # Biology
     "locus-size": locus_size,
     "sample-size": 205,
-    "dominance-coefficient": 0.5,
     # SLiM options
     "last-generation": 5000,
     "simplification-interval": 500,

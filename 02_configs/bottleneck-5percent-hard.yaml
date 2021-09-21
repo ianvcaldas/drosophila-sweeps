@@ -11,7 +11,10 @@ simulation-parameters:
     distribution: log-uniform
     lower: 0.01
     upper: 100
-  selection-generation: 1
+  selection-generation:
+    distribution: integer-range
+    lower: 1
+    upper: 2501
   selection-coordinate: 500000
   dominance-coefficient: 0.5
   frequency-at-sampling: 1.0
@@ -22,6 +25,6 @@ simulation-parameters:
         distribution: integer-range
         lower: 1
         upper: 2501
-      crash-size: 500
+      crash-size: 2500
       duration: 100
       recovery-size: 50000
