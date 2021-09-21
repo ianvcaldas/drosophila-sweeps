@@ -1,5 +1,5 @@
 
-num-simulations: 10
+simulations: 10
 
 simulation-parameters:
   diploid-population-size:
