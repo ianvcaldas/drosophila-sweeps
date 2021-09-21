@@ -81,15 +81,30 @@ def load_template(template_file, replacements):
 
 
 def get_demography_text(event):
-    demog_replacements = dict()
     if event["kind"] == "size-change":
+        demog_replacements = dict()
         demog_replacements["GENERATION"] = int(event["generation"])
         demog_replacements["DIPLOID_SIZE"] = int(event["diploid-size"])
+        template = find_template(event["kind"])
+        demog_text = load_template(template, demog_replacements)
+        return demog_text
+    elif event["kind"] == "bottleneck":
+        # A special event that resolves into two size-change events.
+        population_crash = {
+            "kind": "size-change",
+            "generation": int(event["generation"]),
+            "diploid-size": int(event["crash-size"])
+        }
+        population_recovery = {
+            "kind": "size-change",
+            "generation": int(event["generation"] + event["duration"]),
+            "diploid-size": int(event["recovery-size"])
+        }
+        crash_text = get_demography_text(population_crash)
+        recovery_text = get_demography_text(population_recovery)
+        return crash_text + "\n" + recovery_text
     else:
         raise ValueError(f"Demography event not recognized:\n{event}")
-    template = find_template(event["kind"])
-    demog_text = load_template(template, demog_replacements)
-    return demog_text
 
 
 template = find_template(params["regime"])
