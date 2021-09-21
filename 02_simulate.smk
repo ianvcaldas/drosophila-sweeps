@@ -26,8 +26,8 @@ def get_outdir():
 OUTDIR_ID = get_outdir()
 OUTDIR = Path('output')/OUTDIR_ID
 SIM_IDS = [
-    str(i + 1).zfill(len(str(config['num-simulations'])))
-    for i in range(config['num-simulations'])
+    str(i + 1).zfill(len(str(config['simulations'])))
+    for i in range(config['simulations'])
 ]
 
 def wait_for_slim_checkpoint(wildcards):
