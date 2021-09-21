@@ -12,21 +12,27 @@ from utils.project_parameters import default_simulation_parameters
 
 
 def draw_from_distribution(distr_dict):
+    if "lower" in distr_dict:
+        lower = float(distr_dict["lower"])
+    if "upper" in distr_dict:
+        upper = float(distr_dict["upper"])
     distr = distr_dict["distribution"]
     if distr == "choice":
         value = np.random.choice(distr_dict["options"])
     elif distr == "uniform":
         value = stats.uniform(
-            distr_dict["lower"], distr_dict["upper"] - distr_dict["lower"]
+            lower, upper - lower
         ).rvs()
     elif distr == "integer-range":
-        value = stats.randint(distr_dict["lower"], distr_dict["upper"] + 1).rvs()
+        value = stats.randint(lower, upper + 1).rvs()
     elif distr == "log-uniform":
         log_value = stats.uniform(
-            np.log10(distr_dict["lower"]),
-            np.log10(distr_dict["upper"]) - np.log10(distr_dict["lower"]),
+            np.log10(lower),
+            np.log10(upper) - np.log10(lower),
         ).rvs()
         value = np.power(10, log_value)
+    else:
+        raise Exception(f"Distribution not understood:\n{distr_dict}")
     return value
 
 
