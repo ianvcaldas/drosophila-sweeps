@@ -1,0 +1,17 @@
+
+num-simulations: 5
+
+simulation-parameters:
+
+  diploid-population-size: 25000
+  mutation-rate: 4.5e-8
+  recombination-rate: 3.238e-7
+
+  selection-coefficient:
+    distribution: log-uniform
+    lower: 0.01
+    upper: 100
+  selection-generation: 1
+  selection-coordinate: 500000
+  dominance-coefficient: 0.5
+  frequency-at-sampling: 1.0
