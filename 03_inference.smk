@@ -1,18 +1,23 @@
 
 configfile: '03_config.yaml'
 report: 'captions/inference.rst'
-workdir: config["workdir"]
+
+# Think about how this interacts with the cluster, but do it later.
+# workdir: config["workdir"]
 
 # Every rule should have shadow: copy-minimal.
 
 rule all:
     input:
-        data = "output/simulations/simtest-2936549/data.tar",
-        parameters = "output/simulations/simtest-2936549/parameters.tsv"
+        data = expand(
+            "output/simulations/{sim_id}/{result}",
+            sim_id=config["sim_folders"],
+            result=["data.tar", "parameters.tsv"]
+        )
 
 rule combine_simulation_tasks:
     output:
         data = "output/simulations/{sim}/data.tar",
         parameters = "output/simulations/{sim}/parameters.tsv"
     conda: "envs/simulate.yaml"
-    script: "scripts/"
+    notebook: "notebooks/combine-simulations.py.ipynb"

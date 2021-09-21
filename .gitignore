@@ -5,6 +5,7 @@ fig
 logs
 output
 raw-data
+raw-simulations
 
 .DS_Store
 .ipynb_checkpoints

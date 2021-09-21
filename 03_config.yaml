@@ -1,5 +1,11 @@
-
 # Change this to work on the cluster or not.
 # workdir: "/fs/cbsuclarkfs1/storage/ivc2/drosophila-sweeps"
-workdir: "~/Desktop"
+
+# Directory where all the simulation files are supposed to be
+raw_sim_folder: "raw-simulations"
+
+# Every single simulation folder that we are interested in:
+sim_folders:
+  - simtest-1
+  - simtest-2
 
