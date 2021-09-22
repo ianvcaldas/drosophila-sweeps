@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=18000
 #SBATCH --account=bscb02
-#SBATCH --output=/home/ivc/slurm-outputs/simulate-%j.out
+#SBATCH --output="/home/ivc2/slurm-outputs/%x-%j.out"
 #SBATCH --partition=regular,long7,long30
 
 echo "Workstation is ${HOSTNAME}, partition is ${SLURM_JOB_PARTITION}."
@@ -32,8 +32,7 @@ conda activate python39
 
 echo "Running simulations."
 
-snakemake -c1 --use-conda --snakefile 02_simulate.smk "$@" --config slim=bin/slim3.6
-normalization_stats=resources/normalization-stats.tsv simulations=2 --conda-prefix ~/drosophila-sweeps-conda
+snakemake -c1 --use-conda --snakefile 02_simulate.smk "$@" --config slim=bin/slim3.6 normalization_stats=resources/normalization-stats.tsv --conda-prefix ~/drosophila-sweeps-conda
 
 echo "Deactivating conda."
 conda deactivate
