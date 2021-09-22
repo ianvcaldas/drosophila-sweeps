@@ -399,14 +399,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <div id="loading-screen">
       <p class="animation">Loading Snakemake Report...</p>
       <p id="jswarning">Please enable Javascript in your browser to see this report.</p>
-      <p id="info">Loading 0 Bytes. For large reports, this can take a while.</p>
+      <p id="info">Loading 1.2 kB. For large reports, this can take a while.</p>
     </div>
 
     <nav class="navbar fixed-top navbar-dark bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="https://snakemake.readthedocs.io">Snakemake Report</a>
       <div class="nav navbar-nav navbar-center" id="brand"></div>
       <ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
-        <li class="text-white">Fri Sep 17 12:47:26 2021 EST</li>
+        <li class="text-white">Wed Sep 22 15:38:44 2021 EST</li>
         <li><a class="text-white" href="https://snakemake.readthedocs.io">Snakemake 6.8.0</a></li>
       </ul>
       <!--<input id="searchbar" class="invisible form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
@@ -443,6 +443,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
               </span>
             </h5>
             <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link panel-link" data-panel="f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1" href="javascript:void(0)">
+                  <span data-feather="folder"></span>
+                  Other
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -467,6 +473,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
           </div>
 
+          <div class="panel category" id="f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1">
+            <h2>Other</h2>
+            <table class="results-table table" data-category="f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1" data-subcategory="f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1"></table>
+          </div>  
 
           <div class="panel" id="statistics">
             <h2>Statistics</h2>
@@ -603,9 +613,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
                             <li>pandas=1.2.5</li>
+                            <li>pip</li>
                             <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -847,8 +864,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                     <tr>
                       <td class="rule-property" colspan=2>
                         <ul>
-                            <li>beagle=5.2_21Apr21.304</li>
+                            <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -917,8 +942,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                     <tr>
                       <td class="rule-property" colspan=2>
                         <ul>
-                            <li>beagle=5.2_21Apr21.304</li>
+                            <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -929,212 +962,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                     <tr>
                       <td class="rule-property" colspan=2>
                         <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --012 --out <span class="s2">&quot;output/resistant-lines/cyp-genotype&quot;</span> --snp 2R_8072884_INS 
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div data-rule="dgrp_stats" class="modal rule-properties" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Rule dgrp_stats</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <table class="table w-auto table-sm table-borderless ruletable">
-                  <caption>Rule properties</caption>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Jobs</th><td>1</td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Input files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>output/dgrp2/imputed.vcf.gz</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Output files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>output/dgrp2/imputed-counts.frq.count</li>
-                            <li>output/dgrp2/imputed-heteroz.sites.pi</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-
-                    <tr>
-                      <th scope="row" colspan=2>Conda software stack</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>jupyter=1.0.0</li>
-                            <li>pandas=1.2.5</li>
-                            <li>python=3.9</li>
-                            <li>vcftools=0.1.16</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Code</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --counts --out <span class="s2">&quot;output/dgrp2/imputed-counts&quot;</span> <span class="p">;</span>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --site-pi --out <span class="s2">&quot;output/dgrp2/imputed-heteroz&quot;</span> <span class="p">;</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div data-rule="beagle_impute" class="modal rule-properties" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Rule beagle_impute</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <table class="table w-auto table-sm table-borderless ruletable">
-                  <caption>Rule properties</caption>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Jobs</th><td>1</td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Input files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Output files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>output/dgrp2/imputed.vcf.gz</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-
-                    <tr>
-                      <th scope="row" colspan=2>Conda software stack</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>vcftools=0.1.16</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Code</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>java -Xmx16g -jar <span class="o">{</span>params.beagle<span class="o">}</span> <span class="nv">gt</span><span class="o">=</span><span class="s2">&quot;{input}&quot;</span> <span class="nv">out</span><span class="o">=</span><span class="s2">&quot;output/dgrp2/imputed&quot;</span> <span class="nv">nthreads</span><span class="o">={</span>threads<span class="o">}</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div data-rule="filter_dgrp" class="modal rule-properties" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Rule filter_dgrp</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <table class="table w-auto table-sm table-borderless ruletable">
-                  <caption>Rule properties</caption>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Jobs</th><td>1</td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Input files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>raw-data/dgrp2.vcf.gz</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Output files</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-
-                    <tr>
-                      <th scope="row" colspan=2>Conda software stack</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <ul>
-                            <li>beagle=5.2_21Apr21.304</li>
-                            <li>vcftools=0.1.16</li>
-                        </ul>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row" colspan=2>Code</th>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --mac <span class="m">1</span> --max-alleles <span class="m">2</span> --min-alleles <span class="m">2</span> --max-missing <span class="m">0</span>.85 --recode --remove-filtered-all --remove-indels --out <span class="s2">&quot;output/dgrp2/dgrp2-snps-maxmissing15percent&quot;</span> <span class="p">;</span>gzip output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf <span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
@@ -1194,11 +1021,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
                             <li>numpy=1.21.0</li>
                             <li>pandas=1.2.5</li>
+                            <li>pip</li>
                             <li>python=3.9</li>
                             <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -1343,11 +1175,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
                             <li>numpy=1.21.0</li>
                             <li>pandas=1.2.5</li>
+                            <li>pip</li>
                             <li>python=3.9</li>
                             <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -1358,6 +1194,158 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                     <tr>
                       <td class="rule-property" colspan=2>
                         <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --chr 2R --mac <span class="m">1</span> --012 --out <span class="s2">&quot;output/selection-scan/2R&quot;</span> 
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-rule="beagle_impute" class="modal rule-properties" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Rule beagle_impute</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table w-auto table-sm table-borderless ruletable">
+                  <caption>Rule properties</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Jobs</th><td>1</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Input files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Output files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/dgrp2/imputed.vcf.gz</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" colspan=2>Conda software stack</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
+                            <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Code</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>java -Xmx16g -jar <span class="o">{</span>params.beagle<span class="o">}</span> <span class="nv">gt</span><span class="o">=</span><span class="s2">&quot;{input}&quot;</span> <span class="nv">out</span><span class="o">=</span><span class="s2">&quot;output/dgrp2/imputed&quot;</span> <span class="nv">nthreads</span><span class="o">={</span>threads<span class="o">}</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-rule="filter_dgrp" class="modal rule-properties" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Rule filter_dgrp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table w-auto table-sm table-borderless ruletable">
+                  <caption>Rule properties</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Jobs</th><td>1</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Input files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>raw-data/dgrp2.vcf.gz</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Output files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf.gz</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" colspan=2>Conda software stack</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
+                            <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Code</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --mac <span class="m">1</span> --max-alleles <span class="m">2</span> --min-alleles <span class="m">2</span> --max-missing <span class="m">0</span>.85 --recode --remove-filtered-all --remove-indels --out <span class="s2">&quot;output/dgrp2/dgrp2-snps-maxmissing15percent&quot;</span> <span class="p">;</span>gzip output/dgrp2/dgrp2-snps-maxmissing15percent.recode.vcf <span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
@@ -1416,11 +1404,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
                             <li>numpy=1.21.0</li>
                             <li>pandas=1.2.5</li>
+                            <li>pip</li>
                             <li>python=3.9</li>
                             <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -1441,11 +1434,251 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
             </div>
           </div>
         </div>
-        <div data-rule="empirical_windows_commands" class="modal rule-properties" tabindex="-1" role="dialog">
+        <div data-rule="dgrp_population_parameters" class="modal rule-properties" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Rule empirical_windows_commands</h5>
+                <h5 class="modal-title">Rule dgrp_population_parameters</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table w-auto table-sm table-borderless ruletable">
+                  <caption>Rule properties</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Jobs</th><td>1</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Input files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/dgrp2/imputed-counts.frq.count</li>
+                            <li>output/dgrp2/imputed-heteroz.sites.pi</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Output files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/dgrp2/dgrp-population-parameters.txt</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" colspan=2>Conda software stack</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
+                            <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Code</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;DGRP population parameters&quot;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Ungapped size of r5 assembly, source: https://www.ncbi.nlm.nih.gov/assembly/GCF_000001215.2/&quot;</span><span class="p">)</span>
+<span class="n">total_sites</span> <span class="o">=</span> <span class="mi">136_826_056</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total sites: </span><span class="si">{</span><span class="n">total_sites</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">pi_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">snakemake</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;heterozygosity&quot;</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="c1"># skip header</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pi_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">seg_sites</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi_values</span><span class="p">)</span>
+<span class="n">avg_pi_per_site</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pi_values</span><span class="p">)</span><span class="o">/</span><span class="n">total_sites</span>
+<span class="n">S_per_site</span> <span class="o">=</span> <span class="n">seg_sites</span><span class="o">/</span><span class="n">total_sites</span>
+
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;In the imputed DGRP VCF:&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">seg_sites</span><span class="si">}</span><span class="s2"> segregating sites.&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average pi per site is </span><span class="si">{</span><span class="n">avg_pi_per_site</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S per site is </span><span class="si">{</span><span class="n">S_per_site</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;For comparison, we can relate our parameters to Garud et al. (2015) (https://doi.org/10.1371/journal.pgen.1005004):&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&quot;S and pi estimates in DGRP short intron data were measured to be 5.8</span><span class="si">% a</span><span class="s1">nd 1.2% per bp, respectively.&quot;&#39;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">mutation_rate</span> <span class="o">=</span> <span class="mf">1.39e-9</span>
+<span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-8</span>
+<span class="n">mu_over_r</span> <span class="o">=</span> <span class="n">mutation_rate</span><span class="o">/</span><span class="n">recombination_rate</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;The original population parameters taken from Arguello et al. (2019) (https://doi.org/10.1093/gbe/evz022):&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mutation rate: </span><span class="si">{</span><span class="n">mutation_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recombination rate: </span><span class="si">{</span><span class="n">recombination_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mu over r: </span><span class="si">{</span><span class="n">mu_over_r</span><span class="si">:</span><span class="s2">6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1"># empirical_pi =  0.0045</span>
+<span class="n">empirical_pi</span> <span class="o">=</span>  <span class="n">avg_pi_per_site</span>
+
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Empirical_pi is approximately 2*hap_population_size*mutation_rate in case of Wright-Fisher.&quot;</span><span class="p">)</span>
+<span class="n">hap_population_size</span> <span class="o">=</span> <span class="n">empirical_pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">mutation_rate</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Estimated 2Ne: </span><span class="si">{</span><span class="n">hap_population_size</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">desired_hap_Ne</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;To rescale so 2Ne = </span><span class="si">{</span><span class="n">desired_hap_Ne</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">)</span>
+<span class="n">new_mutation</span> <span class="o">=</span> <span class="n">empirical_pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">desired_hap_Ne</span><span class="p">)</span>
+<span class="n">new_recombination</span> <span class="o">=</span> <span class="n">new_mutation</span><span class="o">/</span><span class="n">mu_over_r</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rescaled mutation rate: </span><span class="si">{</span><span class="n">new_mutation</span><span class="si">:</span><span class="s1">.4g</span><span class="si">}</span><span class="se">\n</span><span class="s1">Rescaled recombination rate: </span><span class="si">{</span><span class="n">new_recombination</span><span class="si">:</span><span class="s1">.4g</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="s2">&quot;The extent of a sweep signature is roughly d = 0.1 * (s/r). Since we have our rescaled recombination rate, to see which selection coefficient we need to simulate, we can solve for s = (rd)/0.1 for our minimum and maximum desired sweep signature.&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">min_signature</span> <span class="o">=</span> <span class="mi">1000</span>    <span class="c1"># 1 kb</span>
+<span class="n">max_signature</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="c1"># 1 Mb</span>
+<span class="n">min_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_recombination</span><span class="o">*</span><span class="n">min_signature</span><span class="p">)</span><span class="o">/</span><span class="mf">0.1</span>
+<span class="n">max_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_recombination</span><span class="o">*</span><span class="n">max_signature</span><span class="p">)</span><span class="o">/</span><span class="mf">0.1</span>
+
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;To see a sweep signature of </span><span class="si">{</span><span class="n">min_signature</span><span class="si">}</span><span class="s1">bp, s=</span><span class="si">{</span><span class="n">min_s</span><span class="si">:</span><span class="s1">6f</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;To see a sweep signature of </span><span class="si">{</span><span class="n">max_signature</span><span class="si">}</span><span class="s1">bp, s=</span><span class="si">{</span><span class="n">max_s</span><span class="si">:</span><span class="s1">6f</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">snakemake</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-rule="dgrp_stats" class="modal rule-properties" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Rule dgrp_stats</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -1465,8 +1698,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>output/dgrp2/imputed.vcf.gz</li>
-                            <li>output/resistant-lines/ace-genotype.012.pos</li>
-                            <li>notebooks/prepare-drosophila/empirical-windows-commands.py.ipynb</li>
                         </ul>
                       </td>
                     </tr>
@@ -1477,7 +1708,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                     <tr>
                       <td class="rule-property" colspan=2>
                         <ul>
-                            <li>output/empirical-windows/commands</li>
+                            <li>output/dgrp2/imputed-counts.frq.count</li>
+                            <li>output/dgrp2/imputed-heteroz.sites.pi</li>
                         </ul>
                       </td>
                     </tr>
@@ -1490,11 +1722,96 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <ul>
                             <li>jupyter=1.0.0</li>
+                            <li>msprime=1.0.1</li>
                             <li>numpy=1.21.0</li>
                             <li>pandas=1.2.5</li>
+                            <li>pip</li>
                             <li>python=3.9</li>
                             <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
                             <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Code</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --counts --out <span class="s2">&quot;output/dgrp2/imputed-counts&quot;</span> <span class="p">;</span>vcftools --gzvcf <span class="o">{</span>input<span class="o">}</span> --site-pi --out <span class="s2">&quot;output/dgrp2/imputed-heteroz&quot;</span> <span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-rule="empirical_window_features" class="modal rule-properties" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Rule empirical_window_features</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table w-auto table-sm table-borderless ruletable">
+                  <caption>Rule properties</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Jobs</th><td>3</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Input files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/empirical-windows/genotypes/{window}.012</li>
+                            <li>resources/normalization-stats.tsv</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Output files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/empirical-windows/npy/{window}.npy</li>
+                            <li>output/empirical-windows/ms/{window}.ms</li>
+                            <li>output/empirical-windows/features/{window}.tsv</li>
+                            <li>output/empirical-windows/features/{window}-stats.tsv</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" colspan=2>Conda software stack</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
+                            <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
                         </ul>
                       </td>
                     </tr>
@@ -1506,9 +1823,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                       <td class="rule-property" colspan=2>
                         <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="o">%%</span><span class="n">bash</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="o">%%</span><span class="n">bash</span>
 
-<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span><span class="o">/</span><span class="n">empirical</span><span class="o">-</span><span class="n">windows</span><span class="o">/</span><span class="n">commands</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span><span class="o">/</span><span class="n">empirical</span><span class="o">-</span><span class="n">windows</span><span class="o">/</span><span class="n">ms</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span><span class="o">/</span><span class="n">empirical</span><span class="o">-</span><span class="n">windows</span><span class="o">/</span><span class="n">features</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span><span class="o">/</span><span class="n">empirical</span><span class="o">-</span><span class="n">windows</span><span class="o">/</span><span class="n">npy</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span><span class="o">/</span><span class="n">empirical</span><span class="o">-</span><span class="n">windows</span><span class="o">/</span><span class="n">npy</span><span class="o">-</span><span class="n">log</span><span class="o">-</span><span class="n">scale</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
@@ -1519,25 +1849,89 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">NAME</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">wildcards</span><span class="p">[</span><span class="s1">&#39;window&#39;</span><span class="p">]</span>
+<span class="n">NORM_STATS</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">&#39;normalization_stats&#39;</span><span class="p">]</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="kn">from</span> <span class="nn">utils.project_parameters</span> <span class="kn">import</span> <span class="n">locus_size</span>
+<span class="n">genotype_file</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">&#39;genotypes&#39;</span><span class="p">]</span>
+<span class="n">ms_file</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ms&#39;</span><span class="p">]</span>
+<span class="n">feature_file</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">]</span>
+<span class="n">stats_file</span> <span class="o">=</span> <span class="n">snakemake</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;stats&#39;</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
                     </tr>
                     <tr>
                       <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">## Plan what windows to take</span>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">### Convert to ms format</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
                     </tr>
                     <tr>
                       <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">### Parameters</span>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="kn">from</span> <span class="nn">utils.conversion</span> <span class="kn">import</span> <span class="n">vcftools_to_ms</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">vcftools_to_ms</span><span class="p">(</span><span class="n">genotype_file</span><span class="p">,</span> <span class="n">ms_file</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">### Calculate features</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="kn">from</span> <span class="nn">utils.feature_calculation</span> <span class="kn">import</span> <span class="n">get_windows</span><span class="p">,</span> <span class="n">calculate_features</span>
+<span class="kn">from</span> <span class="nn">utils.project_parameters</span> <span class="kn">import</span> <span class="n">locus_size</span><span class="p">,</span> <span class="n">data_dimension</span><span class="p">,</span> <span class="n">default_summary_statistics</span><span class="p">,</span> <span class="n">smallest_window</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NAME</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">window_sizes</span><span class="p">,</span> <span class="n">center_pos_dict</span> <span class="o">=</span> <span class="n">get_windows</span><span class="p">(</span><span class="n">locus_size</span><span class="p">,</span> <span class="n">data_dimension</span><span class="p">,</span> <span class="n">start_pos</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">smallest_window</span><span class="o">=</span><span class="n">smallest_window</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">calculate_features</span><span class="p">(</span>
+    <span class="n">ms_file</span><span class="o">=</span><span class="n">ms_file</span><span class="p">,</span>
+    <span class="n">summary_statistics</span><span class="o">=</span><span class="n">default_summary_statistics</span><span class="p">,</span>
+    <span class="n">center_pos</span><span class="o">=</span><span class="n">center_pos_dict</span><span class="p">,</span>
+    <span class="n">window_sizes</span><span class="o">=</span><span class="n">window_sizes</span><span class="p">,</span>
+    <span class="n">output_file</span><span class="o">=</span><span class="n">feature_file</span><span class="p">,</span>
+    <span class="n">output_stats</span><span class="o">=</span><span class="n">stats_file</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">### Normalize features</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
@@ -1561,167 +1955,108 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1"># source of chrom sizes is Release 5 of the _D. melanogaster_ genome from</span>
-<span class="c1"># https://www.ncbi.nlm.nih.gov/assembly/GCF_000001215.2/</span>
-<span class="c1"># We ignore 4, the tiny chromosome, and X because it&#39;s sexual</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">chrom_sizes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;2L&#39;</span><span class="p">:</span> <span class="mi">23011544</span><span class="p">,</span>
-    <span class="s1">&#39;2R&#39;</span><span class="p">:</span> <span class="mi">21146708</span><span class="p">,</span>
-    <span class="s1">&#39;3L&#39;</span><span class="p">:</span> <span class="mi">24543557</span><span class="p">,</span>
-    <span class="s1">&#39;3R&#39;</span><span class="p">:</span> <span class="mi">27905053</span><span class="p">,</span>
-    <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="mi">1351857</span><span class="p">,</span>
-    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="mi">22422827</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="kn">from</span> <span class="nn">utils.project_parameters</span> <span class="kn">import</span> <span class="n">summary_statistic_order</span>
+<span class="kn">from</span> <span class="nn">utils.feature_calculation</span> <span class="kn">import</span> <span class="n">get_normalization_stats</span><span class="p">,</span> <span class="n">normalize_features</span>
 
-<span class="c1"># Known sweeps</span>
+<span class="n">norm_stats_dict</span> <span class="o">=</span> <span class="n">get_normalization_stats</span><span class="p">(</span><span class="n">NORM_STATS</span><span class="p">,</span> <span class="n">summary_statistic_order</span><span class="p">)</span>
+<span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize_features</span><span class="p">(</span><span class="n">feature_file</span><span class="p">,</span> <span class="n">summary_statistic_order</span><span class="p">,</span> <span class="n">norm_stats_dict</span><span class="p">,</span>
+                                <span class="n">reshape</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">convert_to_uint8</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">known_pos</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;ace&#39;</span><span class="p">:</span> <span class="mi">9069408</span><span class="p">,</span>
-    <span class="s1">&#39;chkov&#39;</span><span class="p">:</span> <span class="mi">21150000</span><span class="p">,</span>
-    <span class="s1">&#39;cyp&#39;</span><span class="p">:</span> <span class="mi">8072884</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">known_sweep_chroms</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;ace&#39;</span><span class="p">:</span> <span class="s1">&#39;3R&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;chkov&#39;</span><span class="p">:</span> <span class="s1">&#39;3R&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;cyp&#39;</span><span class="p">:</span> <span class="s1">&#39;2R&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">Start</span> <span class="n">a</span> <span class="n">DataFrame</span> <span class="k">with</span> <span class="n">the</span> <span class="n">known</span> <span class="n">sweep</span> <span class="n">loci</span><span class="p">:</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">locus</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">known_pos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span> <span class="o">-</span> <span class="n">locus_size</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span> <span class="o">+</span> <span class="n">locus_size</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">chrom</span> <span class="o">=</span> <span class="n">known_sweep_chroms</span><span class="p">[</span><span class="n">locus</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">chrom_sizes</span><span class="p">[</span><span class="n">chrom</span><span class="p">]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;sweep-</span><span class="si">{</span><span class="n">locus</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">chrom</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">locus</span><span class="p">,</span> <span class="n">chrom</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">coord</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">data_id</span><span class="p">,</span> <span class="n">normalized_array</span> <span class="ow">in</span> <span class="n">normalized</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">snakemake</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;outdir&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">data_id</span><span class="si">}</span><span class="s2">.npy&quot;</span><span class="p">,</span> <span class="n">normalized_array</span><span class="p">)</span>
     
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">records</span><span class="p">,</span>
-                              <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">,</span> <span class="s1">&#39;locus&#39;</span><span class="p">,</span> <span class="s1">&#39;chrom&#39;</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="s1">&#39;center&#39;</span><span class="p">])</span>
+<span class="c1"># Also do log-scale normalization</span>
+<span class="n">normalized_log</span> <span class="o">=</span> <span class="n">normalize_features</span><span class="p">(</span><span class="n">feature_file</span><span class="p">,</span> <span class="n">summary_statistic_order</span><span class="p">,</span> <span class="n">norm_stats_dict</span><span class="p">,</span>
+                            <span class="n">reshape</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">convert_to_uint8</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">log_scale_outdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">snakemake</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;outdir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">parent</span><span class="o">/</span><span class="s1">&#39;npy-log-scale&#39;</span>
+<span class="k">for</span> <span class="n">data_id</span><span class="p">,</span> <span class="n">normalized_array</span> <span class="ow">in</span> <span class="n">normalized_log</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">log_scale_outdir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">data_id</span><span class="si">}</span><span class="s2">.npy&quot;</span><span class="p">,</span> <span class="n">normalized_array</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
                     </tr>
                     <tr>
                       <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">df</span>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
                       </td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-rule="extract_empirical_windows" class="modal rule-properties" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Rule extract_empirical_windows</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table w-auto table-sm table-borderless ruletable">
+                  <caption>Rule properties</caption>
+                  <tbody>
                     <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1">### Prepare commands</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
+                      <th scope="row">Jobs</th><td>3</td>
                     </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">template</span> <span class="o">=</span> <span class="p">(</span>
-<span class="s2">&quot;vcftools &quot;</span>
-<span class="s2">&quot;--gzvcf output/dgrp2/imputed.vcf.gz &quot;</span>
-<span class="s2">&quot;--chr CHROM &quot;</span>
-<span class="s2">&quot;--from-bp START &quot;</span>
-<span class="s2">&quot;--to-bp END &quot;</span>
-<span class="s2">&quot;--mac 1 &quot;</span>
-<span class="s2">&quot;--012 ACE? &quot;</span>
-<span class="s2">&quot;--out </span><span class="se">\&quot;</span><span class="s2">output/empirical-windows/genotypes/NAME</span><span class="se">\&quot;</span><span class="s2"> &quot;</span>
-<span class="s2">&quot;2&gt;/dev/null&quot;</span>
-<span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="k">def</span> <span class="nf">get_command</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">chrom</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">ace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">locus</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">ace</span><span class="p">:</span>
-        <span class="n">ace_repl</span> <span class="o">=</span> <span class="s2">&quot;--exclude-positions output/resistant-lines/ace-genotype.012.pos&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">ace_repl</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="n">template</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;CHROM&#39;</span><span class="p">,</span> <span class="n">chrom</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;START&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;END&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">end</span><span class="p">))</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ACE?&#39;</span><span class="p">,</span> <span class="n">ace_repl</span><span class="p">)</span>
-        <span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="rule-property" colspan=2>
-                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="n">all_commands</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/empirical-windows/commands/</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">identifier</span><span class="si">}</span><span class="s1">.command&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">get_command</span><span class="p">(</span>
-            <span class="n">template</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">chrom</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">ace</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">locus</span><span class="o">==</span><span class="s1">&#39;ace&#39;</span><span class="p">,</span> <span class="n">locus</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">locus</span>
-        <span class="p">))</span>
+                    <tr>
+                      <th scope="row" colspan=2>Input files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/empirical-windows/commands/{window}.command</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Output files</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>output/empirical-windows/genotypes/{window}.012</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" colspan=2>Conda software stack</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <ul>
+                            <li>jupyter=1.0.0</li>
+                            <li>jupyter_client<7</li>
+                            <li>msprime=1.0.1</li>
+                            <li>numpy=1.21.0</li>
+                            <li>pandas=1.2.5</li>
+                            <li>pip</li>
+                            <li>python=3.9</li>
+                            <li>scipy=1.7.0</li>
+                            <li>tskit=0.3.6</li>
+                            <li>vcftools=0.1.16</li>
+                            <li>{'pip': ['pyslim==0.600']}</li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan=2>Code</th>
+                    </tr>
+                    <tr>
+                      <td class="rule-property" colspan=2>
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code>bash <span class="o">{</span>input<span class="o">}</span>
 </code></pre></div>
 </td></tr></table>
                       </td>
@@ -2259,11 +2594,32 @@ if (typeof module !== 'undefined') {
 
     <script id="results">
       var results = {
+            "output/dgrp2/dgrp-population-parameters.txt": {
+              name: "dgrp-population-parameters.txt",
+              filename: "dgrp-population-parameters.txt",
+              path: "output/dgrp2/dgrp-population-parameters.txt",
+              size: "1.2 kB",
+              caption: "<p>Population parameters calculated from the DGRP, which we use to choose our simulation parameters.</p>\n",
+              job_properties: {
+                rule: "dgrp_population_parameters",
+                wildcards: "",
+                params: ""
+              },
+              data_uri: function() { return "data:text/plain;charset=utf8;filename=dgrp-population-parameters.txt;base64,REdSUCBwb3B1bGF0aW9uIHBhcmFtZXRlcnMKClVuZ2FwcGVkIHNpemUgb2YgcjUgYXNzZW1ibHksIHNvdXJjZTogaHR0cHM6Ly93d3cubmNiaS5ubG0ubmloLmdvdi9hc3NlbWJseS9HQ0ZfMDAwMDAxMjE1LjIvClRvdGFsIHNpdGVzOiAxMzY4MjYwNTYKCkluIHRoZSBpbXB1dGVkIERHUlAgVkNGOgpUaGVyZSBhcmUgMzgwNzU4NiBzZWdyZWdhdGluZyBzaXRlcy4KQXZlcmFnZSBwaSBwZXIgc2l0ZSBpcyAwLjAwNDUxNy4KUyBwZXIgc2l0ZSBpcyAwLjAyNzgyOC4KRm9yIGNvbXBhcmlzb24sIHdlIGNhbiByZWxhdGUgb3VyIHBhcmFtZXRlcnMgdG8gR2FydWQgZXQgYWwuICgyMDE1KSAoaHR0cHM6Ly9kb2kub3JnLzEwLjEzNzEvam91cm5hbC5wZ2VuLjEwMDUwMDQpOgoiUyBhbmQgcGkgZXN0aW1hdGVzIGluIERHUlAgc2hvcnQgaW50cm9uIGRhdGEgd2VyZSBtZWFzdXJlZCB0byBiZSA1LjglIGFuZCAxLjIlIHBlciBicCwgcmVzcGVjdGl2ZWx5LiIKClRoZSBvcmlnaW5hbCBwb3B1bGF0aW9uIHBhcmFtZXRlcnMgdGFrZW4gZnJvbSBBcmd1ZWxsbyBldCBhbC4gKDIwMTkpIChodHRwczovL2RvaS5vcmcvMTAuMTA5My9nYmUvZXZ6MDIyKToKTXV0YXRpb24gcmF0ZTogMS4zOWUtMDkKUmVjb21iaW5hdGlvbiByYXRlOiAxZS0wOApNdSBvdmVyIHI6IDAuMTM5MDAwCgpFbXBpcmljYWxfcGkgaXMgYXBwcm94aW1hdGVseSAyKmhhcF9wb3B1bGF0aW9uX3NpemUqbXV0YXRpb25fcmF0ZSBpbiBjYXNlIG9mIFdyaWdodC1GaXNoZXIuCkVzdGltYXRlZCAyTmU6IDEsNjI0LDk0NAoKVG8gcmVzY2FsZSBzbyAyTmUgPSAxMDAsMDAwOgpSZXNjYWxlZCBtdXRhdGlvbiByYXRlOiAyLjI1OWUtMDgKUmVzY2FsZWQgcmVjb21iaW5hdGlvbiByYXRlOiAxLjYyNWUtMDcKClRoZSBleHRlbnQgb2YgYSBzd2VlcCBzaWduYXR1cmUgaXMgcm91Z2hseSBkID0gMC4xICogKHMvcikuIFNpbmNlIHdlIGhhdmUgb3VyIHJlc2NhbGVkIHJlY29tYmluYXRpb24gcmF0ZSwgdG8gc2VlIHdoaWNoIHNlbGVjdGlvbiBjb2VmZmljaWVudCB3ZSBuZWVkIHRvIHNpbXVsYXRlLCB3ZSBjYW4gc29sdmUgZm9yIHMgPSAocmQpLzAuMSBmb3Igb3VyIG1pbmltdW0gYW5kIG1heGltdW0gZGVzaXJlZCBzd2VlcCBzaWduYXR1cmUuClRvIHNlZSBhIHN3ZWVwIHNpZ25hdHVyZSBvZiAxMDAwYnAsIHM9MC4wMDE2MjUuClRvIHNlZSBhIHN3ZWVwIHNpZ25hdHVyZSBvZiAxMDAwMDAwYnAsIHM9MS42MjQ5NDQu"; },
+              thumbnail_uri: function() { return null; }
+            }
+          
+        
       };
     </script>
 
     <script>
       var categories = {
+        "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1": {
+          "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1": [
+            "output/dgrp2/dgrp-population-parameters.txt"
+          ]
+        }
       };
 
       function show_rule_properties(rule) {
@@ -2393,7 +2749,7 @@ if (typeof module !== 'undefined') {
 
       var rulegraph_spec = {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
-        "width": 815.59,
+        "width": 883.59,
         "height": 326.0,
         "padding": 0,
         "autosize": "none",
@@ -2406,11 +2762,11 @@ if (typeof module !== 'undefined') {
         "data": [
           {
             "name": "node-data",
-            "values": [{'rule': 'ace_resistant_lines', 'fx': 288.59, 'fy': 90.0}, {'rule': 'all', 'fx': 433.59, 'fy': 306.0}, {'rule': 'beagle_impute', 'fx': 568.59, 'fy': 90.0}, {'rule': 'cyp_resistant_lines', 'fx': 80.593, 'fy': 90.0}, {'rule': 'dgrp_stats', 'fx': 695.59, 'fy': 234.0}, {'rule': 'empirical_windows_commands', 'fx': 288.59, 'fy': 162.0}, {'rule': 'filter_dgrp', 'fx': 568.59, 'fy': 18.0}, {'rule': 'genotypes_2R', 'fx': 640.59, 'fy': 162.0}, {'rule': 'genotypes_3R', 'fx': 496.59, 'fy': 162.0}, {'rule': 'resistant_lines', 'fx': 80.593, 'fy': 162.0}, {'rule': 'selection_scan_features', 'fx': 496.59, 'fy': 234.0}]
+            "values": [{'rule': 'ace_resistant_lines', 'fx': 258.59, 'fy': 90.0}, {'rule': 'all', 'fx': 403.59, 'fy': 306.0}, {'rule': 'beagle_impute', 'fx': 420.59, 'fy': 90.0}, {'rule': 'cyp_resistant_lines', 'fx': 80.593, 'fy': 90.0}, {'rule': 'dgrp_population_parameters', 'fx': 518.59, 'fy': 234.0}, {'rule': 'dgrp_stats', 'fx': 540.59, 'fy': 162.0}, {'rule': 'empirical_window_features', 'fx': 763.59, 'fy': 234.0}, {'rule': 'extract_empirical_windows', 'fx': 763.59, 'fy': 162.0}, {'rule': 'filter_dgrp', 'fx': 420.59, 'fy': 18.0}, {'rule': 'genotypes_2R', 'fx': 411.59, 'fy': 162.0}, {'rule': 'genotypes_3R', 'fx': 267.59, 'fy': 162.0}, {'rule': 'resistant_lines', 'fx': 123.59, 'fy': 162.0}, {'rule': 'selection_scan_features', 'fx': 288.59, 'fy': 234.0}]
           },
           {
             "name": "link-data",
-            "values": [{'target': 0, 'source': 9, 'value': 1}, {'target': 0, 'source': 8, 'value': 1}, {'target': 0, 'source': 5, 'value': 1}, {'target': 2, 'source': 4, 'value': 1}, {'target': 2, 'source': 7, 'value': 1}, {'target': 2, 'source': 8, 'value': 1}, {'target': 2, 'source': 5, 'value': 1}, {'target': 3, 'source': 9, 'value': 1}, {'target': 4, 'source': 1, 'value': 1}, {'target': 5, 'source': 1, 'value': 1}, {'target': 6, 'source': 2, 'value': 1}, {'target': 7, 'source': 10, 'value': 1}, {'target': 8, 'source': 10, 'value': 1}, {'target': 9, 'source': 1, 'value': 1}, {'target': 10, 'source': 1, 'value': 1}]
+            "values": [{'target': 0, 'source': 11, 'value': 1}, {'target': 0, 'source': 10, 'value': 1}, {'target': 2, 'source': 9, 'value': 1}, {'target': 2, 'source': 10, 'value': 1}, {'target': 2, 'source': 5, 'value': 1}, {'target': 3, 'source': 11, 'value': 1}, {'target': 4, 'source': 1, 'value': 1}, {'target': 5, 'source': 4, 'value': 1}, {'target': 6, 'source': 1, 'value': 1}, {'target': 7, 'source': 6, 'value': 1}, {'target': 8, 'source': 2, 'value': 1}, {'target': 9, 'source': 12, 'value': 1}, {'target': 10, 'source': 12, 'value': 1}, {'target': 11, 'source': 1, 'value': 1}, {'target': 12, 'source': 1, 'value': 1}]
           }
         ],
 
@@ -2518,7 +2874,7 @@ if (typeof module !== 'undefined') {
       var runtimes_spec = {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
         "description": "Runtimes of jobs.",
-        "data": {"values": [{'rule': 'ace_resistant_lines', 'runtime': 19.905327558517456}, {'rule': 'beagle_impute', 'runtime': 4001.4666299819946}, {'rule': 'cyp_resistant_lines', 'runtime': 19.907156944274902}, {'rule': 'dgrp_stats', 'runtime': 164.95061779022217}, {'rule': 'empirical_windows_commands', 'runtime': 2.9575254917144775}, {'rule': 'filter_dgrp', 'runtime': 561.3339338302612}, {'rule': 'genotypes_2R', 'runtime': 42.94107270240784}, {'rule': 'genotypes_3R', 'runtime': 49.05091667175293}, {'rule': 'resistant_lines', 'runtime': 3.3637075424194336}, {'rule': 'selection_scan_features', 'runtime': 522.4974980354309}, {'rule': 'selection_scan_features', 'runtime': 618.7037830352783}]},
+        "data": {"values": [{'rule': 'ace_resistant_lines', 'runtime': 19.598177909851074}, {'rule': 'beagle_impute', 'runtime': 4527.103453636169}, {'rule': 'cyp_resistant_lines', 'runtime': 19.515607595443726}, {'rule': 'dgrp_population_parameters', 'runtime': 5021.581888437271}, {'rule': 'dgrp_stats', 'runtime': 156.17856001853943}, {'rule': 'empirical_window_features', 'runtime': 31.58311128616333}, {'rule': 'empirical_window_features', 'runtime': 40.74227738380432}, {'rule': 'empirical_window_features', 'runtime': 37.85786819458008}, {'rule': 'extract_empirical_windows', 'runtime': 19.94555926322937}, {'rule': 'extract_empirical_windows', 'runtime': 20.121344327926636}, {'rule': 'extract_empirical_windows', 'runtime': 19.7723867893219}, {'rule': 'filter_dgrp', 'runtime': 618.8577222824097}, {'rule': 'genotypes_2R', 'runtime': 42.4577476978302}, {'rule': 'genotypes_3R', 'runtime': 63.18938875198364}, {'rule': 'resistant_lines', 'runtime': 3.2533106803894043}, {'rule': 'selection_scan_features', 'runtime': 534.6929988861084}, {'rule': 'selection_scan_features', 'runtime': 619.3131561279297}]},
         "mark": "point",
         "encoding": {
           "x": {"field": "runtime", "type": "quantitative",
@@ -2535,7 +2891,7 @@ if (typeof module !== 'undefined') {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
         "description": "Timeline of jobs.",
         "data": {
-          "values": [{'rule': 'ace_resistant_lines', 'starttime': '2021-09-09T17:25:57.371200', 'endtime': '2021-09-09T17:26:17.276528'}, {'rule': 'beagle_impute', 'starttime': '2021-09-09T18:27:09.505360', 'endtime': '2021-09-09T19:33:50.971990'}, {'rule': 'cyp_resistant_lines', 'starttime': '2021-09-09T17:25:57.373669', 'endtime': '2021-09-09T17:26:17.280826'}, {'rule': 'dgrp_stats', 'starttime': '2021-09-09T19:36:50.446240', 'endtime': '2021-09-09T19:39:35.396858'}, {'rule': 'empirical_windows_commands', 'starttime': '2021-09-10T17:27:35.446359', 'endtime': '2021-09-10T17:27:38.403885'}, {'rule': 'filter_dgrp', 'starttime': '2021-09-09T17:25:57.376343', 'endtime': '2021-09-09T17:35:18.710277'}, {'rule': 'genotypes_2R', 'starttime': '2021-09-10T17:52:33.966694', 'endtime': '2021-09-10T17:53:16.907767'}, {'rule': 'genotypes_3R', 'starttime': '2021-09-10T17:52:33.960190', 'endtime': '2021-09-10T17:53:23.011107'}, {'rule': 'resistant_lines', 'starttime': '2021-09-09T23:10:33.658013', 'endtime': '2021-09-09T23:10:37.021721'}, {'rule': 'selection_scan_features', 'starttime': '2021-09-10T17:53:16.911064', 'endtime': '2021-09-10T18:01:59.408562'}, {'rule': 'selection_scan_features', 'starttime': '2021-09-10T17:53:23.014199', 'endtime': '2021-09-10T18:03:41.717982'}]
+          "values": [{'rule': 'ace_resistant_lines', 'starttime': '2021-09-20T13:07:58.963480', 'endtime': '2021-09-20T13:08:18.561658'}, {'rule': 'beagle_impute', 'starttime': '2021-09-20T13:20:32.205030', 'endtime': '2021-09-20T14:35:59.308484'}, {'rule': 'cyp_resistant_lines', 'starttime': '2021-09-20T13:07:58.957652', 'endtime': '2021-09-20T13:08:18.473260'}, {'rule': 'dgrp_population_parameters', 'starttime': '2021-09-22T14:13:25.478464', 'endtime': '2021-09-22T15:37:07.060352'}, {'rule': 'dgrp_stats', 'starttime': '2021-09-20T14:35:59.442930', 'endtime': '2021-09-20T14:38:35.621490'}, {'rule': 'empirical_window_features', 'starttime': '2021-09-20T16:10:05.320047', 'endtime': '2021-09-20T16:10:36.903158'}, {'rule': 'empirical_window_features', 'starttime': '2021-09-20T16:09:07.884237', 'endtime': '2021-09-20T16:09:48.626514'}, {'rule': 'empirical_window_features', 'starttime': '2021-09-20T16:09:07.500784', 'endtime': '2021-09-20T16:09:45.358652'}, {'rule': 'extract_empirical_windows', 'starttime': '2021-09-20T16:09:45.367534', 'endtime': '2021-09-20T16:10:05.313093'}, {'rule': 'extract_empirical_windows', 'starttime': '2021-09-20T16:08:47.701348', 'endtime': '2021-09-20T16:09:07.822692'}, {'rule': 'extract_empirical_windows', 'starttime': '2021-09-20T16:08:47.707290', 'endtime': '2021-09-20T16:09:07.479677'}, {'rule': 'filter_dgrp', 'starttime': '2021-09-20T13:07:58.951464', 'endtime': '2021-09-20T13:18:17.809186'}, {'rule': 'genotypes_2R', 'starttime': '2021-09-20T14:35:59.448373', 'endtime': '2021-09-20T14:36:41.906121'}, {'rule': 'genotypes_3R', 'starttime': '2021-09-20T16:08:42.973927', 'endtime': '2021-09-20T16:09:46.163316'}, {'rule': 'resistant_lines', 'starttime': '2021-09-20T16:08:42.986247', 'endtime': '2021-09-20T16:08:46.239558'}, {'rule': 'selection_scan_features', 'starttime': '2021-09-20T16:08:42.970253', 'endtime': '2021-09-20T16:17:37.663252'}, {'rule': 'selection_scan_features', 'starttime': '2021-09-20T16:09:46.171282', 'endtime': '2021-09-20T16:20:05.484438'}]
         },
         "mark": "point",
         "encoding": {

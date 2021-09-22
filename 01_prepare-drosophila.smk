@@ -18,16 +18,28 @@ rule all:
             'output/resistant-lines/{locus}-resistant-lines.txt',
             locus=['ace', 'chkov', 'cyp']
         ),
-        'output/dgrp2/imputed-counts.frq.count',
-        'output/dgrp2/imputed-heteroz.sites.pi',
         expand(
             'output/selection-scan/{chrom}-features{stats}.tsv',
             chrom=['2R', '3R'],
             stats=['', '-stats']
         ),
+        "output/dgrp2/dgrp-population-parameters.txt",
         # Get set of empirical windows from another rule and add their .npy as inputs to
         # this rule.
         wait_for_empirical_npy
+
+
+rule dgrp_population_parameters:
+    input:
+        allele_counts = 'output/dgrp2/imputed-counts.frq.count',
+        heterozygosity = 'output/dgrp2/imputed-heteroz.sites.pi'
+    output:
+        report(
+            "output/dgrp2/dgrp-population-parameters.txt",
+            caption="captions/dgrp-population-parameters.rst"
+        )
+    conda: "envs/simulate.yaml"
+    notebook: "notebooks/prepare-drosophila/dgrp-population-parameters.py.ipynb"
 
 
 rule selection_scan_features:
