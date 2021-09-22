@@ -44,7 +44,8 @@ json_params = []
 for file in [file for file in snakemake.input if file.endswith("json")]:
     with open(file) as f:
         params_dict = json.load(f)
-    params_dict["demography"] = parse_demography(params_dict["demography"])
+    if "demography" in params_dict:
+        params_dict["demography"] = parse_demography(params_dict["demography"])
     params_dict["data-id"] = Path(file).stem.split("_")[0]
     json_params.append(params_dict)
 json_df = pd.DataFrame.from_records(json_params).set_index("data-id")
