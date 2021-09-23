@@ -4,8 +4,7 @@
 # Directory where all the simulation files are supposed to be
 raw_sim_folder: "raw-simulations"
 
-# Every single simulation folder that we are interested in:
+# Simulation identifiers that we are interested in:
 sim_folders:
-  - simtest-1
-  - simtest-2
+  - simtest-15
 
