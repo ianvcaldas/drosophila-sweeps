@@ -11,13 +11,14 @@ rule all:
         data = expand(
             "output/simulation-data/{sim_id}/{result}",
             sim_id=config["sim_folders"],
-            result=["data.tar", "parameters.tsv"]
+            result=["data.tar", "parameters.tsv", "info.txt"]
         )
 
 rule combine_simulation_tasks:
     output:
         data = "output/simulation-data/{sim}/data.tar",
-        parameters = "output/simulation-data/{sim}/parameters.tsv"
+        parameters = "output/simulation-data/{sim}/parameters.tsv",
+        info = "output/simulation-data/{sim}/info.txt"
     params:
         combine_features = True
     conda: "envs/simulate.yaml"
