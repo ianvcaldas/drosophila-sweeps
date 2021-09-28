@@ -1,10 +1,22 @@
-# Change this to work on the cluster or not.
-# workdir: "/fs/cbsuclarkfs1/storage/ivc2/drosophila-sweeps"
+
+main_training_id: "main-fixedsweeps"
 
 # Directory where all the simulation files are supposed to be
-raw_sim_folder: "raw-simulations"
-
+# raw_sim_folder: "raw-simulations/20210927_simulations"
 # Simulation identifiers that we are interested in:
-sim_folders:
-  - simtest-15
+# sim_ids:
+#   - bottleneck-1percent
+#   - bottleneck-5percent
+#   - main-fixedsweeps
+#   - main-partialsweeps
+#   - offcenter-10000bp
+#   - offcenter-500bp
+#   - popsize-higher
+#   - popsize-lower
+#   - recombination-higher
+#   - recombination-lower
 
+# Testing data:
+raw_sim_folder: "raw-simulations/test"
+sim_ids:
+  - simtest
