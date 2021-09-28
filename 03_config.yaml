@@ -1,6 +1,5 @@
 
-main_training_id: "main-fixedsweeps"
-
+# main_training_id: "main-fixedsweeps"
 # Directory where all the simulation files are supposed to be
 # raw_sim_folder: "raw-simulations/20210927_simulations"
 # Simulation identifiers that we are interested in:
@@ -17,6 +16,7 @@ main_training_id: "main-fixedsweeps"
 #   - recombination-lower
 
 # Testing data:
+main_training_id: "simtest"
 raw_sim_folder: "raw-simulations/test"
 sim_ids:
   - simtest

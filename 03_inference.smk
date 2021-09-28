@@ -12,15 +12,15 @@ rule all:
             "output/simulation-data/{sim_id}/{result}",
             sim_id=config["sim_ids"],
             result=["data.tar", "parameters.tsv", "info.txt"]
-        )
-        # restart_report = "output/training-data/info/restart-limit-report.txt"
+        ),
+        restart_report = "output/training-data/info/training-distributions.txt"
 
 
-rule check_restart_limit:
+rule check_training_distributions:
     input: "output/simulation-data/" + config["main_training_id"] + "/parameters.tsv"
-    output: "output/training-data/info/restart-limit-report.txt"
+    output: "output/training-data/info/training-distributions.txt"
     conda: "envs/simulate.yaml"
-    notebook: "notebooks/inference/check-restart-limit.py.ipynb"
+    notebook: "notebooks/inference/check-training-distributions.py.ipynb"
 
 
 rule combine_simulation_tasks:
