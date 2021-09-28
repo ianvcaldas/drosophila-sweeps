@@ -11,7 +11,7 @@ def get_windows(locus_size, dimension, start_pos=1, smallest_window=1000):
     """Get logarithmically distributed window sizes and their locations, for the given parameters.
     start_pos offsets the center of every window.
     """
-    # Window sizes are logarithmically distributed
+    # Window sizes are logarithmically distributed.
     window_sizes = np.exp(
         np.linspace(
             np.log(smallest_window),
@@ -20,7 +20,20 @@ def get_windows(locus_size, dimension, start_pos=1, smallest_window=1000):
         )
     )
     window_sizes = [np.round(i) for i in window_sizes]
-    # The positions for each window size depend on that window size
+    # Check that the parameters produce meaningful window sizes.
+    if (
+        len(np.unique(window_sizes)) != len(window_sizes)
+        or window_sizes[0] > window_sizes[-1]
+        or smallest_window > locus_size
+    ):
+        lines = [
+            f"Your combination of parameters does not produce meaningful window sizes.",
+            f"Locus size: {locus_size}, dimension: {dimension}, starting position: {start_pos}, smallest window: {smallest_window}.",
+            "Window sizes:",
+        ]
+        lines.extend([str(ws) for ws in window_sizes])
+        raise Exception("\n".join(lines))
+    # The positions for each window size depend on that window size.
     center_pos_dict = {
         ws: (
             np.linspace(

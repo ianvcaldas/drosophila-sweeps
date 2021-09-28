@@ -75,9 +75,10 @@ function (void)restart_sim(void) {
 
 function (void)finalize_sim(void) {
     sim.treeSeqOutput(output_file);
-    current_gen_record = paste(c('slim_generations =', sim.generation));
-    num_rest_record = paste(c('num_restarts =', sim.getValue('num_restarts')));
-    records = c(current_gen_record, num_rest_record);
+    current_gen_record = paste(c("slim_generations =", sim.generation));
+    num_rest_record = paste(c("num_restarts =", sim.getValue('num_restarts')));
+    end_freq = paste(c("actual_frequency_at_sampling =", mutfreq()));
+    records = c(current_gen_record, num_rest_record, end_freq);
     writeFile(metrics_output, records, append=T);
     sim.simulationFinished();
 }
