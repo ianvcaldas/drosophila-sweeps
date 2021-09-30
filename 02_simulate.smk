@@ -42,6 +42,9 @@ def successful_npy(wildcards):
     successful_sim_ids = wait_for_slim_checkpoint(wildcards)
     return expand(OUTDIR/'npy/{sim_id}.npy', sim_id=successful_sim_ids)
 
+def successful_lognpy(wildcards):
+    successful_sim_ids = wait_for_slim_checkpoint(wildcards)
+    return expand(OUTDIR/'npy-log-scale/{sim_id}.npy', sim_id=successful_sim_ids)
 
 def successful_metrics(wildcards):
     successful_sim_ids = wait_for_slim_checkpoint(wildcards)
@@ -66,8 +69,19 @@ rule all:
     input:
         OUTDIR/"parameters.tsv",
         OUTDIR/"features.tar.gz",
-        OUTDIR/"data.tar"
+        OUTDIR/"data.tar",
+        OUTDIR/"logdata.tar"
 
+rule logtar_npy:
+    input:
+        npy_files = successful_lognpy,
+        params_file = OUTDIR/"parameters.tsv"
+    output:
+        tar_file = OUTDIR/"logdata.tar"
+    params:
+        npy_folder = OUTDIR/"npy-log-scale",
+    conda: "envs/simulate.yaml"
+    script: "scripts/simulations/tar_npy.py"
 
 rule tar_npy:
     input:
@@ -77,7 +91,6 @@ rule tar_npy:
         tar_file = OUTDIR/"data.tar"
     params:
         npy_folder = OUTDIR/"npy",
-        out_folder = OUTDIR
     conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
 

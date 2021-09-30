@@ -12,7 +12,7 @@ uuids = (
 )["uuid"]
 
 original_npys = [Path(f) for f in snakemake.input["npy_files"]]
-unique_folder = Path(snakemake.params["out_folder"])/"npy-unique"
+unique_folder = Path(str(snakemake.params["npy_folder"]) + '-unique')
 unique_folder.mkdir(exist_ok=True)
 for original in original_npys:
     unique = unique_folder/(uuids.loc[original.stem] + '.npy')
