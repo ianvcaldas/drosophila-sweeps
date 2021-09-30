@@ -78,7 +78,11 @@ def calculate_features(
     snp_coordinates, genotypes = ms_to_numpy(ms_file)
     if last_position is None:
         # This allows for 0-1 or raw base-pair coordinates.
-        last_position = max(snp_coordinates[-1], 1)
+        try:
+            last_position = max(snp_coordinates[-1], 1)
+        except IndexError:
+            s = "Can't determine locus size; you probably have 0 segregating sites and no last_position was passed to calculate_features."
+            raise Exception(s)
     for stat in summary_statistics:
         # these if statements are a poor way to check if the user wants
         # a bp window or a snp window.

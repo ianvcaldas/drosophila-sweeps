@@ -37,6 +37,7 @@ calculate_features(
     summary_statistics=default_summary_statistics,
     center_pos=center_pos_dict,
     window_sizes=window_sizes,
+    last_position=params["locus-size"],
     output_file=feature_file,
     output_stats=stats_file,
 )

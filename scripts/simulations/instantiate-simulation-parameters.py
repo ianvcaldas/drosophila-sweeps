@@ -20,15 +20,12 @@ def draw_from_distribution(distr_dict):
     if distr == "choice":
         value = np.random.choice(distr_dict["options"])
     elif distr == "uniform":
-        value = stats.uniform(
-            lower, upper - lower
-        ).rvs()
+        value = stats.uniform(lower, upper - lower).rvs()
     elif distr == "integer-range":
         value = stats.randint(lower, upper + 1).rvs()
     elif distr == "log-uniform":
         log_value = stats.uniform(
-            np.log10(lower),
-            np.log10(upper) - np.log10(lower),
+            np.log10(lower), np.log10(upper) - np.log10(lower),
         ).rvs()
         value = np.power(10, log_value)
     else:

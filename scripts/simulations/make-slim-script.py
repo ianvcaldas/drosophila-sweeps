@@ -93,12 +93,12 @@ def get_demography_text(event):
         population_crash = {
             "kind": "size-change",
             "generation": int(event["generation"]),
-            "diploid-size": int(event["crash-size"])
+            "diploid-size": int(event["crash-size"]),
         }
         population_recovery = {
             "kind": "size-change",
             "generation": int(event["generation"] + event["duration"]),
-            "diploid-size": int(event["recovery-size"])
+            "diploid-size": int(event["recovery-size"]),
         }
         crash_text = get_demography_text(population_crash)
         recovery_text = get_demography_text(population_recovery)

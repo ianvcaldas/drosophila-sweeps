@@ -28,39 +28,24 @@ def vcftools_to_ms(input_file, output_file, pos_file=None):
 
 
 def ms_to_numpy(ms_file):
-    """Returns positions and genotypes of a ms file as numpy arrays. Genotypes are an
-    array of zeros and ones, in the format positions x samples.
+    """Reads in a ms file and outputs the positions and the genotypes.
+    Genotypes are a numpy array of 0s and 1s with shape (num_segsites, num_samples).
     """
-    try:
-        with open(ms_file, "rb") as f:
-            line = f.readline()
-            while line.strip() != b"//":
-                line = f.readline()
-            data = np.genfromtxt(
-                (line for line in f), skip_header=2, dtype=np.uint8, delimiter=1
-            )
-    except StopIteration:  # catches files wth 0 segregating sites
-        data = np.array([])
-    if len(data.shape) == 1:  # correct shape for 0 or 1 segregating site
-        data = data.reshape((-1, 1))
-    # remove all the monomorphic sites:
-    uniq_cols = [len(np.unique(col)) > 1 for col in data.T]
-    data = data[:, uniq_cols]
-    positions = np.array([])  # another provision for 0 segregating sites
     with open(ms_file, "r") as f:
+        # Read in number of segregating sites and positions
         for line in f:
-            if line.startswith("positions:"):
-                positions = np.array([float(x) for x in line.split()[1:]])
-                # Only keep polymorphic positions:
-                positions = positions[uniq_cols]
-    if data.shape[1] != positions.shape[0]:
-        raise FeatureError(
-            "Data is shape {data.shape}, but"
-            "positions are shape {positions.shape}. We"
-            "expect the number of columns in data and the"
-            "number of elements in positions to be equal."
-        )
-    assert data.shape[1] == positions.shape[0], print(data.shape, positions.shape)
+            if line.startswith("segsites"):
+                num_segsites = int(line.strip().split()[1])
+                if num_segsites == 0:
+                    # Shape of data array for 0 segregating sites should be (0, 1)
+                    return np.array([]), np.array([], ndmin=2, dtype=np.uint8).T
+            elif line.startswith("positions"):
+                positions = np.array([float(x) for x in line.strip().split()[1:]])
+                break
+            else:
+                continue
+        # Now read in the data
+        data = np.array([list(line.strip()) for line in f], dtype=np.uint8)
     return positions, data.T
 
 
