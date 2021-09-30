@@ -2,13 +2,13 @@
 #SBATCH --nodes=1
 #SBATCH --mem=18000
 #SBATCH --account=bscb02
-#SBATCH --output="/home/ivc2/slurm-outputs/%x-%j.out"
+#SBATCH --output="/home/ivc2/slurm-outputs/%x-%j-%a.out"
 #SBATCH --partition=regular,long7,long30
 
 echo "Workstation is ${HOSTNAME}, partition is ${SLURM_JOB_PARTITION}."
 
 # Create working directory and the destination folder for results.
-WORKDIR=/workdir/$USER/${SLURM_JOB_ID}
+WORKDIR=/workdir/$USER/${SLURM_ARRAY_JOB_ID}-${SLURM_ARRAY_TASK_ID}
 DATAHOME=/fs/cbsuclarkfs1/storage/ivc2/drosophila-sweeps
 RESULTSHOME=${DATAHOME}/raw-simulations/${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}
 
@@ -39,10 +39,12 @@ conda deactivate
 
 echo "Moving results into storage."
 mkdir -p ${RESULTSHOME}/data
+mkdir -p ${RESULTSHOME}/logdata
 mkdir -p ${RESULTSHOME}/features
 mkdir -p ${RESULTSHOME}/parameters
 mkdir -p ${RESULTSHOME}/logs
 mv output/simulations/data.tar ${RESULTSHOME}/data/data_${SLURM_ARRAY_TASK_ID}.tar
+mv output/simulations/logdata.tar ${RESULTSHOME}/logdata/logdata_${SLURM_ARRAY_TASK_ID}.tar
 mv output/simulations/features.tar.gz ${RESULTSHOME}/features/features_${SLURM_ARRAY_TASK_ID}.tar.gz
 mv output/simulations/parameters.tsv ${RESULTSHOME}/parameters/parameters_${SLURM_ARRAY_TASK_ID}.tsv
 tar -czf logs.tar.gz logs/simulations
