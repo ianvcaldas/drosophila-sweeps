@@ -1,0 +1,178 @@
+
+Archived entries from file /Users/ian/ciencia/projects_202109_drosophila-sweeps/todo.org
+
+* 2021
+
+** 2021-09 September
+
+*** 2021-09-30 Thursday
+**** DONE [#B] Simulate with log-scale normalized statistics. [100%]
+CLOSED: [2021-09-30 Thu 18:39] SCHEDULED: <2021-09-30 Thu>
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-04 Mon 11:31
+:ARCHIVE_FILE: ~/ciencia/projects_202109_drosophila-sweeps/todo.org
+:ARCHIVE_OLPATH: Sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:END:
+
+- State "DONE"       from "DOING"      [2021-09-30 Thu 18:39]
+- State "DOING"      from "TODO"       [2021-09-30 Thu 13:03]
+- [X] Check if simulations are saving a log-transformed .tar of data.
+- [X] If not, implement that in simulations: make a folder of unique npys with the log data, then tar that.
+- [X] Test the new stuff locally.
+- [X] Check if cluster scripts are saving the .tar of log-transformed data.
+- [X] If not, make them save that as well.
+- [X] Git update everything.
+- [X] Move existing cluster simulations to their own folder, create a new one for raw simulations.
+- [X] Now we just need to re-run cluster simulations, yet again. Do this *after* debugging the new simulation results.
+
+**** DONE [#A] Debug feature calculation failure with zero segregating sites. [100%]
+CLOSED: [2021-09-30 Thu 16:56] SCHEDULED: <2021-09-30 Thu>
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-04 Mon 11:31
+:ARCHIVE_FILE: ~/ciencia/projects_202109_drosophila-sweeps/todo.org
+:ARCHIVE_OLPATH: Sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:END:
+
+- State "DONE"       from "TODO"       [2021-09-30 Thu 16:56]
+- [X] Add a config with mutation rate of zero to produce zero segregating sites all the time.
+- [X] Change =02_run= to use that config for now.
+- [X] Check that we get the same =genfromtxt= error using that config.
+- [X] Reproduce =genfromtxt= error in an interactive session.
+- [X] What is the error caused by?
+- [X] Fix it in an interactive session.
+- [X] Confirm that we read in 0 segregating sites properly.
+- [X] Confirm that we read in 1 segregating site properly.
+- [X] Confirm that we read in >1 segregating sites properly.
+- [X] Check timing of new function vs. old function for >1 segregating sites.
+- [X] Put new function in the script.
+- [X] Make feature calculation work with 0 segregating sites.
+- [X] Run simulations and check that everything runs, and features are calculated properly.
+- [X] Clean output folder of simulations.
+- [X] Change =02_run= back to its normal state.
+- [X] Put zero-mutations simulation in as a simtest folder.
+- [X] Git update everything.
+
+
+** 2021-10 October
+
+*** 2021-10-01 Friday
+**** DONE [#A] Debug new simulation results. [100%]
+CLOSED: [2021-10-01 Fri 11:16] SCHEDULED: <2021-09-30 Thu>
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-04 Mon 11:31
+:ARCHIVE_FILE: ~/ciencia/projects_202109_drosophila-sweeps/todo.org
+:ARCHIVE_OLPATH: Sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:END:
+
+- State "DONE"       from "DOING"      [2021-10-01 Fri 11:16]
+- State "DOING"      from "TODO"       [2021-09-30 Thu 13:03]
+- My hypothesis was that all SLURM tasks from a single array job are happening in the same workdir, and thus the snakemake input/output calculations are going haywire.
+- It turns out that the =/workdir= scratch space on =cbsubscb10= was 100% full, so you couldn't =mkdir= a folder there; I was getting this mysterious "Input/output error". So instead of creating a directory in scratch and switching to it, we were running simulations from inside home in multiple jobs and tasks, causing a huge amount of race conditions. The temporary solution is to avoid =cbsubscb10= for now and hope no other compute nodes have the same problem.
+- [X] Wait for everything to run in the cluster.
+- [X] Download the tars.
+- [X] Check the SLURM output for the logs.
+- [X] Does every data tar contain the same NPY files? No...
+- [X] Change name of output file to include slurm job array ID. Locally.
+- [X] Change workdir to include slurm job array ID. Locally.
+- [X] slurm array task id vs. slurm array job id.
+- [X] Git update just the slurm script.
+- [X] Clean cluster folder of slurm outputs.
+- [X] Check workdirs.
+- [X] Confirm cluster slurm output are alright.
+- [X] Re-run with very few simulations jobs; comment original amounts out.
+- [X] Confirm it runs properly.
+- [X] Confirm there are not extra files in =~/drosophila-sweeps=.
+- [X] Git checkout of the slurm sbatch script so simulation amounts are back to normal.
+- [X] Update git from the cluster: fetch, merge, then commit and push.
+- [X] Delete local simulations.
+- [X] Read SLURM outputs to see what failed.
+- [X] Make testing SLURM scripts.
+- [X] See if I run into the same mistake as before.
+- [X] Re-run simulations with only a couple of runs.
+- [X] Clean up =benchmark=, =output= and =bin= from the main folder.
+- [X] Do not use cbsubscb10.
+- [X] Try re-running the big ones now.
+
+*** 2021-10-05 Tuesday
+**** DONE Combine simulations, including log-transformed data. [100%]
+CLOSED: [2021-10-05 Tue 15:34] SCHEDULED: <2021-10-04 Mon>
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-27 Wed 11:29
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:END:
+  
+- State "DONE"       from "DOING"      [2021-10-05 Tue 15:34]
+- State "DOING"      from "TODO"       [2021-10-04 Mon 18:40]
+- [X] Grep the slurm outputs for "Input/output" errors.
+- [X] Check if the main folder does not have an =output=, etc.
+- [X] Wait for everything to run.
+- [X] Check that the log-transformed =tar= of data are there.
+- [X] Remove old simulations.
+- [X] Rename folder of new simulations to =raw-simulations=.
+- [X] Download new data.
+- [X] Replace current data with new data that includes log-transformed data.
+- [X] Additional rule for combining simulation results, but using the log-transformed data this time. This can be a simple parameter passed to the simulation combination notebook.
+- [X] Make features and logdata outputs of the simulation combination rule.
+- [X] Modify =03_config.yaml= back to using real data.
+- [X] Run everything to combine data.
+- [X] Confirm that things ran as planned.
+
+*** 2021-10-18 Monday
+**** DONE Snakemake rules for model training. [100%]
+CLOSED: [2021-10-18 Mon 12:35]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-27 Wed 11:29
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:END:
+
+- State "DONE"       from "DOING"      [2021-10-18 Mon 12:35] \\
+  Brainstormed what the Snakemake pipeline for training models would look like. Still missing: the pipeline for converting inferences on training, validation, and testing datasets into performance metrics.
+- State "DOING"      from "TODO"       [2021-10-18 Mon 12:00]
+- [X] Use the fastai conda environment.
+- [X] Read the code for building a model. What steps happen in it?
+- [X] Read the code for training a model. What steps happen in it?
+- [X] How would we turn these steps into rules with inputs and outputs?
+- [X] List in config for datasets to train models with.
+- [X] A general rule for training a model and outputting trained model, reports of fitting, and validation results.
+- [X] One rule per target of inference. 
+- [X] Use multiple cores when training, add number of cores to the snakemake rule as well.
+- [X] Use a smaller dataset for training.
+
+*** 2021-10-20 Wednesday
+**** DONE Toy model training implementation. [100%]
+CLOSED: [2021-10-20 Wed 19:00]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-10-27 Wed 11:29
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:END:
+
+- State "DONE"       from "DOING"      [2021-10-20 Wed 19:00]
+- State "DOING"      from "TODO"       [2021-10-20 Wed 16:01]
+- [X] Add lists of training and testing datasets to config; add list of inference targets to config.
+- [X] Expand those lists into the final outputs of the process, the testing inferences. Add that into the top rule.
+- [X] Write toy Test rule with =touch=.
+- [X] Write toy Fit rule with =touch=.
+- [X] Write toy Split rule with =touch=.
+- [X] Write toy Balance rule with =touch=.
+- [X] Add outcomes of overfitting analysis to top rule. Try and keep that in as few files as possible.
+- [X] Add toy rule to combine SimpleFit outcomes with =touch=.
+- [X] Add toy SimpleFit rule with =touch=.
+

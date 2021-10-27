@@ -1,22 +1,22 @@
 
-# main_training_id: "main-fixedsweeps"
-# Directory where all the simulation files are supposed to be
-# raw_sim_folder: "raw-simulations/20210927_simulations"
-# Simulation identifiers that we are interested in:
-# sim_ids:
-#   - bottleneck-1percent
-#   - bottleneck-5percent
-#   - main-fixedsweeps
-#   - main-partialsweeps
-#   - offcenter-10000bp
-#   - offcenter-500bp
-#   - popsize-higher
-#   - popsize-lower
-#   - recombination-higher
-#   - recombination-lower
+raw_sim_folder: "raw-simulations/20211004_simulations"
+num_overfitting_replicates: 10
 
-# Testing data:
-main_training_id: "simtest"
-raw_sim_folder: "raw-simulations/test"
-sim_ids:
-  - simtest
+training_ids:
+  - main-fixedsweeps
+  - main-partialsweeps
+testing_ids:
+  - bottleneck-1percent
+  - bottleneck-5percent
+  - offcenter-10000bp
+  - offcenter-500bp
+  - popsize-higher
+  - popsize-lower
+  - recombination-higher
+  - recombination-lower
+
+inference_targets:
+  - log-sel-strength
+  - sweep-mode
+  - hard-vs-soft
+  - rnm-vs-sgv
