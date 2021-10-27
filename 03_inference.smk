@@ -35,11 +35,13 @@ rule all:
             training=config["training_ids"]
         )
 
+
 rule apply_model_to_empirical_data:
     input: "output/trained-models/{target}_{training}.pth"
     output: "output/inferences-empirical/{target}_{training}_empirical.tsv"
     shell:
         "touch {output};"
+
 
 rule apply_model_to_testing_data:
     input:
@@ -56,9 +58,11 @@ rule aggregate_overfitting_replicates:
             "output/model-fitting/{{target}}_{{training}}_replicate-{k}.tsv",
             k=range(config["num_overfitting_replicates"])
         )
-    output: "output/model-fitting/{target}_{training}_overfitting.tsv"
-    shell:
-        "touch {output};"
+    output:
+        aggregated = "output/model-fitting/{target}_{training}_overfitting.tsv"
+    conda: "envs/simulate.yaml"
+    script: "scripts/inference/aggregate-overfitting-replicates.py"
+
 
 rule fit_model:
     input:
@@ -71,8 +75,13 @@ rule fit_model:
         training_inferences = "output/inferences-training/{target}_{training}_training.tsv",
         validation_inferences = "output/inferences-training/{target}_{training}_validation.tsv",
         fit_report = "output/model-fitting/{target}_{training}_fit.tsv"
-    shell:
-        "touch {output};"
+    params:
+        save_model = True,
+        save_inferences = True,
+        use_log_data = False
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
+
 
 rule overfitting_simple_fit:
     input:
@@ -82,17 +91,23 @@ rule overfitting_simple_fit:
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
         fit_report = "output/model-fitting/{target}_{training}_replicate-{k}.tsv"
-    shell:
-        "touch {output};"
+    params:
+        save_model = False,
+        save_inferences = False,
+        use_log_data = False
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
     
 
 rule train_validation_split:
-    input: "output/training-data/balanced/{target}_{training}.tsv"
+    input:
+        balanced = "output/training-data/balanced/{target}_{training}.tsv"
     output:
         training = "output/training-data/train-valid-split/{target}_{training}_training.tsv",
         validation = "output/training-data/train-valid-split/{target}_{training}_validation.tsv"
     params:
         random_seed = 13
+    conda: "envs/ml.yaml"
     notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 

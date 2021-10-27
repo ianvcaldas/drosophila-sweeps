@@ -7,3 +7,4 @@ dependencies:
   - jupyter=1.0.0
   - jupyter_client<7
   - python=3.9
+  - scikit-learn=1.0.1

@@ -2,6 +2,8 @@
 raw_sim_folder: "raw-simulations/20211004_simulations"
 num_overfitting_replicates: 10
 
+validation_percentage: 0.2
+
 training_ids:
   - main-fixedsweeps
   - main-partialsweeps
