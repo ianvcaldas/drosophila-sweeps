@@ -66,8 +66,8 @@ rule aggregate_overfitting_replicates:
 
 rule fit_model:
     input:
-        training = "output/training-data/train-valid-split/{target}_{training}_training.tsv",
-        validation = "output/training-data/train-valid-split/{target}_{training}_validation.tsv",
+        training = "output/training-data/balanced/{target}_{training}_training.tsv",
+        validation = "output/training-data/balanced/{target}_{training}_validation.tsv",
         data = "output/simulation-data/{training}/data.tar",
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
@@ -85,8 +85,8 @@ rule fit_model:
 
 rule overfitting_simple_fit:
     input:
-        training = "output/training-data/train-valid-split/{target}_{training}_training.tsv",
-        validation = "output/training-data/train-valid-split/{target}_{training}_validation.tsv",
+        training = "output/training-data/balanced/{target}_{training}_training.tsv",
+        validation = "output/training-data/balanced/{target}_{training}_validation.tsv",
         data = "output/simulation-data/{training}/data.tar",
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
@@ -97,27 +97,29 @@ rule overfitting_simple_fit:
         use_log_data = False
     conda: "envs/ml.yaml"
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
-    
-
-rule train_validation_split:
-    input:
-        balanced = "output/training-data/balanced/{target}_{training}.tsv"
-    output:
-        training = "output/training-data/train-valid-split/{target}_{training}_training.tsv",
-        validation = "output/training-data/train-valid-split/{target}_{training}_validation.tsv"
-    params:
-        random_seed = 13
-    conda: "envs/ml.yaml"
-    notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 
 rule balance_training_data:
     input:
-        sim_params = "output/simulation-data/{training}/parameters.tsv"
+        training = "output/training-data/train-valid-split/{training}_training.tsv",
+        validation = "output/training-data/train-valid-split/{training}_validation.tsv"
     output:
-        balanced_params = "output/training-data/balanced/{target}_{training}.tsv"
+        balanced_training = "output/training-data/balanced/{target}_{training}_training.tsv",
+        balanced_validation = "output/training-data/balanced/{target}_{training}_validation.tsv"
     conda: "envs/simulate.yaml"
     script: "scripts/inference/balance-training-data.py"
+
+    
+rule train_validation_split:
+    input:
+        sim_params = "output/simulation-data/{training}/parameters.tsv"
+    output:
+        training = "output/training-data/train-valid-split/{training}_training.tsv",
+        validation = "output/training-data/train-valid-split/{training}_validation.tsv"
+    params:
+        random_seed = 13
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 
 rule check_training_distributions:
