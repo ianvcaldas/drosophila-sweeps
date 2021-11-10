@@ -44,6 +44,8 @@ rule apply_model_to_empirical_data:
     output:
         inferences = "output/inferences-empirical/{target}_{training}_empirical.tsv"
     conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/apply-model-empirical_{target}_{training}.tsv"
+    log: "logs/inference/apply-model-empirical_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
@@ -55,6 +57,8 @@ rule apply_model_to_testing_data:
     output:
         inferences = "output/inferences-testing/{target}_{training}_{testing}.tsv",
     conda: "envs/ml.yaml"
+    benchmark: "benchmarks/apply-model-testing_{target}_{training}_{testing}.tsv"
+    log: "logs/inference/apply-model-testing_{target}_{training}_{testing}.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
@@ -67,6 +71,7 @@ rule aggregate_overfitting_replicates:
     output:
         aggregated = "output/model-fitting/{target}_{training}_overfitting.tsv"
     conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/aggregate-overfitting_{target}_{training}.tsv"
     script: "scripts/inference/aggregate-overfitting-replicates.py"
 
 
@@ -86,6 +91,8 @@ rule fit_model:
         save_inferences = True,
         use_log_data = False
     conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}.tsv"
+    log: "logs/inference/fit-neural-network_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
@@ -102,6 +109,8 @@ rule overfitting_simple_fit:
         save_inferences = False,
         use_log_data = False
     conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.tsv"
+    log: "logs/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.py.ipynb"
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
@@ -113,6 +122,7 @@ rule balance_training_data:
         balanced_training = "output/training-data/balanced/{target}_{training}_training.tsv",
         balanced_validation = "output/training-data/balanced/{target}_{training}_validation.tsv"
     conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/balance-training-data_{target}_{training}.tsv"
     script: "scripts/inference/balance-training-data.py"
 
     
@@ -125,6 +135,8 @@ rule train_validation_split:
     params:
         random_seed = 13
     conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/train-validation-split_{training}.tsv"
+    log: "logs/inference/train-validation-split_{training}.py.ipynb"
     notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 
@@ -132,6 +144,8 @@ rule check_training_distributions:
     input: "output/simulation-data/{sim_id}/parameters.tsv"
     output: "output/training-data/info/{sim_id}_training-distributions.txt"
     conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/check-training-distributions_{sim_id}.tsv"
+    log: "logs/inference/check-training-distributions_{sim_id}.py.ipynb"
     notebook: "notebooks/inference/check-training-distributions.py.ipynb"
 
 
@@ -143,4 +157,6 @@ rule combine_simulation_tasks:
         features = "output/simulation-data/{sim}/features.tar.gz",
         logdata  = "output/simulation-data/{sim}/logdata.tar"
     conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/combine-simulations_{sim}.tsv"
+    log: "logs/inference/combine-simulations_{sim}.py.ipynb"
     notebook: "notebooks/inference/combine-simulations.py.ipynb"
