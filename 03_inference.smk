@@ -37,10 +37,14 @@ rule all:
 
 
 rule apply_model_to_empirical_data:
-    input: "output/trained-models/{target}_{training}.pth"
-    output: "output/inferences-empirical/{target}_{training}_empirical.tsv"
-    shell:
-        "touch {output};"
+    input:
+        fit_model = "output/trained-models/{target}_{training}.pth",
+        data = "output/empirical-windows/data.tar",
+        logdata = "output/empirical-windows/logdata.tar"
+    output:
+        inferences = "output/inferences-empirical/{target}_{training}_empirical.tsv"
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
 rule apply_model_to_testing_data:
@@ -48,9 +52,11 @@ rule apply_model_to_testing_data:
         fit_model = "output/trained-models/{target}_{training}.pth",
         data = "output/simulation-data/{testing}/data.tar",
         logdata  = "output/simulation-data/{testing}/logdata.tar"
-    output: "output/inferences-testing/{target}_{training}_{testing}.tsv",
-    shell:
-        "touch {output};"
+    output:
+        inferences = "output/inferences-testing/{target}_{training}_{testing}.tsv",
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/apply-model.py.ipynb"
+
 
 rule aggregate_overfitting_replicates:
     input:
