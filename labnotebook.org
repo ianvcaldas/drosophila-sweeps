@@ -176,3 +176,88 @@ CLOSED: [2021-10-20 Wed 19:00]
 - [X] Add toy rule to combine SimpleFit outcomes with =touch=.
 - [X] Add toy SimpleFit rule with =touch=.
 
+*** 2021-10-27 Wednesday
+**** DONE Skeleton training implementations. [100%]
+CLOSED: [2021-10-27 Wed 13:18]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-01 Mon 15:01
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "DOING"      [2021-10-27 Wed 13:18]
+- State "DOING"      from "TODO"       [2021-10-27 Wed 12:27]
+Convert rules into notebooks or scripts that load the right packages, produce out the right files, and use the right number of cores, instead of simply using =touch=.
+
+- [X] Balance rule. [7/7]
+  - [X] Import pandas.
+  - [X] Dictionary of balancing function per target.
+  - [X] Current target is a wildcard.
+  - [X] Produce one output only, the one for the target.
+  - [X] Skeleton functions in =prepare_data.py=.
+  - [X] Delete outputs and run test.
+  - [X] Columns have mixed types?
+- [X] Split rule. [10/10]
+  - [X] Close notebook, re-run with new conda env.
+  - [X] Check sklearn version; add that to the env.
+  - [X] Close notebook again, re-run again with new env.
+  - [X] Now complete the notebook: stratify, use random seed, shuffle.
+  - [X] Turn validation % into a snakemake parameter.
+  - [X] Put stratifying column in =prepare_data= and import that into notebook.
+  - [X] Run notebook to see the files appear.
+  - [X] Check label proportions and sizes of outputs.
+  - [X] Convert notebook back to using the proper validation % before closing it.
+  - [X] Re-run, forcing the rule but not editing the notebook.
+- [X] Fit rule. [2/2]
+  - [X] Import fastai.
+  - [X] Produce every output in the most basic way possible.
+- [X] SimpleFit rule. [3/3]
+  - [X] Variation of Fit notebook, but with a different parameter.
+  - [X] Run snakemake with the target being a fit replicate.
+  - [X] Make a toy 1-line DF for the fit report instead of a touch.
+- [X] Aggregating overfitting replicates rule. [2/2]
+  - [X] Script, not notebook.
+  - [X] Use simple pandas concat.
+- [X] Update git and github.
+
+*** 2021-10-28 Thursday
+**** DONE Split training and validation at the start. [100%]
+CLOSED: [2021-10-28 Thu 16:00]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-01 Mon 15:01
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+- State "DONE"       from "DOING"      [2021-10-28 Thu 16:00]
+- State "DOING"      from              [2021-10-27 Wed 15:56]
+- [X] Write question down to understand the issue yourself.
+- [X] Ask about differences.
+- [X] Is it interesting to do?
+- [X] Plan reworking of rules.
+- [X] Implement reworking in terms of Snakefile wildcards and rules.
+  - [X] Train/valid split is done once per training data, as the first thing. Output folder.
+  - [X] Balancing rule takes the train/valid splits as input, happens once per training data and once per target. Output folder.
+  - [X] Fitting rules (both) take in the balanced datasets as input.
+- [X] Confirm with =-n= that all necessary files are there.
+- [X] Produce a DAG in PDF format with dot. (Check bash history to see how.)
+- [X] Implement reworking in terms of skeleton notebooks.
+  - [X] Train/valid split.
+  - [X] Balancing.
+  - [X] Fitting.
+- [X] Delete current outputs, test one output file to see if it works.
+- [X] Git update.
+  
+I have a main dataset with labels A, B, C in equal proportions. I want to train two models: model 1 is a 3-way classification A vs. B vs. C, and model 2 is a binary classification A vs. (B + C). For that second one labels B and C are downsampled so (num A) = (num B + C). I can do training/testing split in two ways:
+
+1) Do it once, at the start, so I've got a fixed A+B+C training dataset and a fixed A+B+C testing set. For the binary model, downsample those training and testing sets. This way, any example x_i is always going to be in the training set for both models or the testing set for both models.
+
+2) Do it one time per model. Do a training/testing split for model 1. Then, downsample the data and do a separate training/testing split for model 2. This way, an example x_i that's training for model 1 may be testing for model 2.
+
+I don't have a great intuition for what's "best" among these. Intuition tells me option (1) might propagate any weird bias you might end up having by chance in your original train/test split to every model. While option (2) makes it harder to compare the models. Any thoughts?
+

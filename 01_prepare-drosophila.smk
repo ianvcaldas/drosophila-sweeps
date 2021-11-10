@@ -11,6 +11,14 @@ def wait_for_empirical_npy(wildcards):
     # And generate the desired input for the `all` rule from that list of names.
     return expand('output/empirical-windows/npy/{name}.npy', name=window_names)
 
+def wait_for_empirical_log_npy(wildcards):
+    # This line halts workflow execution until the empirical_windows_012 rule runs:
+    checkpoints.empirical_windows_commands.get(**wildcards)
+    # That rule creates some files; we can extract their filenames now.
+    window_names = glob_wildcards('output/empirical-windows/commands/{name}.command').name
+    # And generate the desired input for the `all` rule from that list of names.
+    return expand('output/empirical-windows/npy-log-scale/{name}.npy', name=window_names)
+
 
 rule all:
     input:
@@ -24,9 +32,8 @@ rule all:
             stats=['', '-stats']
         ),
         "output/dgrp2/dgrp-population-parameters.txt",
-        # Get set of empirical windows from another rule and add their .npy as inputs to
-        # this rule.
-        wait_for_empirical_npy
+        "output/empirical-windows/data.tar",
+        "output/empirical-windows/logdata.tar"
 
 
 rule dgrp_population_parameters:
@@ -79,6 +86,24 @@ rule genotypes_3R:
         "--exclude-positions \"{input.ace_pos}\" "
         "--012 "
         "--out \"output/selection-scan/3R\" "
+
+
+rule compress_empirical_log_features:
+    input: wait_for_empirical_log_npy
+    output: 'output/empirical-windows/logdata.tar'
+    params:
+        npy_dir = 'output/empirical-windows/npy-log-scale'
+    shell:
+        "tar -czf {output} {params.npy_dir} ;"
+
+
+rule compress_empirical_features:
+    input: wait_for_empirical_npy
+    output: 'output/empirical-windows/data.tar'
+    params:
+        npy_dir = 'output/empirical-windows/npy'
+    shell:
+        "tar -czf {output} {params.npy_dir} ;"
 
 
 rule empirical_window_features:
