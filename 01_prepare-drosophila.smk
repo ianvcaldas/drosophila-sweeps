@@ -57,7 +57,7 @@ rule selection_scan_features:
         stats = 'output/selection-scan/{chrom}-features-stats.tsv',
         ms = temp('output/selection-scan/{chrom}.ms')
     conda: 'envs/simulate.yaml'
-    benchmark: 'benchmarks/selection-scan-features/{chrom}.tsv'
+    benchmark: 'benchmarks/prepare-drosophila/selection-scan-features_{chrom}.tsv'
     notebook: 'notebooks/prepare-drosophila/selection-scan.py.ipynb'
 
 
@@ -118,7 +118,7 @@ rule empirical_window_features:
     params:
         outdir = 'output/empirical-windows/npy'
     conda: 'envs/simulate.yaml'
-    benchmark: 'benchmarks/empirical-window-features/{window}.tsv'
+    benchmark: 'benchmarks/prepare-drosophila/empirical-window-features/{window}.tsv'
     notebook: 'notebooks/prepare-drosophila/empirical-window-features.py.ipynb'
 
 
@@ -138,7 +138,7 @@ checkpoint empirical_windows_commands:
         'notebooks/prepare-drosophila/empirical-windows-commands.py.ipynb'
     output: directory('output/empirical-windows/commands')
     conda: 'envs/simulate.yaml'
-    benchmark: 'benchmarks/empirical-windows-commands.tsv'
+    benchmark: 'benchmarks/prepare-drosophila/empirical-windows-commands.tsv'
     log:
         notebook = 'logs/prepare-drosophila/empirical-windows-commands.py.ipynb'
     notebook: 'notebooks/prepare-drosophila/empirical-windows-commands.py.ipynb'
@@ -159,7 +159,7 @@ rule resistant_lines:
         ),
         'output/resistant-lines/dgrp1-dgrp2-lines-comparison.txt'
     conda: 'envs/simulate.yaml'
-    benchmark: 'benchmarks/resistant-lines.tsv'
+    benchmark: 'benchmarks/prepare-drosophila/resistant-lines.tsv'
     log:
         notebook = 'logs/prepare-drosophila/resistant-lines.py.ipynb'
     notebook: 'notebooks/prepare-drosophila/resistant-lines.py.ipynb'
