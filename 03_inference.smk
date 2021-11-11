@@ -96,24 +96,6 @@ rule fit_model:
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
-rule overfitting_simple_fit:
-    input:
-        training = "output/training-data/balanced/{target}_{training}_training.tsv",
-        validation = "output/training-data/balanced/{target}_{training}_validation.tsv",
-        data = "output/simulation-data/{training}/data.tar",
-        logdata  = "output/simulation-data/{training}/logdata.tar"
-    output:
-        fit_report = "output/model-fitting/{target}_{training}_replicate-{k}.tsv"
-    params:
-        save_model = False,
-        save_inferences = False,
-        use_log_data = False
-    conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.tsv"
-    log: "logs/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.py.ipynb"
-    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
-
-
 rule balance_training_data:
     input:
         training = "output/training-data/train-valid-split/{training}_training.tsv",
@@ -137,6 +119,48 @@ rule train_validation_split:
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/train-validation-split_{training}.tsv"
     log: "logs/inference/train-validation-split_{training}.py.ipynb"
+    notebook: "notebooks/inference/train-validation-split.py.ipynb"
+
+
+rule overfitting_simple_fit:
+    input:
+        training = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
+        validation = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv",
+        data = "output/simulation-data/{training}/data.tar",
+        logdata  = "output/simulation-data/{training}/logdata.tar"
+    output:
+        fit_report = "output/model-fitting/{target}_{training}_replicate-{k}.tsv"
+    params:
+        save_model = False,
+        save_inferences = False,
+        use_log_data = False
+    conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.tsv"
+    log: "logs/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.py.ipynb"
+    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
+
+
+rule overfitting_balance_training_data:
+    input:
+        training = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
+        validation = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
+    output:
+        balanced_training = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
+        balanced_validation = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv"
+    conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/overfitting-balance-training-data_{target}_{training}_replicate-{k}.tsv"
+    script: "scripts/inference/balance-training-data.py"
+
+
+rule overfitting_train_validation_split:
+    input:
+        sim_params = "output/simulation-data/{training}/parameters.tsv"
+    output:
+        training = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
+        validation = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
+    conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/overfitting-train-validation-split_{training}_replicate-{k}.tsv"
+    log: "logs/inference/overfitting-train-validation-split_{training}_replicate-{k}.py.ipynb"
     notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 
