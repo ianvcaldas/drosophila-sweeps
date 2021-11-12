@@ -4,6 +4,8 @@ num_overfitting_replicates: 10
 
 validation_percentage: 0.2
 
+sims_per_regime: 5000
+
 training_ids:
   - main-fixedsweeps
   - main-partialsweeps

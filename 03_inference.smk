@@ -110,7 +110,7 @@ rule balance_training_data:
     
 rule train_validation_split:
     input:
-        sim_params = "output/simulation-data/{training}/parameters.tsv"
+        sim_params = "output/simulation-data/{training}/parameters-clean.tsv"
     output:
         training = "output/training-data/train-valid-split/{training}_training.tsv",
         validation = "output/training-data/train-valid-split/{training}_validation.tsv"
@@ -154,7 +154,7 @@ rule overfitting_balance_training_data:
 
 rule overfitting_train_validation_split:
     input:
-        sim_params = "output/simulation-data/{training}/parameters.tsv"
+        sim_params = "output/simulation-data/{training}/parameters-clean.tsv"
     output:
         training = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
         validation = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
@@ -165,12 +165,24 @@ rule overfitting_train_validation_split:
 
 
 rule check_training_distributions:
-    input: "output/simulation-data/{sim_id}/parameters.tsv"
+    input: "output/simulation-data/{sim_id}/parameters-clean.tsv"
     output: "output/training-data/info/{sim_id}_training-distributions.txt"
     conda: "envs/simulate.yaml"
     benchmark: "benchmarks/inference/check-training-distributions_{sim_id}.tsv"
     log: "logs/inference/check-training-distributions_{sim_id}.py.ipynb"
     notebook: "notebooks/inference/check-training-distributions.py.ipynb"
+
+
+rule clean_training_datasets:
+    input:
+        sim_params = "output/simulation-data/{training}/parameters.tsv"
+    output:
+        cleaned = "output/simulation-data/{training}/parameters-clean.tsv"
+    params:
+        random_seed = 13
+    conda: "envs/simulate.yaml"
+    benchmark: "benchmarks/inference/clean-training-dataset_{training}.tsv"
+    script: "scripts/inference/clean-training-dataset.py"
 
 
 rule combine_simulation_tasks:
