@@ -8,32 +8,32 @@ report: 'captions/inference.rst'
 
 rule all:
     input:
-        training_data_distributions = expand(
-            "output/training-data/info/{sim_id}_training-distributions.txt",
-            sim_id=config["training_ids"]
-        ),
-        testing_inferences = expand(
-            "output/inferences-testing/{target}_{training}_{testing}.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"],
-            testing=config["testing_ids"]
-        ),
-        training_inferences = expand(
-            "output/inferences-training/{target}_{training}_{testing}.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"],
-            testing=["training", "validation"]
-        ),
-        empirical_inferences = expand(
-            "output/inferences-empirical/{target}_{training}_empirical.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        ),
-        overfitting_reports = expand(
-            "output/model-fitting/{target}_{training}_overfitting.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        )
+        data_reports = expand(
+            "output/simulation-data-processed/info/{sim_id}_data-report.txt",
+            sim_id=(config["training_ids"] + config["testing_ids"])
+        ) #,
+#         testing_inferences = expand(
+#             "output/inferences-testing/{target}_{training}_{testing}.tsv",
+#             target=config["inference_targets"],
+#             training=config["training_ids"],
+#             testing=config["testing_ids"]
+#         ),
+#         training_inferences = expand(
+#             "output/inferences-training/{target}_{training}_{testing}.tsv",
+#             target=config["inference_targets"],
+#             training=config["training_ids"],
+#             testing=["training", "validation"]
+#         ),
+#         empirical_inferences = expand(
+#             "output/inferences-empirical/{target}_{training}_empirical.tsv",
+#             target=config["inference_targets"],
+#             training=config["training_ids"]
+#         ),
+#         overfitting_reports = expand(
+#             "output/model-fitting/{target}_{training}_overfitting.tsv",
+#             target=config["inference_targets"],
+#             training=config["training_ids"]
+#         )
 
 
 rule apply_model_to_empirical_data:
@@ -77,8 +77,8 @@ rule aggregate_overfitting_replicates:
 
 rule fit_model:
     input:
-        training = "output/training-data/balanced/{target}_{training}_training.tsv",
-        validation = "output/training-data/balanced/{target}_{training}_validation.tsv",
+        training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv",
         data = "output/simulation-data/{training}/data.tar",
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
@@ -98,11 +98,13 @@ rule fit_model:
 
 rule balance_training_data:
     input:
-        training = "output/training-data/train-valid-split/{training}_training.tsv",
-        validation = "output/training-data/train-valid-split/{training}_validation.tsv"
+        training = "output/simulation-data-processed/train-valid-split/{training}_training.tsv",
+        validation = "output/simulation-data-processed/train-valid-split/{training}_validation.tsv"
     output:
-        balanced_training = "output/training-data/balanced/{target}_{training}_training.tsv",
-        balanced_validation = "output/training-data/balanced/{target}_{training}_validation.tsv"
+        balanced_training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        balanced_validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv"
+    params:
+        random_seed = 13
     conda: "envs/simulate.yaml"
     benchmark: "benchmarks/inference/balance-training-data_{target}_{training}.tsv"
     script: "scripts/inference/balance-training-data.py"
@@ -110,10 +112,10 @@ rule balance_training_data:
     
 rule train_validation_split:
     input:
-        sim_params = "output/simulation-data/{training}/parameters-clean.tsv"
+        sim_params = "output/simulation-data-processed/parameters/{training}_parameters-clean.tsv"
     output:
-        training = "output/training-data/train-valid-split/{training}_training.tsv",
-        validation = "output/training-data/train-valid-split/{training}_validation.tsv"
+        training = "output/simulation-data-processed/train-valid-split/{training}_training.tsv",
+        validation = "output/simulation-data-processed/train-valid-split/{training}_validation.tsv"
     params:
         random_seed = 13
     conda: "envs/ml.yaml"
@@ -124,8 +126,8 @@ rule train_validation_split:
 
 rule overfitting_simple_fit:
     input:
-        training = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
-        validation = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv",
+        training = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
+        validation = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv",
         data = "output/simulation-data/{training}/data.tar",
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
@@ -142,11 +144,11 @@ rule overfitting_simple_fit:
 
 rule overfitting_balance_training_data:
     input:
-        training = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
-        validation = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
+        training = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
+        validation = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
     output:
-        balanced_training = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
-        balanced_validation = "output/training-data/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv"
+        balanced_training = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
+        balanced_validation = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv"
     conda: "envs/simulate.yaml"
     benchmark: "benchmarks/inference/overfitting-balance-training-data_{target}_{training}_replicate-{k}.tsv"
     script: "scripts/inference/balance-training-data.py"
@@ -154,35 +156,29 @@ rule overfitting_balance_training_data:
 
 rule overfitting_train_validation_split:
     input:
-        sim_params = "output/simulation-data/{training}/parameters-clean.tsv"
+        sim_params = "output/simulation-data-processed/parameters/{training}_parameters-clean.tsv"
     output:
-        training = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
-        validation = "output/training-data/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
+        training = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
+        validation = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/overfitting-train-validation-split_{training}_replicate-{k}.tsv"
     log: "logs/inference/overfitting-train-validation-split_{training}_replicate-{k}.py.ipynb"
     notebook: "notebooks/inference/train-validation-split.py.ipynb"
 
 
-rule check_training_distributions:
-    input: "output/simulation-data/{sim_id}/parameters-clean.tsv"
-    output: "output/training-data/info/{sim_id}_training-distributions.txt"
-    conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/check-training-distributions_{sim_id}.tsv"
-    log: "logs/inference/check-training-distributions_{sim_id}.py.ipynb"
-    notebook: "notebooks/inference/check-training-distributions.py.ipynb"
-
-
-rule clean_training_datasets:
+rule clean_datasets:
     input:
-        sim_params = "output/simulation-data/{training}/parameters.tsv"
+        sim_params = "output/simulation-data/{sim_id}/parameters.tsv"
     output:
-        cleaned = "output/simulation-data/{training}/parameters-clean.tsv"
+        cleaned_parameters = "output/simulation-data-processed/parameters/{sim_id}_parameters-clean.tsv",
+        sweep_mode_report = "output/simulation-data-processed/info/{sim_id}_sweep-modes.txt",
+        successful_report = "output/simulation-data-processed/info/{sim_id}_data-report.txt",
+        failed_report = "output/simulation-data-processed/info/{sim_id}_failed-simulations-report.txt"
     params:
         random_seed = 13
     conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/clean-training-dataset_{training}.tsv"
-    script: "scripts/inference/clean-training-dataset.py"
+    benchmark: "benchmarks/inference/clean-dataset_{sim_id}.tsv"
+    script: "scripts/inference/clean-dataset.py"
 
 
 rule combine_simulation_tasks:
