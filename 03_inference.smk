@@ -11,29 +11,29 @@ rule all:
         data_reports = expand(
             "output/simulation-data-processed/info/{sim_id}_data-report.txt",
             sim_id=(config["training_ids"] + config["testing_ids"])
-        ) #,
-#         testing_inferences = expand(
-#             "output/inferences-testing/{target}_{training}_{testing}.tsv",
-#             target=config["inference_targets"],
-#             training=config["training_ids"],
-#             testing=config["testing_ids"]
-#         ),
-#         training_inferences = expand(
-#             "output/inferences-training/{target}_{training}_{testing}.tsv",
-#             target=config["inference_targets"],
-#             training=config["training_ids"],
-#             testing=["training", "validation"]
-#         ),
-#         empirical_inferences = expand(
-#             "output/inferences-empirical/{target}_{training}_empirical.tsv",
-#             target=config["inference_targets"],
-#             training=config["training_ids"]
-#         ),
-#         overfitting_reports = expand(
-#             "output/model-fitting/{target}_{training}_overfitting.tsv",
-#             target=config["inference_targets"],
-#             training=config["training_ids"]
-#         )
+        ),
+        testing_inferences = expand(
+            "output/inferences-testing/{target}_{training}_{testing}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"],
+            testing=config["testing_ids"]
+        ),
+        training_inferences = expand(
+            "output/inferences-training/{target}_{training}_{testing}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"],
+            testing=["training", "validation"]
+        ),
+        empirical_inferences = expand(
+            "output/inferences-empirical/{target}_{training}_empirical.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
+        ),
+        overfitting_reports = expand(
+            "output/model-fitting/{target}_{training}_overfitting.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
+        )
 
 
 rule apply_model_to_empirical_data:
@@ -120,8 +120,7 @@ rule train_validation_split:
         random_seed = 13
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/train-validation-split_{training}.tsv"
-    log: "logs/inference/train-validation-split_{training}.py.ipynb"
-    notebook: "notebooks/inference/train-validation-split.py.ipynb"
+    script: "scripts/inference/train-validation-split.py"
 
 
 rule overfitting_simple_fit:
@@ -162,8 +161,7 @@ rule overfitting_train_validation_split:
         validation = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/overfitting-train-validation-split_{training}_replicate-{k}.tsv"
-    log: "logs/inference/overfitting-train-validation-split_{training}_replicate-{k}.py.ipynb"
-    notebook: "notebooks/inference/train-validation-split.py.ipynb"
+    script: "scripts/inference/train-validation-split.py"
 
 
 rule clean_datasets:

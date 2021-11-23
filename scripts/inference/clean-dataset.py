@@ -1,10 +1,10 @@
-
 import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
 sys.path.append(snakemake.scriptdir + "/../..")
 from utils.prepare_data import read_data, save_data
+
 
 def get_sweep_mode(df):
     x = df.regime.copy()
@@ -21,13 +21,11 @@ def get_sweep_mode(df):
     x.loc[(df.regime == "hard") & failed] = "hard (failed)"
     return x
 
+
 def add_key_columns(df):
-    return (
-        df
-        .assign(
-            log_selection_coefficient=np.log10(df.selection_coefficient),
-            sweep_mode=get_sweep_mode(df)
-        )
+    return df.assign(
+        log_selection_coefficient=np.log10(df.selection_coefficient),
+        sweep_mode=get_sweep_mode(df),
     )
 
 
@@ -65,7 +63,7 @@ def get_df_report(df, name):
     lines = []
     title = f"{name} simulations"
     lines.append(title.upper())
-    lines.append("-"*len(title))
+    lines.append("-" * len(title))
     lines.append("")
     lines.append(get_columns_report(df))
     lines.append("")
@@ -77,19 +75,17 @@ def make_data_report(df):
     constant_cols = df.columns[df.nunique(dropna=False) == 1].tolist()
     title = "CONSTANT PARAMETERS"
     lines.append(title)
-    lines.append("-"*len(title))
+    lines.append("-" * len(title))
     lines.append("")
     for col in constant_cols:
         lines.append(col)
         s = df[col]
         lines.append(f"{len(s)}x {s.unique()[0]}")
         lines.append("")
-        if col != 'sweep_mode':
-            df = df.drop(col, axis='columns')
+        if col != "sweep_mode":
+            df = df.drop(col, axis="columns")
     lines.append("")
-    modes = {
-        sm: df.loc[df.sweep_mode == sm] for sm in sorted(df.sweep_mode.unique())
-    }
+    modes = {sm: df.loc[df.sweep_mode == sm] for sm in sorted(df.sweep_mode.unique())}
     lines.extend(get_df_report(df, "All"))
     for mode, this_df in modes.items():
         lines.extend(get_df_report(this_df, mode))
@@ -97,24 +93,24 @@ def make_data_report(df):
 
 
 raw = add_key_columns(read_data(snakemake.input["sim_params"]))
-successful = raw.loc[raw.simulation_status == 'ok']
-failed = raw.loc[raw.simulation_status == 'failed']
+successful = raw.loc[raw.simulation_status == "ok"]
+failed = raw.loc[raw.simulation_status == "failed"]
 
 save_data(successful, snakemake.output["cleaned_parameters"])
 successful_report = make_data_report(successful)
-with open(snakemake.output["successful_report"], 'w') as f:
+with open(snakemake.output["successful_report"], "w") as f:
     f.write(f"Successful simulations of {snakemake.wildcards['sim_id']}\n\n\n")
     f.write(successful_report)
 
 failed_report = make_data_report(failed)
-with open(snakemake.output["failed_report"], 'w') as f:
+with open(snakemake.output["failed_report"], "w") as f:
     f.write(f"Failed simulations of {snakemake.wildcards['sim_id']}\n\n\n")
     f.write(failed_report)
 
-with open(snakemake.output["sweep_mode_report"], 'w') as f:
+with open(snakemake.output["sweep_mode_report"], "w") as f:
     sweep_modes = successful.sweep_mode.value_counts().sort_index().to_string()
     failed_modes = failed.sweep_mode.value_counts().sort_index().to_string()
     f.write(f"Sweep mode report for {snakemake.wildcards['sim_id']}" + "\n\n")
     f.write(sweep_modes)
-    f.write('\n\n')
+    f.write("\n\n")
     f.write(failed_modes)

@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 sys.path.append(snakemake.scriptdir + "/../..")
@@ -12,5 +11,8 @@ except AttributeError:
 balance = balancing_functions[snakemake.wildcards["target"]]
 for case in ["training", "validation"]:
     dataset = read_data(snakemake.input[case])
-    result = balance(dataset, seed)
+    if balance is not None:
+        result = balance(dataset, seed)
+    else:
+        result = dataset
     save_data(result, snakemake.output[f"balanced_{case}"])
