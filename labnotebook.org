@@ -261,3 +261,282 @@ I have a main dataset with labels A, B, C in equal proportions. I want to train 
 
 I don't have a great intuition for what's "best" among these. Intuition tells me option (1) might propagate any weird bias you might end up having by chance in your original train/test split to every model. While option (2) makes it harder to compare the models. Any thoughts?
 
+** 2021-11 November
+
+*** 2021-11-10 Wednesday
+**** DONE [#3] New plot of selection strength performance. [100%]
+CLOSED: [2021-11-10 Wed 12:00]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-11-10 Wed 12:00]
+- State "DONE"       from "TODO"       [2021-11-09 Tue 12:19]
+- [X] Find notebook with the right plotting code.
+- [X] Reconstruct plot with both sel. strength and sweep mode performance.
+- [X] Load dataframe with all s predictions for the validation set.
+- [X] Calculate (predicted s/true s), not in log scale, for every data point.
+- [X] Get a list of all selection splits, with separate values for min and max.
+- [X] For each selection split, calculate the mean of that value.
+- [X] Create a DF with split and mean relative error.
+- [X] Join that DF with the original one from the notebook.
+- [X] Plot the mean relative error by selection bracket.
+- [X] Plot mean(abs((predicted - true)/true)) instead.
+- [X] What are the conclusions?
+- [X] Send that to Philipp.
+
+Sel. strength performance vs. sel. strength bracket: Instead of showing 1-RMSE, show mean(predicted s/true s). (Not in log scale!) There is a thing called "root mean squared relative error". Philipp would call it "mean relative error". Philipp thinks this would turn results around and say that we do better at strong sweeps than weak ones.
+
+
+**** DONE [#3] Finalize skeleton model fitting implementations. [100%]
+CLOSED: [2021-11-10 Wed 21:13]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "DOING"      [2021-11-10 Wed 21:13]
+- State "DOING"      from "TODO"       [2021-11-10 Wed 16:30]
+- [X] First workflow modifications. [10/10]
+  - [X] Modify existing rule or add rule?
+  - [X] Tar empirical windows.
+  - [X] Test that entire workflow works with tar windows.
+  - [X] Add log windows to empirical features rule.
+  - [X] Implement log windows in notebook.
+  - [X] Add a waiting rule for log-tar windows.
+  - [X] Tar log empirical windows.
+  - [X] Add log windows to the =all= rule.
+  - [X] Test that the entire workflow still works.
+  - [X] Git update.
+- [X] Test application rules in workflow 3. [4/4]
+  - [X] Same notebook of trained model application for both.
+  - [X] For now, just touching outputs is fine.
+  - [X] Test that everything works fine.
+  - [X] Git update.
+- [X] Delete outputs and run everything in workflow 3. [5/5]
+  - [X] Training data, model fitting, trained models, all inferences.
+  - [X] Add benchmarks and notebook logs for everything.
+  - [X] Add wildcards to benchmarks and logs.
+  - [X] Test that everything works fine.
+  - [X] Git update.
+- [X] Every benchmark for workflow 1 goes into a =prepare= folder.
+- [X] Every benchmark for workflow 2 goes into a separate folder as well.
+
+*** 2021-11-11 Thursday
+**** DONE [#3] Re-draw training and validation datasets for overfitting replicates. [100%] 
+CLOSED: [2021-11-11 Thu 14:34]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+- State "DONE"       from "DOING"      [2021-11-11 Thu 14:34]
+- State "DOING"      from "TODO"       [2021-11-11 Thu 14:32]
+- [X] New required inputs.
+- [X] Can we just use the existing rule?
+- [X] Add rules if needed.
+- [X] Adapt notebook if necessary. (=params.random_seed= is optional.)
+- [X] Double-check benchmarks and logs of overfitting rules.
+- [X] Run everything, test.
+
+**** DONE [#3] Train-test splitting notebook. [100%]
+CLOSED: [2021-11-11 Thu 15:28]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-11-11 Thu 15:28]
+- [X] Remove lines corresponding to failed simulations.
+- [X] Remove neutral simulations.
+- [X] Downsample so all four regimes are equally represented. Possibly so that they all have exactly 4000 cases for training and 1000 for validation.
+
+*** 2021-11-12 Friday
+**** DONE [#3] Rule for cleaning parameters. [100%]
+CLOSED: [2021-11-12 Fri 11:12]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-11-12 Fri 11:12]
+Since the train-test split runs once for every overfitting replicate, if we downsample the data here, each replicate will get a different dataset of 5000 sweeps for each mode. We want each replicate to have the same dataset. Meaning we need to add a new rule between getting the parameters and splitting them into training and testing datasets.
+
+- [X] Add a rule for cleaning parameters before the train-test split. Should run once per training dataset.
+- [X] Update input of rule for checking the training distribution of cleaned simulations.
+- [X] Rule removes failed simulations, neutral simulations, and downsamples to a fixed number of cases per selection regime (5000, make it a snakemake parameter).
+- [X] Move that code over from the current notebook on train-test split to a script.
+- [X] Change input of the train-valid split to accomodate the new rule.
+- [X] Change input of the overfitting splitting rule to accomodate the new rule as well.
+- [X] Confirm that train-test split is shuffling cases.
+- [X] Test it, check that it works.
+- [X] Updage git.
+
+**** DONE [#3] Balancing functions. [100%]
+CLOSED: [2021-11-12 Fri 15:42]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-11-12 Fri 15:42] \\
+  Changed my mind, there's a lot of changes to make.
+Should: Add necessary columns.
+Should: Downsample to match.
+
+- [X] Balance log selection strength.
+- [X] Balance sweep mode.
+- [X] Balance hard vs. soft.
+- [X] Balance SGV vs. RNM.
+- [X] Move code back to script.
+- [X] Complete the "target columns".
+- [X] Compare with previous data preparation functions.
+- [X] Create column of "true softness" when balancing the data.
+- [X] Redo target columns and balancing functions to account for true softness.
+
+*** 2021-11-23 Tuesday
+**** DONE [#3] Number of simulations. [100%]
+CLOSED: [2021-11-23 Tue 12:56]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-11-23 Tue 17:48
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-11-23 Tue 12:56]
+- State "DOING"      from "TODO"       [2021-11-16 Tue 15:30]
+  
+We start with a training that has:
+- Failed simulations.
+- Neutral simulations.
+- Soft sweeps that aren't really soft, that only have 1 adaptive allele.
+We need to get rid of all these things for training data.
+We want to /add/:
+- Sweep mode with true soft sweeps.
+- Log of selection coefficient.
+And after this, we want to make training data 4000+1000 samples.
+For robustness datasets, you want to /add/ the columns but remove only the failed simulations, since neutrality and hard-like soft sweeps are all informative. We should have columns that indicate their existence, though.
+
+So this is universal, for every single dataset:
+1. Remove failed simulations.
+2. Make a column for sweep mode: neutral, hard, true sgv, true rnm, fake sgv, fake rnm.
+3. Make a column for log selection coefficient.
+4. Report how many successful and failed simulations are there for each sweep mode.
+5. Report distributions of successful and failed simulations per sweep mode.
+
+For training and validation data:
+1. Remove neutral, fake sgv, and fake rnm sweep modes.
+2. Save those removed cases for a full validation dataset.
+3. Subset to 5000 cases per mode.
+
+My work so far is in =notebooks/inference/Untitled.ipynb=.
+
+- [X] Plan data preparation for /training/ and /validation/ datasets, write it all down.
+- [X] Plan data preparation for /robustness/ datasets, write it all down.
+- Universal rules are applied in the =clean= rule:
+  - [X] Adapt =make-data-report= for the case when there is only one simulation status.
+  - [X] Fold all of =make-data-report= into a single function.
+  - [X] Move that into the =clean= script.
+  - [X] Invoke it separately for the successful and the failed simulations.
+  - [X] Add all those reports to the =clean= rule outputs.
+  - [X] Test it all.
+- Train/validation rules are applied in the =split= rule:
+  - [X] Remove neutral, fake sgv, and fake rnm sweep modes.
+  - [X] Save those removed cases for a full validation dataset.
+  - [X] Subset to 5000 cases per mode.
+- [X] Make the useful functions easy to reuse by putting them in utils.
+- [X] Transfer tain/valid split to a script.
+- [X] What to do with the =balancing= rule?
+- [X] Check workflow.
+- [X] Check that balanced training datasets have equal number of target cases.
+- [X] Clean unused notebooks.
+- [X] How many simulations have we got left? 4000 + 1000?
+- [X] Black every script.
+- [X] Update git.
+
+*** 2021-11-24 Wednesday
+**** DONE [#1] Read about Python's tar package.
+CLOSED: [2021-11-24 Wed 16:10]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-12-21 Tue 12:44
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+- State "DONE"       from "DOING"      [2021-11-24 Wed 16:10]
+- State "DOING"      from "TODO"       [2021-11-24 Wed 16:07]
+- Module of the Week.
+- Official documentation.
+
+**** DONE [#3] Simulate more data. [5/5]
+CLOSED: [2021-11-24 Wed 15:45]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-12-21 Tue 12:44
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "DOING"      [2021-11-24 Wed 15:45]
+- State "DOING"      from "TODO"       [2021-11-24 Wed 12:58]
+Around 50% of RNM sweeps are hard-like.
+Around 11% of SGV sweeps are hard-like.
+
+To get 5000 true sweeps of each, I need more training simulations.
+
+- [X] Update github repo, locally and on the cluster.
+- [X] Change simulation amounts.
+- [X] Double-check simulation destiation folders.
+- [X] Run simulations.
+- [X] Check that simulations are running okay.
+
+
+** 2021-12 December
+
+*** 2021-12-01 Wednesday
+**** DONE [#3] Get new simulations. [2/2]
+CLOSED: [2021-12-01 Wed 14:25]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-12-21 Tue 12:44
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "TODO"       [2021-12-01 Wed 14:25]
+- [X] Check if simulations ran okay in the cluster.
+- [X] Download them.
+  
