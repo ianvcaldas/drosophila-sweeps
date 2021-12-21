@@ -4,6 +4,7 @@
 #SBATCH --account=bscb02
 #SBATCH --output="/home/ivc2/slurm-outputs/%x-%j-%a.out"
 #SBATCH --partition=regular,long7,long30
+#SBATCH --exclude=cbsubscb10
 
 echo "Workstation is ${HOSTNAME}, partition is ${SLURM_JOB_PARTITION}."
 
