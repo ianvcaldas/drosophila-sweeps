@@ -29,11 +29,11 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"]
         ),
-        overfitting_reports = expand(
-            "output/model-fitting/{target}_{training}_overfitting.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        )
+        # overfitting_reports = expand(
+        #     "output/model-fitting/{target}_{training}_overfitting.tsv",
+        #     target=config["inference_targets"],
+        #     training=config["training_ids"]
+        # )
 
 
 rule apply_model_to_empirical_data:
@@ -89,7 +89,8 @@ rule fit_model:
     params:
         save_model = True,
         save_inferences = True,
-        use_log_data = False
+        use_log_data = False,
+        only_one_epoch = True
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}.tsv"
     log: "logs/inference/fit-neural-network_{target}_{training}.py.ipynb"

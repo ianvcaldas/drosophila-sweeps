@@ -38,3 +38,10 @@ default_simulation_parameters = {
     "data-dimension": data_dimension,
     "smallest-window": smallest_window,
 }
+
+epochs_of_training = {
+    "log-sel-strength": 25,
+    "sweep-mode": 25,
+    "hard-vs-soft": 25,
+    "rnm-vs-sgv": 25,
+}

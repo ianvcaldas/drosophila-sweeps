@@ -539,4 +539,25 @@ CLOSED: [2021-12-01 Wed 14:25]
 - State "DONE"       from "TODO"       [2021-12-01 Wed 14:25]
 - [X] Check if simulations ran okay in the cluster.
 - [X] Download them.
-  
+
+*** 2021-12-21 Tuesday
+**** DONE Prepare new simulation data. [7/7]
+CLOSED: [2021-12-21 Tue 13:23]
+:PROPERTIES:
+:ARCHIVE_TIME: 2021-12-21 Tue 14:59
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+- State "DONE"       from "DOING"      [2021-12-21 Tue 13:23]
+- State "DOING"      from "TODO"       [2021-12-21 Tue 12:15]
+- [X] Verify where the folders specifications are in the config.
+- [X] What do the rules do? What's a placeholder and what isn't?
+- [X] Just run all the rules.
+- [X] How to combine different simulation runs together?
+- [X] Run all the rules, again.
+- [X] Check that simulation numbers add up.
+- [X] Update git: cluster to repo. Repo to local. Local to repo.
+
