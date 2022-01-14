@@ -8,6 +8,7 @@ from pandas.api.types import is_numeric_dtype
 
 import torch
 import torch.nn as nn
+import fastai
 
 
 class SweepsDataset(torch.utils.data.Dataset):

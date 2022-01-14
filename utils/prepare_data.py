@@ -10,9 +10,18 @@ def save_data(df, path):
     df.to_csv(path, index=False, sep="\t")
 
 
-def balance_hard_vs_soft(df, seed=None):
+def add_regime_kind_column(df):
     kinds = {"hard": "hard", "rnm (true)": "soft", "sgv (true)": "soft"}
-    results = df.assign(regime_kind=[kinds[x] for x in df.sweep_mode])
+    results = df.assign(regime_kind=[
+        kinds[x]
+        if x in kinds
+        else None
+        for x in df.sweep_mode])
+    return results
+
+
+def balance_hard_vs_soft(df, seed=None):
+    results = add_regime_kind_column(df)
     results = results.groupby("regime_kind").sample(
         n=results.regime_kind.value_counts().min(), random_state=seed
     )
