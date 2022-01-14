@@ -45,3 +45,5 @@ epochs_of_training = {
     "hard-vs-soft": 25,
     "rnm-vs-sgv": 25,
 }
+
+neural_network_batch_size = 64

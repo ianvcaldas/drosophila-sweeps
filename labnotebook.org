@@ -561,3 +561,166 @@ CLOSED: [2021-12-21 Tue 13:23]
 - [X] Check that simulation numbers add up.
 - [X] Update git: cluster to repo. Repo to local. Local to repo.
 
+* 2022
+
+** 2022-01 January
+
+*** 2022-01-04 Tuesday
+**** DONE [#1] Model fitting notebook. [30/30]
+CLOSED: [2022-01-04 Tue 15:50]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-01-12 Wed 12:31
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+- State "DONE"       from "DOING"      [2022-01-04 Tue 15:50]
+- State "DOING"      from "TODO"       [2022-01-03 Mon 16:38]
+- [X] Untar the simulation data.
+- [X] In =utils/prepare_data.py=, the target columns should be the right ones.
+- [X] Put data in DataLoaders.
+- [X] Create a Learner from the DataLoaders and the torch model.
+- [X] Find the Loss functions from the previous project iteration and add them to the current training Dataset object.
+- [X] Turn labels into number-encoded ones.
+- [X] Debug the Learner until it Fits properly.
+- [X] Do I need to add a softmax layer manually for classification?
+- [X] Test everything with regression and classification both.
+  - [X] Continous labels are returned for regression task.
+  - [X] Integer labels with class ID are returned for classification task.
+- [X] Clean previous snakemake conda temp notebooks.
+- [X] Save the learned parameters from the model.
+- [X] Need to make sure that using log data runs as smoothly as using the regular data.
+- [X] Save the model fit history, if requested.
+- [X] Save predictions, if requested.
+  - [X] Classification predictions get uuid, probabilities for everything, predicted class, predicted class ID, true class, and true class ID.
+  - [X] Regression predictions get uuid, predicted and true values.
+  - [X] Don't have "(true)" in label names, might get confused with "predicted" and "true" values.
+- [X] Number of epochs of training is in =project_parameters=, indexed by target.
+  - [X] Implement in script.
+  - [X] Implement in notebook.
+- [X] Snakemake parameter to train for only 1 epoch, for debugging.
+  - [X] Implement in snakefile.
+  - [X] Implement in notebook.
+- [X] Save functions to =utils=, keep them out of the notebook. Apply =Black= to them.
+- [X] Delete existing intermediate files: we're starting from scratch this time.
+- [X] Run everything together. Comment out overfitting runs to save on time.
+- [X] Check outputs.
+- [X] Update git.
+
+*** 2022-01-12 Wednesday
+**** Model training steps.
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-01-12 Wed 12:31
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+For one training dataset, one inference target, and one group of input features:
+1. Read in data parameters.
+2. Add new transformed parameters relevant for the inference target.
+3. Subset it to relevant data points for the inference target.
+4. Balance data so all labels have the same number of instances.
+5. Do training/validation split.
+6. Report distribution of parameters in training and validation data.
+7. Convert training and validation data to format appropriate for framework.
+8. Create model object according to inference target and number of features.
+9. Get a model
+   - Fit model, report fitting process, and save model parameters; or
+   - Load pre-trained model.
+10. Save inferences on training and validation datasets.
+11. Load testing datasets, can be more than one.
+12. Convert testing datasets to format appropriate for framework.
+13. Save inferences on all testing datasets.
+
+For checking overfitting, steps up until balancing data can be done once, and then repeat multiple times:
+1. Training/validation split.
+2. Convert training and validation data to format appropriate for framework.
+3. Create model object according to inference target and number of features.
+4. Fit model, report fitting process.
+
+Possible implementation.
+- Balance :: Create balanced training data. Happens once per training dataset and per inference target. Different data prep functions in a dictionary in utils, and access that using the snakemake wildcard for the inference target.
+- Split :: Training/validation split, report distribution. Happens once per model that needs to be fit, using the Fit or SimpleFit rules.
+- Fit :: Convert training and validation data to framework format, create model object, fit, report fitting, save model parameters, save inferences on training and validation. Happens once per training dataset, per inference target. Can use multiple cores.
+- SimpleFit :: Convert training and validation data to framework format, create model object, fit, report fitting. Happens once per training dataset, per inference target, per overfitting replicate.
+- Test :: Load testing data and fit model, save inferences on testing data. Happens once per trained model and per testing data.
+
+Fit and SimpleFit rules use the same notebook, which reads in Snakemake params to decide what to do. That notebook can ad-hoc reduce the size of the training data to speed up training to test if things are working properly.
+
+Configfile has two lists: one for training datasets, one for testing datasets. Also has a list of inference targets. Use those lists to expand inputs and outputs of rules.
+
+Everything should work perfectly well with log-transformed data as well as linearly-transformed data.
+
+**** Task list, not updated.
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-01-12 Wed 12:32
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+
+Preparing Drosophila data:
+- Filter raw DGRP data to biallelic sites with not more than 15% missing data.
+- Perform imputation on filtered DGRP data.
+- Extract Ace, Cyp, and Chkov genotypes for each individual.
+- Get pi per site for the filtered/imputed DGRP data.
+- Choose which empirical windows to predict on.
+- Extract empirical windows from the filtered/imputed DGRP.
+- Calculate features for the empirical DGRP windows.
+  
+Simulation:
+- Choose simulation parameters.
+- Simulate main model on the cluster.
+- Choose robustness parameters.
+- Simulate robustness testing datasets on the cluster.
+- Check simulation statistics.
+- Simulate neutrality to get the simulated SFS.
+- Simulate hard sweeps to get average signatures.
+  
+Training and applying models:
+- Create training replicates to check for overfitting and pick ideal # of epochs to train for.
+- Train the final model with the chosen # of epochs.
+- Perform feature analysis on the main training dataset.
+- Train Gradient-Boosted Trees on the main training dataset.
+- Apply the trained main model to the robustness testing datasets.
+- Calculate performance metrics on all results and post-process those tables.
+- Compare the Sweep Mode model performance to the two specialized secondary models.
+- Create training replicates to check for overfitting for model trained on partial sweeps.
+- Train model on partial sweeps; apply it to empirical data.
+- Do a couple of training replicates on empirical data to check that predictions are consistent.
+- Calculate performance metrics for model trained on partial sweeps.
+  
+Model-agnostic plots:
+- Plot: methods diagram / graphical abstract.
+- Plot: simulated SFS vs. empirical SFS.
+- Plot: window size diagram.
+- Plot: simulated and empirical sweep signatures.
+- Plot: H12 selection scan on DGRP data.
+  
+Plots for model trained on fixed sweeps:
+- Process data for plotting.
+- Internal plot: overfitting learning curves.
+- Plot: learning curves of final trained models.
+- Plot: validation of main models.
+- Plot: validation of secondary models.
+- Plot: performance of main model divided by selection strength brackets.
+- Internal plot: feature distributions in the window around the sweep.
+- Plot: predictions of neutral simulated windows.
+- Plot: robustness plot with recombination rate and population size.
+- Plot: robustness plot with partial sweeps.
+- Plot: robustness plot with bottleneck.
+- Tables of performance metrics.
+
+Plots for model trained on partial sweeps:
+- Internal plot: overfitting learning curves.
+- Plot: learning curves of final trained models.
+- Plot: basic performance metrics.
+- Plot: genome-wide predictions on the DGRP.
+- Plot: predictions when you miss the known sweep windows.
+  

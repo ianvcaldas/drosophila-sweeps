@@ -21,9 +21,16 @@ class SweepsDataset(torch.utils.data.Dataset):
         self.feature_subset = feature_subset
         self.data = self.untar_data(data_tar)
         self.is_validation = is_validation
+        
+    def new_empty(self):
+        return SweepsDataset(
+            data_tar=None, df=pd.DataFrame(), target_column=None
+        )
 
     def untar_data(self, tar):
         result = dict()
+        if tar is None:
+            return result
         with tarfile.open(tar) as data:
             uuids = self.df.uuid
             for uuid in tqdm.notebook.tqdm(uuids):
@@ -40,6 +47,8 @@ class SweepsDataset(torch.utils.data.Dataset):
 
     def get_task(self):
         """Returns the type of inference problem and number of labels."""
+        if self.target_column is None:
+            return ("application", 0)
         labels_col = self.df[self.target_column]
         if pd.api.types.is_numeric_dtype(labels_col):
             return ("regression", 1)
@@ -51,17 +60,23 @@ class SweepsDataset(torch.utils.data.Dataset):
             return sorted(self.df[self.target_column].unique())
         elif self.task == "regression":
             return self.target_column
+        else:
+            return ["no labels"]
 
     def __getitem__(self, ix):
         simulation_uid = self.df.iloc[ix].uuid
         item = self.data[simulation_uid]
-        label = self.df.iloc[ix][self.target_column]
         if self.task == "classification":
+            label = self.df.iloc[ix][self.target_column]
             y = self.labels.index(label)
             y_tensor = torch.LongTensor([y]).squeeze()
         elif self.task == "regression":
+            label = self.df.iloc[ix][self.target_column]
             y = label
             y_tensor = torch.Tensor([y]).squeeze()
+        elif self.task == "application":
+            # We return 0 as the "label ID" as a placeholder
+            y_tensor = torch.LongTensor([0]).squeeze()
         return item, y_tensor
 
     def __len__(self):
@@ -127,7 +142,7 @@ class SimpleCNN2Layer(nn.Module):
         return out
 
 
-def get_inferences(model, loader, dataset_name):
+def get_training_inferences(model, loader, dataset_name):
     data = {"training": (loader.train_ds, 0), "validation": (loader.valid_ds, 1)}
     dataset_object, dataset_idx = data[dataset_name]
     predictions, targets = model.get_preds(ds_idx=dataset_idx)
@@ -157,5 +172,35 @@ def get_inferences(model, loader, dataset_name):
             .assign(uuid=dataset_object.df.uuid, true=targets.numpy(),)
             .set_index("uuid")
             .rename({"true": "true_" + label}, axis="columns")
+        )
+    return result
+
+def get_application_inferences(model, dataset, batch_size, labels, target_col):
+    loader = fastai.data.core.DataLoader(dataset, bs=batch_size)
+    predictions, _ = model.get_preds(dl=loader)
+    if len(labels) == 1: # A regression application
+        result = (
+            pd.DataFrame.from_records(
+                predictions.numpy(), columns=["predicted_" + labels[0]]
+            )
+            .assign(uuid=dataset.df.uuid, true=dataset.df[target_col])
+            .set_index("uuid")
+            .rename({"true": "true_" + labels[0]}, axis="columns")
+        )
+    elif len(labels) > 1: # A classification application
+        true_labels = dataset.df[target_col]
+        true_ix = [labels.index(s) if s in labels else None for s in true_labels]
+        predicted_ix = predictions.numpy().argmax(axis=1)
+        predicted_labels = [labels[i] for i in predicted_ix]
+        result = (
+            pd.DataFrame.from_records(predictions.numpy(), columns=labels)
+            .assign(
+                uuid=dataset.df.uuid,
+                true_ix=true_ix,
+                predicted_ix=predicted_ix,
+                true_labels=true_labels,
+                predicted_labels=predicted_labels,
+            )
+            .set_index("uuid")
         )
     return result

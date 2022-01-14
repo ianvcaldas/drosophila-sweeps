@@ -24,11 +24,11 @@ rule all:
             training=config["training_ids"],
             testing=["training", "validation"]
         ),
-        empirical_inferences = expand(
-            "output/inferences-empirical/{target}_{training}_empirical.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        ),
+        # empirical_inferences = expand(
+        #     "output/inferences-empirical/{target}_{training}_empirical.tsv",
+        #     target=config["inference_targets"],
+        #     training=config["training_ids"]
+        # ),
         # overfitting_reports = expand(
         #     "output/model-fitting/{target}_{training}_overfitting.tsv",
         #     target=config["inference_targets"],
@@ -39,6 +39,8 @@ rule all:
 rule apply_model_to_empirical_data:
     input:
         fit_model = "output/trained-models/{target}_{training}.pth",
+        model_object = "output/trained-models/{target}_{training}.pkl",
+        model_labels = "output/trained-models/{target}_{training}_labels.txt",
         data = "output/empirical-windows/data.tar",
         logdata = "output/empirical-windows/logdata.tar"
     output:
@@ -52,7 +54,10 @@ rule apply_model_to_empirical_data:
 rule apply_model_to_testing_data:
     input:
         fit_model = "output/trained-models/{target}_{training}.pth",
+        model_object = "output/trained-models/{target}_{training}.pkl",
+        model_labels = "output/trained-models/{target}_{training}_labels.txt",
         data = "output/simulation-data/{testing}/data.tar",
+        sim_parameters = "output/simulation-data-processed/parameters/{testing}_parameters-clean.tsv",
         logdata  = "output/simulation-data/{testing}/logdata.tar"
     output:
         inferences = "output/inferences-testing/{target}_{training}_{testing}.tsv",
@@ -83,6 +88,8 @@ rule fit_model:
         logdata  = "output/simulation-data/{training}/logdata.tar"
     output:
         fit_model = "output/trained-models/{target}_{training}.pth",
+        model_object = "output/trained-models/{target}_{training}.pkl",
+        model_labels = "output/trained-models/{target}_{training}_labels.txt",
         training_inferences = "output/inferences-training/{target}_{training}_training.tsv",
         validation_inferences = "output/inferences-training/{target}_{training}_validation.tsv",
         fit_report = "output/model-fitting/{target}_{training}_fit.tsv"
