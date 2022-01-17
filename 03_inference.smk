@@ -24,11 +24,11 @@ rule all:
             training=config["training_ids"],
             testing=["training", "validation"]
         ),
-        # empirical_inferences = expand(
-        #     "output/inferences-empirical/{target}_{training}_empirical.tsv",
-        #     target=config["inference_targets"],
-        #     training=config["training_ids"]
-        # ),
+        empirical_inferences = expand(
+            "output/inferences-empirical/{target}_{training}_empirical.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
+        ),
         # overfitting_reports = expand(
         #     "output/model-fitting/{target}_{training}_overfitting.tsv",
         #     target=config["inference_targets"],
@@ -45,6 +45,8 @@ rule apply_model_to_empirical_data:
         logdata = "output/empirical-windows/logdata.tar"
     output:
         inferences = "output/inferences-empirical/{target}_{training}_empirical.tsv"
+    params:
+        application_type = "empirical"
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/apply-model-empirical_{target}_{training}.tsv"
     log: "logs/inference/apply-model-empirical_{target}_{training}.py.ipynb"
@@ -61,6 +63,8 @@ rule apply_model_to_testing_data:
         logdata  = "output/simulation-data/{testing}/logdata.tar"
     output:
         inferences = "output/inferences-testing/{target}_{training}_{testing}.tsv",
+    params:
+        application_type = "testing"
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/apply-model-testing_{target}_{training}_{testing}.tsv"
     log: "logs/inference/apply-model-testing_{target}_{training}_{testing}.py.ipynb"
