@@ -2,9 +2,19 @@
 configfile: '03_config.yaml'
 report: 'captions/inference.rst'
 
-# Think about how this interacts with the cluster, but do it later.
-# workdir: config["workdir"]
-# Cluster rules might have shadow: copy-minimal.
+def get_feature_subsets(num_features):
+    """Feature subsets are coded as a string, where each character is "0" or "1" for
+    presence or absence of a feature."""
+    no_features = ["0"]*num_features
+    all_features = ["1"]*num_features
+    results = []
+    for ix in range(num_features):
+        only_this_one = no_features[:]
+        only_this_one[ix] = "1"
+        without_this_one = all_features[:]
+        without_this_one[ix] = "0"
+        results.extend(["".join(only_this_one), "".join(without_this_one)])
+    return results
 
 rule all:
     input:
@@ -29,11 +39,19 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"]
         ),
-        # overfitting_reports = expand(
-        #     "output/model-fitting/{target}_{training}_overfitting.tsv",
-        #     target=config["inference_targets"],
-        #     training=config["training_ids"]
-        # )
+        feature_analysis = expand(
+            "output/inferences-feature-analysis/{target}_{training}_features-{features}_{testing}.tsv",
+            target=config["inference_targets"],
+            # We only do feature analysis for fixed sweeps training dataset
+            training=config["training_ids"][0],
+            features=get_feature_subsets(num_features=7),
+            testing=["training", "validation"]
+        ),
+        overfitting_reports = expand(
+            "output/model-fitting/{target}_{training}_overfitting.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
+        )
 
 
 rule apply_model_to_empirical_data:
@@ -82,6 +100,27 @@ rule aggregate_overfitting_replicates:
     conda: "envs/simulate.yaml"
     benchmark: "benchmarks/inference/aggregate-overfitting_{target}_{training}.tsv"
     script: "scripts/inference/aggregate-overfitting-replicates.py"
+
+
+rule fit_model_feature_subset:
+    input:
+        training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv",
+        data = "output/simulation-data/{training}/data.tar",
+        logdata  = "output/simulation-data/{training}/logdata.tar"
+    output:
+        training_inferences = "output/inferences-feature-analysis/{target}_{training}_features-{features}_training.tsv",
+        validation_inferences = "output/inferences-feature-analysis/{target}_{training}_features-{features}_validation.tsv",
+        fit_report = "output/model-fitting/{target}_{training}_features-{features}_fit.tsv"
+    params:
+        save_model = False,
+        save_inferences = True,
+        use_log_data = False,
+        only_one_epoch = True
+    conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}_features-{features}.tsv"
+    log: "logs/inference/fit-neural-network_{target}_{training}_features-{features}.py.ipynb"
+    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
 rule fit_model:
