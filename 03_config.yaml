@@ -1,6 +1,8 @@
 
 raw_sim_folder: "raw-simulations/20211004_simulations"
+epochs_for_model_training: 25
 num_overfitting_replicates: 10
+epochs_for_overfitting_analyses: 60
 
 validation_percentage: 0.2
 

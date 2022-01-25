@@ -116,7 +116,7 @@ rule fit_model_feature_subset:
         save_model = False,
         save_inferences = True,
         use_log_data = False,
-        only_one_epoch = True
+        epochs = config["epochs_for_model_training"]
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}_features-{features}.tsv"
     log: "logs/inference/fit-neural-network_{target}_{training}_features-{features}.py.ipynb"
@@ -140,7 +140,7 @@ rule fit_model:
         save_model = True,
         save_inferences = True,
         use_log_data = False,
-        only_one_epoch = True
+        epochs = config["epochs_for_model_training"]
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}.tsv"
     log: "logs/inference/fit-neural-network_{target}_{training}.py.ipynb"
@@ -185,7 +185,8 @@ rule overfitting_simple_fit:
     params:
         save_model = False,
         save_inferences = False,
-        use_log_data = False
+        use_log_data = False,
+        epochs = config["epochs_for_overfitting_analyses"]
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.tsv"
     log: "logs/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.py.ipynb"

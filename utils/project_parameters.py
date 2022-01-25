@@ -39,11 +39,4 @@ default_simulation_parameters = {
     "smallest-window": smallest_window,
 }
 
-epochs_of_training = {
-    "log-sel-strength": 25,
-    "sweep-mode": 25,
-    "hard-vs-soft": 25,
-    "rnm-vs-sgv": 25,
-}
-
 neural_network_batch_size = 64
