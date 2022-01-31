@@ -6,6 +6,7 @@ logs
 output
 raw-data
 raw-simulations
+fig-manual
 
 .DS_Store
 .ipynb_checkpoints
