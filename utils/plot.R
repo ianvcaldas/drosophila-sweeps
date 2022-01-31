@@ -28,3 +28,13 @@ target_factor <- function(target) {
     result <- factor(result, levels=c('Sel. strength', 'Sweep mode', 'Hard vs. Soft', 'RNM vs. SGV'))
     return(result)
 }
+
+sweepmode_factor <- function(mode) {
+    result <- str_replace_all(mode, c(
+        'hard'='Hard sweeps',
+        'rnm \\(true\\)'='RNM sweeps',
+        'sgv \\(true\\)'='SGV sweeps'
+    ))
+    result <- factor(result, levels=c('Hard sweeps', 'RNM sweeps', 'SGV sweeps'))
+    return(result)
+}
