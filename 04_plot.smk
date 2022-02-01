@@ -20,7 +20,17 @@ rule all:
         expand("fig/overfitting-learning-curves_{training}.pdf",
                training=config["training_ids"]),
         "fig/subwindow-diagram.pdf",
-        "fig/fixed-sweeps-validation.pdf"
+        "fig/fixed-sweeps-validation.pdf",
+        "fig/fixed-sweeps-validation-selection-brackets.pdf"
+
+rule fixed_sweeps_validation_selection_brackets:
+    input:
+        parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
+        selstrength = "output/inferences-training/log-sel-strength_main-fixedsweeps_validation.tsv",
+        sweepmode = "output/inferences-training/sweep-mode_main-fixedsweeps_validation.tsv"
+    output: "fig/fixed-sweeps-validation-selection-brackets.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/selection-brackets-validation.r.ipynb"
 
 rule fixed_sweeps_validation:
     input:
