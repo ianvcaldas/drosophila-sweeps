@@ -51,3 +51,20 @@ sweepmode_factor_short <- function(mode) {
     result <- factor(result, levels=c('Hard', 'RNM', 'SGV', 'Soft'))
     return(result)
 }
+
+rmse <- function(true, pred) {
+    result <- sqrt(mean((true - pred)^2))
+    return(result)
+}
+
+mean_relative_error <- function(log_true, log_pred) {
+    true <- 10^log_true
+    pred <- 10^log_pred
+    result <- mean(abs((true - pred)/true))
+    return(result)
+}
+
+accuracy <- function(true, pred) {
+    result <- mean(true == pred)
+    return(result)
+}

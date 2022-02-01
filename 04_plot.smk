@@ -21,7 +21,8 @@ rule robustness_to_bottlenecks:
         sweepmode_weak = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-5percent.tsv",
         sweepmode_strong = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-1percent.tsv"
     output:
-        "fig/robustness-to-bottlenecks.pdf"
+        figure = "fig/robustness-to-bottlenecks.pdf",
+        metrics = "output/metrics/bottleneck-fixedsweeps.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-bottlenecks.r.ipynb"
 
@@ -32,7 +33,9 @@ rule partial_sweeps_validation:
         sweepmode = "output/inferences-training/sweep-mode_main-partialsweeps_validation.tsv",
         sweepmode_roc =
         "output/metrics/sweep-mode_main-partialsweeps_roc-curve.tsv"
-    output: "fig/partial-sweeps-validation.pdf"
+    output:
+        figure="fig/partial-sweeps-validation.pdf",
+        metrics="output/metrics/partial-sweeps-metrics.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/partialsweeps-validation.r.ipynb"
 
