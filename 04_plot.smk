@@ -21,7 +21,19 @@ rule all:
                training=config["training_ids"]),
         "fig/subwindow-diagram.pdf",
         "fig/fixed-sweeps-validation.pdf",
-        "fig/fixed-sweeps-validation-selection-brackets.pdf"
+        "fig/fixed-sweeps-validation-selection-brackets.pdf",
+        "fig/partial-sweeps-validation.pdf"
+
+rule partial_sweeps_validation:
+    input:
+        parameters = "output/simulation-data-processed/train-valid-split/main-partialsweeps_validation.tsv",
+        selstrength = "output/inferences-training/log-sel-strength_main-partialsweeps_validation.tsv",
+        sweepmode = "output/inferences-training/sweep-mode_main-partialsweeps_validation.tsv",
+        sweepmode_roc =
+        "output/metrics/sweep-mode_main-partialsweeps_roc-curve.tsv"
+    output: "fig/partial-sweeps-validation.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/partialsweeps-validation.r.ipynb"
 
 rule fixed_sweeps_validation_selection_brackets:
     input:
@@ -34,7 +46,7 @@ rule fixed_sweeps_validation_selection_brackets:
 
 rule fixed_sweeps_validation:
     input:
-        parameters = "output/simulation-data-processed/balanced/log-sel-strength_main-fixedsweeps_validation.tsv",
+        parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
         selstrength = "output/inferences-training/log-sel-strength_main-fixedsweeps_validation.tsv",
         sweepmode = "output/inferences-training/sweep-mode_main-fixedsweeps_validation.tsv",
         sweepmode_roc =
@@ -43,7 +55,7 @@ rule fixed_sweeps_validation:
         feature_analysis_code = "output/metrics/main-fixedsweeps_feature-analysis-grid.tsv"
     output: "fig/fixed-sweeps-validation.pdf"
     conda: "envs/plotting.yaml"
-    notebook: "notebooks/plotting/main-validation.r.ipynb"
+    notebook: "notebooks/plotting/fixedsweeps-validation.r.ipynb"
 
 rule prepare_metrics:
     input:
