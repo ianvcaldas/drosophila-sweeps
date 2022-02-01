@@ -1,20 +1,6 @@
 
 configfile: '03_config.yaml'
 
-def get_feature_subsets(num_features):
-    """Feature subsets are coded as a string, where each character is "0" or "1" for
-    presence or absence of a feature."""
-    no_features = ["0"]*num_features
-    all_features = ["1"]*num_features
-    results = []
-    for ix in range(num_features):
-        only_this_one = no_features[:]
-        only_this_one[ix] = "1"
-        without_this_one = all_features[:]
-        without_this_one[ix] = "0"
-        results.extend(["".join(only_this_one), "".join(without_this_one)])
-    return results
-
 rule all:
     input:
         expand("fig/overfitting-learning-curves_{training}.pdf",
@@ -23,7 +9,21 @@ rule all:
         "fig/fixed-sweeps-validation.pdf",
         "fig/fixed-sweeps-validation-selection-brackets.pdf",
         "fig/fixed-sweeps-validation-secondary-models.pdf",
-        "fig/partial-sweeps-validation.pdf"
+        "fig/partial-sweeps-validation.pdf",
+        "fig/robustness-to-bottlenecks.pdf"
+
+rule robustness_to_bottlenecks:
+    input:
+        parameters_weak = "output/simulation-data-processed/parameters/bottleneck-5percent_parameters-clean.tsv",
+        parameters_strong = "output/simulation-data-processed/parameters/bottleneck-1percent_parameters-clean.tsv",
+        selstrength_weak = "output/inferences-testing/log-sel-strength_main-partialsweeps_bottleneck-5percent.tsv",
+        selstrength_strong = "output/inferences-testing/log-sel-strength_main-partialsweeps_bottleneck-1percent.tsv",
+        sweepmode_weak = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-5percent.tsv",
+        sweepmode_strong = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-1percent.tsv"
+    output:
+        "fig/robustness-to-bottlenecks.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/robustness-to-bottlenecks.r.ipynb"
 
 rule partial_sweeps_validation:
     input:
@@ -70,6 +70,20 @@ rule fixed_sweeps_validation:
     output: "fig/fixed-sweeps-validation.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/fixedsweeps-validation.r.ipynb"
+
+def get_feature_subsets(num_features):
+    """Feature subsets are coded as a string, where each character is "0" or "1" for
+    presence or absence of a feature."""
+    no_features = ["0"]*num_features
+    all_features = ["1"]*num_features
+    results = []
+    for ix in range(num_features):
+        only_this_one = no_features[:]
+        only_this_one[ix] = "1"
+        without_this_one = all_features[:]
+        without_this_one[ix] = "0"
+        results.extend(["".join(only_this_one), "".join(without_this_one)])
+    return results
 
 rule prepare_metrics:
     input:
