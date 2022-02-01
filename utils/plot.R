@@ -11,7 +11,7 @@ sweeps_save <- function(file, fig, width=4.5, asp=4/3) {
 sweeps_theme <- theme_minimal() +
     theme(
         text=element_text(size=12, family="Arial Narrow"),
-	axis.title=element_text(hjust=1),
+	axis.title.x=element_text(hjust=1),
         panel.grid.minor=element_blank(),
 	strip.text=element_text(hjust=0, face='italic')
     )
@@ -36,5 +36,16 @@ sweepmode_factor <- function(mode) {
         'sgv \\(true\\)'='SGV sweeps'
     ))
     result <- factor(result, levels=c('Hard sweeps', 'RNM sweeps', 'SGV sweeps'))
+    return(result)
+}
+
+
+sweepmode_factor_short <- function(mode) {
+    result <- str_replace_all(mode, c(
+        'hard'='Hard',
+        'rnm \\(true\\)'='RNM',
+        'sgv \\(true\\)'='SGV'
+    ))
+    result <- factor(result, levels=c('Hard', 'RNM', 'SGV'))
     return(result)
 }
