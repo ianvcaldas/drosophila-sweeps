@@ -33,9 +33,10 @@ sweepmode_factor <- function(mode) {
     result <- str_replace_all(mode, c(
         'hard'='Hard sweeps',
         'rnm \\(true\\)'='RNM sweeps',
-        'sgv \\(true\\)'='SGV sweeps'
+        'sgv \\(true\\)'='SGV sweeps',
+	'soft'='Soft sweeps'
     ))
-    result <- factor(result, levels=c('Hard sweeps', 'RNM sweeps', 'SGV sweeps'))
+    result <- factor(result, levels=c('Hard sweeps', 'RNM sweeps', 'SGV sweeps', 'Soft sweeps'))
     return(result)
 }
 
@@ -44,8 +45,9 @@ sweepmode_factor_short <- function(mode) {
     result <- str_replace_all(mode, c(
         'hard'='Hard',
         'rnm \\(true\\)'='RNM',
-        'sgv \\(true\\)'='SGV'
+        'sgv \\(true\\)'='SGV',
+	'soft'='Soft'
     ))
-    result <- factor(result, levels=c('Hard', 'RNM', 'SGV'))
+    result <- factor(result, levels=c('Hard', 'RNM', 'SGV', 'Soft'))
     return(result)
 }

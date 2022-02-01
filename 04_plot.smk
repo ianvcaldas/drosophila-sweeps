@@ -22,6 +22,7 @@ rule all:
         "fig/subwindow-diagram.pdf",
         "fig/fixed-sweeps-validation.pdf",
         "fig/fixed-sweeps-validation-selection-brackets.pdf",
+        "fig/fixed-sweeps-validation-secondary-models.pdf",
         "fig/partial-sweeps-validation.pdf"
 
 rule partial_sweeps_validation:
@@ -34,6 +35,19 @@ rule partial_sweeps_validation:
     output: "fig/partial-sweeps-validation.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/partialsweeps-validation.r.ipynb"
+
+rule fixed_sweeps_validation_secondary_models:
+    input:
+        parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
+        rnm_vs_sgv = "output/inferences-training/rnm-vs-sgv_main-fixedsweeps_validation.tsv",
+        rnm_vs_sgv_roc = "output/metrics/rnm-vs-sgv_main-fixedsweeps_roc-curve.tsv",
+        hard_vs_soft = "output/inferences-training/hard-vs-soft_main-fixedsweeps_validation.tsv",
+        hard_vs_soft_roc = "output/metrics/hard-vs-soft_main-fixedsweeps_roc-curve.tsv",
+        feature_analysis = "output/metrics/main-fixedsweeps_metrics-with-features.tsv",
+        feature_analysis_code = "output/metrics/main-fixedsweeps_feature-analysis-grid.tsv"
+    output: "fig/fixed-sweeps-validation-secondary-models.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/fixedsweeps-validation-secondary-models.r.ipynb"
 
 rule fixed_sweeps_validation_selection_brackets:
     input:
