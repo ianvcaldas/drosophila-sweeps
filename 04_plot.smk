@@ -10,7 +10,31 @@ rule all:
         "fig/fixed-sweeps-validation-selection-brackets.pdf",
         "fig/fixed-sweeps-validation-secondary-models.pdf",
         "fig/partial-sweeps-validation.pdf",
-        "fig/robustness-to-bottlenecks.pdf"
+        "fig/robustness-to-bottlenecks.pdf",
+        "fig/robustness-to-ne-rec.pdf"
+
+rule robustness_to_ne_rec:
+    input:
+        parameters = expand(
+            "output/simulation-data-processed/parameters/{parameter}-{change}_parameters-clean.tsv",
+            parameter=["popsize", "recombination"],
+            change=["higher", "lower"]
+        ),
+        selstrength = expand(
+            "output/inferences-testing/log-sel-strength_main-fixedsweeps_{parameter}-{change}.tsv",
+            parameter=["popsize", "recombination"],
+            change=["higher", "lower"]
+        ),
+        sweepmode = expand(
+            "output/inferences-testing/sweep-mode_main-fixedsweeps_{parameter}-{change}.tsv",
+            parameter=["popsize", "recombination"],
+            change=["higher", "lower"]
+        )
+    output:
+        figure = "fig/robustness-to-ne-rec.pdf",
+        metrics = "output/metrics/fixedsweeps-ne-rec.tsv"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/robustness-to-ne-rec.r.ipynb"
 
 rule robustness_to_bottlenecks:
     input:
@@ -22,7 +46,7 @@ rule robustness_to_bottlenecks:
         sweepmode_strong = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-1percent.tsv"
     output:
         figure = "fig/robustness-to-bottlenecks.pdf",
-        metrics = "output/metrics/bottleneck-fixedsweeps.tsv"
+        metrics = "output/metrics/fixedsweeps-bottleneck.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-bottlenecks.r.ipynb"
 
