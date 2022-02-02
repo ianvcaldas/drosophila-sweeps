@@ -11,7 +11,28 @@ rule all:
         "fig/fixed-sweeps-validation-secondary-models.pdf",
         "fig/partial-sweeps-validation.pdf",
         "fig/robustness-to-bottlenecks.pdf",
-        "fig/robustness-to-ne-rec.pdf"
+        "fig/robustness-to-ne-rec.pdf",
+        "fig/robustness-to-offcenter-sweeps.pdf"
+
+rule robustness_to_offcenter:
+    input:
+        parameters = expand(
+            "output/simulation-data-processed/parameters/offcenter-{distance}bp_parameters-clean.tsv",
+            distance=[500, 10000]
+        ),
+        selstrength = expand(
+            "output/inferences-testing/log-sel-strength_main-fixedsweeps_offcenter-{distance}bp.tsv",
+            distance=[500, 10000]
+        ),
+        sweepmode = expand(
+            "output/inferences-testing/sweep-mode_main-fixedsweeps_offcenter-{distance}bp.tsv",
+            distance=[500, 10000]
+        )
+    output:
+        figure = "fig/robustness-to-offcenter-sweeps.pdf",
+        metrics = "output/metrics/fixedsweeps-offcenter.tsv"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/robustness-to-offcenter-sweeps.r.ipynb"
 
 rule robustness_to_ne_rec:
     input:
