@@ -12,7 +12,19 @@ rule all:
         "fig/partial-sweeps-validation.pdf",
         "fig/robustness-to-bottlenecks.pdf",
         "fig/robustness-to-ne-rec.pdf",
-        "fig/robustness-to-offcenter-sweeps.pdf"
+        "fig/robustness-to-offcenter-sweeps.pdf",
+        "fig/robustness-to-partial-sweeps.pdf"
+
+rule robustness_to_partial_sweeps:
+    input:
+        parameters = "output/simulation-data-processed/train-valid-split/main-partialsweeps_validation.tsv",
+        selstrength = "output/inferences-partial/log-sel-strength_main-fixedsweeps_main-partialsweeps.tsv",
+        sweepmode = "output/inferences-partial/sweep-mode_main-fixedsweeps_main-partialsweeps.tsv",
+    output:
+        figure = "fig/robustness-to-partial-sweeps.pdf",
+        metrics = "output/metrics/fixedsweeps-applied-to-partialsweeps.tsv"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/robustness-to-partial-sweeps.r.ipynb"
 
 rule robustness_to_offcenter:
     input:

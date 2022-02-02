@@ -28,6 +28,10 @@ rule all:
             training=config["training_ids"],
             testing=config["testing_ids"]
         ),
+        partial_sweeps_testing_inferences = expand(
+            "output/inferences-partial/{target}_main-fixedsweeps_main-partialsweeps.tsv",
+            target=config["inference_targets"]
+        ),
         training_inferences = expand(
             "output/inferences-training/{target}_{training}_{testing}.tsv",
             target=config["inference_targets"],
@@ -69,6 +73,25 @@ rule apply_model_to_empirical_data:
     benchmark: "benchmarks/inference/apply-model-empirical_{target}_{training}.tsv"
     log: "logs/inference/apply-model-empirical_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
+
+
+rule apply_fixed_sweeps_model_to_partial_sweeps:
+    input:
+        fit_model = "output/trained-models/{target}_main-fixedsweeps.pth",
+        model_object = "output/trained-models/{target}_main-fixedsweeps.pkl",
+        model_labels = "output/trained-models/{target}_main-fixedsweeps_labels.txt",
+        data = "output/simulation-data/main-partialsweeps/data.tar",
+        sim_parameters = "output/simulation-data-processed/train-valid-split/main-partialsweeps_validation.tsv",
+        logdata = "output/simulation-data/main-partialsweeps/logdata.tar",
+    output:
+        inferences = "output/inferences-partial/{target}_main-fixedsweeps_main-partialsweeps.tsv",
+    params:
+        application_type = "testing"
+    conda: "envs/ml.yaml"
+    benchmark: "benchmarks/apply-model-testing_{target}_main-fixedsweeps_main-partialsweeps.tsv"
+    log: "logs/inference/apply-model-testing_{target}_main-fixedsweeps_main-partialsweeps.py.ipynb"
+    notebook: "notebooks/inference/apply-model.py.ipynb"
+
 
 
 rule apply_model_to_testing_data:
