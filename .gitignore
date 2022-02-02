@@ -10,6 +10,9 @@ raw-data
 raw-simulations
 fig-manual
 
+*.pdf
+*.tsv
+
 .DS_Store
 .ipynb_checkpoints
 .snakemake

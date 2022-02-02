@@ -17,6 +17,7 @@ sweeps_theme <- theme_minimal() +
     )
 
 sweeps_colour <- scale_colour_brewer(palette='Dark2')
+sweeps_fill <- scale_fill_brewer(palette='Dark2')
 
 target_factor <- function(target) {
     result <- str_replace_all(target, c(
