@@ -44,12 +44,14 @@ mkdir -p ${RESULTSHOME}/logdata
 mkdir -p ${RESULTSHOME}/features
 mkdir -p ${RESULTSHOME}/parameters
 mkdir -p ${RESULTSHOME}/logs
+mkdir -p ${RESULTSHOME}/genotypes
 mv output/simulations/data.tar ${RESULTSHOME}/data/data_${SLURM_ARRAY_TASK_ID}.tar
 mv output/simulations/logdata.tar ${RESULTSHOME}/logdata/logdata_${SLURM_ARRAY_TASK_ID}.tar
 mv output/simulations/features.tar.gz ${RESULTSHOME}/features/features_${SLURM_ARRAY_TASK_ID}.tar.gz
 mv output/simulations/parameters.tsv ${RESULTSHOME}/parameters/parameters_${SLURM_ARRAY_TASK_ID}.tsv
 tar -czf logs.tar.gz logs/simulations
 mv logs.tar.gz ${RESULTSHOME}/logs/logs_${SLURM_ARRAY_TASK_ID}.tar.gz
+mv output/simulations/genotypes.tar.gz ${RESULTSHOME}/genotypes/genotypes_${SLURM_ARRAY_TASK_ID}.tar.gz
 
 echo "Cleaning up working directory..."
 rm -r $WORKDIR

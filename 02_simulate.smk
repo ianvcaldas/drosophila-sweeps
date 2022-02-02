@@ -59,6 +59,9 @@ def successful_features(wildcards):
     successful_sim_ids = wait_for_slim_checkpoint(wildcards)
     return expand(OUTDIR/'features/{sim_id}_features.tsv', sim_id=successful_sim_ids)
     
+def successful_genomes(wildcards):
+    successful_sim_ids = wait_for_slim_checkpoint(wildcards)
+    return expand(OUTDIR/'{sim_id}_genotypes.ms', sim_id=successful_sim_ids)
 
 
 # RULES #
@@ -70,7 +73,8 @@ rule all:
         OUTDIR/"parameters.tsv",
         OUTDIR/"features.tar.gz",
         OUTDIR/"data.tar",
-        OUTDIR/"logdata.tar"
+        OUTDIR/"logdata.tar",
+        OUTDIR/"genotypes.tar.gz"
 
 rule logtar_npy:
     input:
@@ -93,6 +97,12 @@ rule tar_npy:
         npy_folder = OUTDIR/"npy",
     conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
+
+rule compress_genomes:
+    input: successful_genomes
+    output: OUTDIR/"genotypes.tar.gz"
+    shell:
+        "tar -czf {output} {input} ;"
 
 
 rule compress_features:
