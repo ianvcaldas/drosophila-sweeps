@@ -13,7 +13,19 @@ rule all:
         "fig/robustness-to-bottlenecks.pdf",
         "fig/robustness-to-ne-rec.pdf",
         "fig/robustness-to-offcenter-sweeps.pdf",
-        "fig/robustness-to-partial-sweeps.pdf"
+        "fig/robustness-to-partial-sweeps.pdf",
+        "fig/main-fixedsweeps_learning-curves.pdf",
+        "fig/main-partialsweeps_learning-curves.pdf"
+
+rule learning_curves:
+    input:
+        expand(
+            "output/model-fitting/{target}_{{training}}_fit.tsv",
+            target=config["inference_targets"]
+        )
+    output: "fig/{training}_learning-curves.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/learning-curves.r.ipynb"
 
 rule robustness_to_partial_sweeps:
     input:
