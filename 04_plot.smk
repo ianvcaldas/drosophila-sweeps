@@ -15,7 +15,26 @@ rule all:
         "fig/robustness-to-offcenter-sweeps.pdf",
         "fig/robustness-to-partial-sweeps.pdf",
         "fig/main-fixedsweeps_learning-curves.pdf",
-        "fig/main-partialsweeps_learning-curves.pdf"
+        "fig/main-partialsweeps_learning-curves.pdf",
+        "fig/sweep-signatures-control-sweeps.pdf",
+        "fig/sweep-signatures-theoretical.pdf"
+
+rule plot_sweep_signals:
+    input: "output/metrics/sweep-signals.tsv"
+    output:
+        empirical = "fig/sweep-signatures-control-sweeps.pdf",
+        simulated = "fig/sweep-signatures-theoretical.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/sweep-signals.r.ipynb"
+
+rule prepare_sweep_signals:
+    input:
+        empirical = "output/empirical-windows/data.tar",
+        simulated = "output/simulation-data/main-fixedsweeps/data.tar",
+        parameters = "output/simulation-data-processed/parameters/main-fixedsweeps_parameters-clean.tsv"
+    output: "output/metrics/sweep-signals.tsv"
+    conda: "envs/simulate.yaml"
+    notebook: "notebooks/plotting/prepare-sweep-signals.py.ipynb"
 
 rule learning_curves:
     input:
