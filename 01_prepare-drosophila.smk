@@ -164,6 +164,15 @@ rule resistant_lines:
         notebook = 'logs/prepare-drosophila/resistant-lines.py.ipynb'
     notebook: 'notebooks/prepare-drosophila/resistant-lines.py.ipynb'
 
+rule dgrp_sfs:
+    input: 'output/dgrp2/imputed.vcf.gz'
+    output:
+        'output/dgrp2/sfs.txt'
+    conda: 'envs/simulate.yaml'
+    shell:
+        "vcftools --gzvcf {input} --counts2 --out counts ;"
+        "sed '1d' counts.frq.count | cut -f 6 | sort -g | uniq -c > {output} ;"
+        "rm counts.frq.count; rm counts.log"
 
 rule dgrp_stats:
     input: 'output/dgrp2/imputed.vcf.gz'

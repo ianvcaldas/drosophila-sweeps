@@ -75,7 +75,8 @@ def calculate_features(
         sim_stats[stat] = dict()
         sim_stats[stat]["min"] = np.inf
         sim_stats[stat]["max"] = -np.inf
-    snp_coordinates, genotypes = ms_to_numpy(ms_file)
+    with open(ms_file, "r") as f:
+        snp_coordinates, genotypes = ms_to_numpy(f)
     if last_position is None:
         # This allows for 0-1 or raw base-pair coordinates.
         try:

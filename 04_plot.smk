@@ -17,7 +17,23 @@ rule all:
         "fig/main-fixedsweeps_learning-curves.pdf",
         "fig/main-partialsweeps_learning-curves.pdf",
         "fig/sweep-signatures-control-sweeps.pdf",
-        "fig/sweep-signatures-theoretical.pdf"
+        "fig/sweep-signatures-theoretical.pdf",
+        "fig/sfs.pdf"
+
+rule plot_sfs:
+    input:
+        empirical = "output/dgrp2/sfs.txt",
+        simulated = "output/metrics/simulated-neutral-sfs.tsv"
+    output: "fig/sfs.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/plot-sfs.r.ipynb"
+
+rule prepare_simulated_sfs:
+    output: "output/metrics/simulated-neutral-sfs.tsv"
+    conda: "envs/simulate.yaml"
+    params:
+        num_neutral_simulations_to_use = 200
+    notebook: "notebooks/plotting/prepare-simulated-sfs.py.ipynb"
 
 rule plot_sweep_signals:
     input: "output/metrics/sweep-signals.tsv"
