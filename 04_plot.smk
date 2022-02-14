@@ -161,7 +161,9 @@ rule fixed_sweeps_validation_selection_brackets:
         parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
         selstrength = "output/inferences-training/log-sel-strength_main-fixedsweeps_validation.tsv",
         sweepmode = "output/inferences-training/sweep-mode_main-fixedsweeps_validation.tsv"
-    output: "fig/fixed-sweeps-validation-selection-brackets.pdf"
+    output:
+        figure="fig/fixed-sweeps-validation-selection-brackets.pdf",
+        metrics="output/metrics/main-fixedsweeps_selection-brackets.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/selection-brackets-validation.r.ipynb"
 

@@ -11,9 +11,10 @@ sweeps_save <- function(file, fig, width=4.5, asp=4/3) {
 sweeps_theme <- theme_minimal() +
     theme(
         text=element_text(size=12, family="Arial Narrow"),
-	axis.title.x=element_text(hjust=1),
         panel.grid.minor=element_blank(),
-	strip.text=element_text(hjust=0, face='italic')
+        strip.text=element_text(hjust=0, face='italic'),
+        panel.spacing.x = unit(1, "lines"),
+        plot.title=element_text(size=12, family="Arial Narrow", hjust=0, face='italic')
     )
 
 sweeps_colour <- scale_colour_brewer(palette='Dark2')
@@ -35,7 +36,7 @@ sweepmode_factor <- function(mode) {
         'hard'='Hard sweeps',
         'rnm \\(true\\)'='RNM sweeps',
         'sgv \\(true\\)'='SGV sweeps',
-	'soft'='Soft sweeps'
+        'soft'='Soft sweeps'
     ))
     result <- factor(result, levels=c('Hard sweeps', 'RNM sweeps', 'SGV sweeps', 'Soft sweeps'))
     return(result)
@@ -47,7 +48,7 @@ sweepmode_factor_short <- function(mode) {
         'hard'='Hard',
         'rnm \\(true\\)'='RNM',
         'sgv \\(true\\)'='SGV',
-	'soft'='Soft'
+        'soft'='Soft'
     ))
     result <- factor(result, levels=c('Hard', 'RNM', 'SGV', 'Soft'))
     return(result)
