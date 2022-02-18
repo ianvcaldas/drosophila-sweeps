@@ -55,7 +55,31 @@ rule all:
             "output/model-fitting/{target}_{training}_overfitting.tsv",
             target=config["inference_targets"],
             training=config["training_ids"]
+        ),
+        gradient_boost_inferences = expand(
+            "output/inferences-gradientboost/{target}_{training}_{testing}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"],
+            testing=["training", "validation"]
         )
+
+
+rule fit_gradient_boost:
+    input:
+        training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv",
+        data = "output/simulation-data/{training}/data.tar",
+        logdata  = "output/simulation-data/{training}/logdata.tar"
+    output:
+        training_inferences = "output/inferences-gradientboost/{target}_{training}_training.tsv",
+        validation_inferences = "output/inferences-gradientboost/{target}_{training}_validation.tsv"
+    params:
+        num_gb_estimators = config["num_gradient_boosting_estimators"],
+        use_log_data = False
+    conda: "envs/ml.yaml"
+    benchmark: "benchmarks/inference/fit-gradient-boost_{target}_{training}.tsv"
+    log: "logs/inference/fit-gradient-boost_{target}_{training}.py.ipynb"
+    notebook: "notebooks/inference/fit-gradient-boost.py.ipynb"
 
 
 rule apply_model_to_empirical_data:

@@ -40,3 +40,11 @@ default_simulation_parameters = {
 }
 
 neural_network_batch_size = 64
+
+# Parameters of https://doi.org/10.1142/9789813235533_0018
+gradient_boosting_params = {
+    'learning_rate': 0.1,
+    'max_depth': 3,
+    'max_features': 'log2',
+    'verbose': 1
+}
