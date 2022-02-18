@@ -18,7 +18,21 @@ rule all:
         "fig/main-partialsweeps_learning-curves.pdf",
         "fig/sweep-signatures-control-sweeps.pdf",
         "fig/sweep-signatures-theoretical.pdf",
-        "fig/sfs.pdf"
+        "fig/sfs.pdf",
+        "fig/gradientboost.pdf"
+
+
+rule fixed_sweeps_gradientboost_validation:
+    input:
+        parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
+        selstrength = "output/inferences-gradientboost/log-sel-strength_main-fixedsweeps_validation.tsv",
+        sweepmode = "output/inferences-gradientboost/sweep-mode_main-fixedsweeps_validation.tsv"
+    output:
+        figure = "fig/gradientboost.pdf",
+        metrics = "output/metrics/fixedsweeps-gradientboost.tsv"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/fixedsweeps-gradientboost.r.ipynb"
+
 
 rule plot_sfs:
     input:
