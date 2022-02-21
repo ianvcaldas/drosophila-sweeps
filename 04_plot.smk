@@ -29,7 +29,7 @@ rule fixed_sweeps_gradientboost_validation:
         sweepmode = "output/inferences-gradientboost/sweep-mode_main-fixedsweeps_validation.tsv"
     output:
         figure = "fig/gradientboost.pdf",
-        metrics = "output/metrics/fixedsweeps-gradientboost.tsv"
+        metrics = "output/metrics/main-fixedsweeps_gradientboost.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/fixedsweeps-gradientboost.r.ipynb"
 
@@ -37,20 +37,20 @@ rule fixed_sweeps_gradientboost_validation:
 rule plot_sfs:
     input:
         empirical = "output/dgrp2/sfs.txt",
-        simulated = "output/metrics/simulated-neutral-sfs.tsv"
+        simulated = "output/metrics/data_simulated-neutral-sfs.tsv"
     output: "fig/sfs.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/plot-sfs.r.ipynb"
 
 rule prepare_simulated_sfs:
-    output: "output/metrics/simulated-neutral-sfs.tsv"
+    output: "output/metrics/data_simulated-neutral-sfs.tsv"
     conda: "envs/simulate.yaml"
     params:
         num_neutral_simulations_to_use = 200
     notebook: "notebooks/plotting/prepare-simulated-sfs.py.ipynb"
 
 rule plot_sweep_signals:
-    input: "output/metrics/sweep-signals.tsv"
+    input: "output/metrics/data_sweep-signals.tsv"
     output:
         empirical = "fig/sweep-signatures-control-sweeps.pdf",
         simulated = "fig/sweep-signatures-theoretical.pdf"
@@ -62,7 +62,7 @@ rule prepare_sweep_signals:
         empirical = "output/empirical-windows/data.tar",
         simulated = "output/simulation-data/main-fixedsweeps/data.tar",
         parameters = "output/simulation-data-processed/parameters/main-fixedsweeps_parameters-clean.tsv"
-    output: "output/metrics/sweep-signals.tsv"
+    output: "output/metrics/data_sweep-signals.tsv"
     conda: "envs/simulate.yaml"
     notebook: "notebooks/plotting/prepare-sweep-signals.py.ipynb"
 
@@ -83,7 +83,7 @@ rule robustness_to_partial_sweeps:
         sweepmode = "output/inferences-partial/sweep-mode_main-fixedsweeps_main-partialsweeps.tsv",
     output:
         figure = "fig/robustness-to-partial-sweeps.pdf",
-        metrics = "output/metrics/fixedsweeps-applied-to-partialsweeps.tsv"
+        metrics = "output/metrics/main-fixedsweeps_applied-to-partialsweeps.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-partial-sweeps.r.ipynb"
 
@@ -103,7 +103,7 @@ rule robustness_to_offcenter:
         )
     output:
         figure = "fig/robustness-to-offcenter-sweeps.pdf",
-        metrics = "output/metrics/fixedsweeps-offcenter.tsv"
+        metrics = "output/metrics/main-fixedsweeps_offcenter.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-offcenter-sweeps.r.ipynb"
 
@@ -126,7 +126,7 @@ rule robustness_to_ne_rec:
         )
     output:
         figure = "fig/robustness-to-ne-rec.pdf",
-        metrics = "output/metrics/fixedsweeps-ne-rec.tsv"
+        metrics = "output/metrics/main-fixedsweeps_ne-rec.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-ne-rec.r.ipynb"
 
@@ -140,7 +140,7 @@ rule robustness_to_bottlenecks:
         sweepmode_strong = "output/inferences-testing/sweep-mode_main-partialsweeps_bottleneck-1percent.tsv"
     output:
         figure = "fig/robustness-to-bottlenecks.pdf",
-        metrics = "output/metrics/fixedsweeps-bottleneck.tsv"
+        metrics = "output/metrics/main-fixedsweeps_bottleneck.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/robustness-to-bottlenecks.r.ipynb"
 
@@ -150,10 +150,10 @@ rule partial_sweeps_validation:
         selstrength = "output/inferences-training/log-sel-strength_main-partialsweeps_validation.tsv",
         sweepmode = "output/inferences-training/sweep-mode_main-partialsweeps_validation.tsv",
         sweepmode_roc =
-        "output/metrics/sweep-mode_main-partialsweeps_roc-curve.tsv"
+        "output/metrics/data_main-partialsweeps_sweep-mode_roc-curve.tsv"
     output:
         figure="fig/partial-sweeps-validation.pdf",
-        metrics="output/metrics/partial-sweeps-metrics.tsv"
+        metrics="output/metrics/main-partialsweeps_validation.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/partialsweeps-validation.r.ipynb"
 
@@ -161,11 +161,11 @@ rule fixed_sweeps_validation_secondary_models:
     input:
         parameters = "output/simulation-data-processed/train-valid-split/main-fixedsweeps_validation.tsv",
         rnm_vs_sgv = "output/inferences-training/rnm-vs-sgv_main-fixedsweeps_validation.tsv",
-        rnm_vs_sgv_roc = "output/metrics/rnm-vs-sgv_main-fixedsweeps_roc-curve.tsv",
+        rnm_vs_sgv_roc = "output/metrics/data_main-fixedsweeps_rnm-vs-sgv_roc-curve.tsv",
         hard_vs_soft = "output/inferences-training/hard-vs-soft_main-fixedsweeps_validation.tsv",
-        hard_vs_soft_roc = "output/metrics/hard-vs-soft_main-fixedsweeps_roc-curve.tsv",
-        feature_analysis = "output/metrics/main-fixedsweeps_metrics-with-features.tsv",
-        feature_analysis_code = "output/metrics/main-fixedsweeps_feature-analysis-grid.tsv"
+        hard_vs_soft_roc = "output/metrics/data_main-fixedsweeps_hard-vs-soft_roc-curve.tsv",
+        feature_analysis = "output/metrics/main-fixedsweeps_feature-analysis.tsv",
+        feature_analysis_code = "output/metrics/data_main-fixedsweeps_feature-analysis-grid.tsv"
     output: "fig/fixed-sweeps-validation-secondary-models.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/fixedsweeps-validation-secondary-models.r.ipynb"
@@ -187,10 +187,12 @@ rule fixed_sweeps_validation:
         selstrength = "output/inferences-training/log-sel-strength_main-fixedsweeps_validation.tsv",
         sweepmode = "output/inferences-training/sweep-mode_main-fixedsweeps_validation.tsv",
         sweepmode_roc =
-        "output/metrics/sweep-mode_main-fixedsweeps_roc-curve.tsv",
-        feature_analysis = "output/metrics/main-fixedsweeps_metrics-with-features.tsv",
-        feature_analysis_code = "output/metrics/main-fixedsweeps_feature-analysis-grid.tsv"
-    output: "fig/fixed-sweeps-validation.pdf"
+        "output/metrics/data_main-fixedsweeps_sweep-mode_roc-curve.tsv",
+        feature_analysis = "output/metrics/main-fixedsweeps_feature-analysis.tsv",
+        feature_analysis_code = "output/metrics/data_main-fixedsweeps_feature-analysis-grid.tsv"
+    output:
+        figure = "fig/fixed-sweeps-validation.pdf",
+        metrics = "output/metrics/main-fixedsweeps_validation.tsv"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/fixedsweeps-validation.r.ipynb"
 
@@ -220,8 +222,8 @@ rule prepare_metrics:
             target=config["inference_targets"]
         )
     output:
-        feature_analysis = "output/metrics/{training}_metrics-with-features.tsv",
-        feature_analysis_code = "output/metrics/{training}_feature-analysis-grid.tsv"
+        feature_analysis = "output/metrics/{training}_feature-analysis.tsv",
+        feature_analysis_code = "output/metrics/data_{training}_feature-analysis-grid.tsv"
     conda: "envs/ml.yaml"
     notebook: "notebooks/plotting/prepare-metrics-with-features.py.ipynb"
 
@@ -230,20 +232,20 @@ rule prepare_roc_curve:
         data="output/inferences-training/{target}_{training}_validation.tsv",
         labels="output/trained-models/{target}_{training}_labels.txt"
     output:
-        curve="output/metrics/{target}_{training}_roc-curve.tsv",
-        auc="output/metrics/{target}_{training}_roc-curve-auc.tsv"
+        curve="output/metrics/data_{training}_{target}_roc-curve.tsv",
+        auc="output/metrics/{training}_{target}_roc-curve-auc.tsv"
     conda: "envs/ml.yaml"
     notebook: "notebooks/plotting/prepare-roc-curve.py.ipynb"
 
 
 rule subwindow_diagram:
-    input: "output/metrics/subwindow-sizes.tsv"
+    input: "output/metrics/data_subwindow-sizes.tsv"
     output: "fig/subwindow-diagram.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/subwindow-diagram.r.ipynb"
 
 rule prepare_subdwindow_data:
-    output: "output/metrics/subwindow-sizes.tsv"
+    output: "output/metrics/data_subwindow-sizes.tsv"
     conda: "envs/simulate.yaml"
     notebook: "notebooks/plotting/prepare-subwindow-data.py.ipynb"
 

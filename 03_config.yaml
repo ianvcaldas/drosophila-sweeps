@@ -5,7 +5,7 @@ epochs_for_model_training: 75
 num_overfitting_replicates: 10
 epochs_for_overfitting_analyses: 60
 
-num_gradient_boosting_estimators: 1 # 500
+num_gradient_boosting_estimators: 500
 
 validation_percentage: 0.2
 
