@@ -61,7 +61,50 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"],
             testing=["training", "validation"]
+        ),
+        empirical_inference_replicates = expand(
+            "output/inferences-empirical-replicates/{target}_{training}_empirical_replicate-{k}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"],
+            k=range(config["num_empirical_replicates"])
         )
+
+
+rule apply_replicate_model_to_empirical_data:
+    input:
+        fit_model = "output/trained-models-replicates/{target}_{training}_replicate-{k}.pth",
+        model_object = "output/trained-models-replicates/{target}_{training}_replicate-{k}.pkl",
+        model_labels = "output/trained-models-replicates/{target}_{training}_labels_replicate-{k}.txt",
+        data = "output/empirical-windows/data.tar",
+        logdata = "output/empirical-windows/logdata.tar"
+    output:
+        inferences = "output/inferences-empirical-replicates/{target}_{training}_empirical_replicate-{k}.tsv"
+    params:
+        application_type = "empirical"
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/apply-model.py.ipynb"
+
+
+rule fit_model_replicate:
+    input:
+        training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv",
+        data = "output/simulation-data/{training}/data.tar",
+        logdata  = "output/simulation-data/{training}/logdata.tar"
+    output:
+        fit_model = "output/trained-models-replicates/{target}_{training}_replicate-{k}.pth",
+        model_object = "output/trained-models-replicates/{target}_{training}_replicate-{k}.pkl",
+        model_labels = "output/trained-models-replicates/{target}_{training}_labels_replicate-{k}.txt",
+        training_inferences = "output/inferences-training-replicates/{target}_{training}_training_replicate-{k}.tsv",
+        validation_inferences = "output/inferences-training-replicates/{target}_{training}_validation_replicate-{k}.tsv",
+        fit_report = "output/model-fitting-replicates/{target}_{training}_fit_replicate-{k}.tsv"
+    params:
+        save_model = True,
+        save_inferences = True,
+        use_log_data = False,
+        epochs = config["epochs_for_model_training"]
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
 rule fit_gradient_boost:

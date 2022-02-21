@@ -7,6 +7,8 @@ epochs_for_overfitting_analyses: 60
 
 num_gradient_boosting_estimators: 500
 
+num_empirical_replicates: 10
+
 validation_percentage: 0.2
 
 sims_per_regime: 5000
