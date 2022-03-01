@@ -19,7 +19,25 @@ rule all:
         "fig/sweep-signatures-control-sweeps.pdf",
         "fig/sweep-signatures-theoretical.pdf",
         "fig/sfs.pdf",
-        "fig/gradientboost.pdf"
+        "fig/gradientboost.pdf",
+        expand("output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
+        )
+
+
+rule replicate_empirical_inferences_table:
+    input:
+        expand(
+            "output/inferences-empirical-replicates/{{target}}_{{training}}_empirical_replicate-{k}.tsv",
+            k=range(config["num_empirical_replicates"])
+        )
+    output:
+        replicates_results = "output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
+        replicates_statistics = "output/metrics/empirical-inference-replicates/{target}_{training}_statistics.tsv"
+    conda:
+        "envs/simulate.yaml"
+    notebook: "notebooks/plotting/empirical-inference-replicates.py.ipynb"
 
 
 rule fixed_sweeps_gradientboost_validation:
