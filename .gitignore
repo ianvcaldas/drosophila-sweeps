@@ -9,6 +9,7 @@ output
 raw-data
 raw-simulations
 fig-manual
+backup*
 
 *.pdf
 *.tsv
