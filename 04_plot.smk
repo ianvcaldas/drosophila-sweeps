@@ -292,14 +292,3 @@ rule prepare_subdwindow_data:
     output: "output/metrics/data_subwindow-sizes.tsv"
     conda: "envs/simulate.yaml"
     notebook: "notebooks/plotting/prepare-subwindow-data.py.ipynb"
-
-
-rule overfitting_learning_curves:
-    input:
-        expand(
-            "output/model-fitting/{target}_{{training}}_overfitting.tsv",
-            target=config["inference_targets"]
-        )
-    output: "fig/overfitting-learning-curves_{training}.pdf"
-    conda: "envs/plotting.yaml"
-    notebook: "notebooks/plotting/overfitting-learning-curves.r.ipynb"

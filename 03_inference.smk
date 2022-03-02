@@ -51,11 +51,6 @@ rule all:
             features=get_feature_subsets(num_features=7),
             testing=["training", "validation"]
         ),
-        overfitting_reports = expand(
-            "output/model-fitting/{target}_{training}_overfitting.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        ),
         gradient_boost_inferences = expand(
             "output/inferences-gradientboost/{target}_{training}_{testing}.tsv",
             target=config["inference_targets"],
@@ -221,19 +216,6 @@ rule apply_model_to_testing_data:
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
-rule aggregate_overfitting_replicates:
-    input:
-        expand(
-            "output/model-fitting/{{target}}_{{training}}_replicate-{k}.tsv",
-            k=range(config["num_overfitting_replicates"])
-        )
-    output:
-        aggregated = "output/model-fitting/{target}_{training}_overfitting.tsv"
-    conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/aggregate-overfitting_{target}_{training}.tsv"
-    script: "scripts/inference/aggregate-overfitting-replicates.py"
-
-
 rule fit_model_feature_subset:
     input:
         training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
@@ -304,48 +286,6 @@ rule train_validation_split:
         random_seed = 13
     conda: "envs/ml.yaml"
     benchmark: "benchmarks/inference/train-validation-split_{training}.tsv"
-    script: "scripts/inference/train-validation-split.py"
-
-
-rule overfitting_simple_fit:
-    input:
-        training = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
-        validation = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv",
-        data = "output/simulation-data/{training}/data.tar",
-        logdata  = "output/simulation-data/{training}/logdata.tar"
-    output:
-        fit_report = "output/model-fitting/{target}_{training}_replicate-{k}.tsv"
-    params:
-        save_model = False,
-        save_inferences = False,
-        use_log_data = False,
-        epochs = config["epochs_for_overfitting_analyses"]
-    conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.tsv"
-    log: "logs/inference/overfitting-simple-fit_{target}_{training}_replicate-{k}.py.ipynb"
-    notebook: "notebooks/inference/fit-neural-network.py.ipynb"
-
-
-rule overfitting_balance_training_data:
-    input:
-        training = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
-        validation = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
-    output:
-        balanced_training = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_training.tsv",
-        balanced_validation = "output/simulation-data-processed/balanced-overfitting/{target}_{training}_replicate-{k}_validation.tsv"
-    conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/overfitting-balance-training-data_{target}_{training}_replicate-{k}.tsv"
-    script: "scripts/inference/balance-training-data.py"
-
-
-rule overfitting_train_validation_split:
-    input:
-        sim_params = "output/simulation-data-processed/parameters/{training}_parameters-clean.tsv"
-    output:
-        training = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_training.tsv",
-        validation = "output/simulation-data-processed/train-valid-split-overfitting/{training}_replicate-{k}_validation.tsv"
-    conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/overfitting-train-validation-split_{training}_replicate-{k}.tsv"
     script: "scripts/inference/train-validation-split.py"
 
 
