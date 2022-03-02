@@ -20,10 +20,23 @@ rule all:
         "fig/sweep-signatures-theoretical.pdf",
         "fig/sfs.pdf",
         "fig/gradientboost.pdf",
+        "fig/main-fixedsweeps_learning-curves-by-sample-size.pdf",
+        "fig/main-partialsweeps_learning-curves-by-sample-size.pdf",
         expand("output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
             target=config["inference_targets"],
             training=config["training_ids"]
         )
+
+rule learning_curves_by_sample_size:
+    input:
+        expand(
+            "output/model-fitting-learning-curve/{target}_{{training}}_fit_{k}.tsv",
+            target=config["inference_targets"],
+            k=range(config["num_overfitting_replicates"])
+        )
+    output: "fig/{training}_learning-curves-by-sample-size.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/learning-curves-by-sample-size.r.ipynb"
 
 
 rule replicate_empirical_inferences_table:

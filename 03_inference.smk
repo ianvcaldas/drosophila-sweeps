@@ -67,7 +67,28 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"],
             k=range(config["num_empirical_replicates"])
+        ),
+        learning_curve_per_sample_size = expand(
+            "output/model-fitting-learning-curve/{target}_{training}_fit_{k}.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"],
+            k=range(config["num_overfitting_replicates"])
         )
+
+
+rule learning_curve:
+    input:
+        training = "output/simulation-data-processed/balanced/{target}_{training}_training.tsv",
+        validation = "output/simulation-data-processed/balanced/{target}_{training}_validation.tsv",
+        data = "output/simulation-data/{training}/data.tar",
+        logdata  = "output/simulation-data/{training}/logdata.tar"
+    output:
+        fit_report = "output/model-fitting-learning-curve/{target}_{training}_fit_{k}.tsv"
+    params:
+        use_log_data = False,
+        epochs = config["epochs_for_model_training"]
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/fit-neural-network-learning-curve.py.ipynb"
 
 
 rule apply_replicate_model_to_empirical_data:
