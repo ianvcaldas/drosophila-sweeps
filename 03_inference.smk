@@ -73,7 +73,28 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"],
             k=range(config["num_overfitting_replicates"])
+        ),
+        neutral_inferences = expand(
+            "output/inferences-neutral/{target}_{training}_neutral.tsv",
+            target=config["inference_targets"],
+            training=config["training_ids"]
         )
+
+
+rule apply_model_to_neutral_regions:
+    input:
+        fit_model = "output/trained-models/{target}_{training}.pth",
+        model_object = "output/trained-models/{target}_{training}.pkl",
+        model_labels = "output/trained-models/{target}_{training}_labels.txt",
+        data = "output/simulation-data/main-fixedsweeps/data.tar",
+        sim_parameters = "output/simulation-data-processed/neutral/main-fixedsweeps_neutral.tsv",
+        logdata = "output/simulation-data/main-fixedsweeps/logdata.tar",
+    output:
+        inferences = "output/inferences-neutral/{target}_{training}_neutral.tsv",
+    params:
+        application_type = "testing"
+    conda: "envs/ml.yaml"
+    notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
 rule learning_curve:
@@ -277,7 +298,8 @@ rule train_validation_split:
         sim_params = "output/simulation-data-processed/parameters/{training}_parameters-clean.tsv"
     output:
         training = "output/simulation-data-processed/train-valid-split/{training}_training.tsv",
-        validation = "output/simulation-data-processed/train-valid-split/{training}_validation.tsv"
+        validation = "output/simulation-data-processed/train-valid-split/{training}_validation.tsv",
+        neutral = "output/simulation-data-processed/neutral/{training}_neutral.tsv"
     params:
         random_seed = 13
     conda: "envs/ml.yaml"

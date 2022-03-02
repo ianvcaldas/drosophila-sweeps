@@ -10,6 +10,9 @@ except AttributeError:  # No random seed given
 
 raw = read_data(snakemake.input["sim_params"])
 
+# Save neutral simulations
+neutral = raw.loc[raw.sweep_mode == "neutral"]
+save_data(neutral, snakemake.output["neutral"])
 # Remove neutral simulations; remove SGV and RNM sweeps that ended up hard-like.
 df = raw.loc[raw.sweep_mode.isin(("hard", "rnm (true)", "sgv (true)"))]
 # Downsample to the desired amount of simulations per sweep mode.

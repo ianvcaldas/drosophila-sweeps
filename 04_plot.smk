@@ -22,10 +22,23 @@ rule all:
         "fig/gradientboost.pdf",
         "fig/main-fixedsweeps_learning-curves-by-sample-size.pdf",
         "fig/main-partialsweeps_learning-curves-by-sample-size.pdf",
+        "fig/null-predictions.pdf",
         expand("output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
             target=config["inference_targets"],
             training=config["training_ids"]
         )
+
+rule null_predictions:
+    input:
+        expand(
+            "output/inferences-{case}/{target}_{training}_{case}.tsv",
+            case=["empirical", "neutral"],
+            target=["log-sel-strength", "sweep-mode"],
+            training=config["training_ids"]
+        )
+    output: "fig/null-predictions.pdf"
+    conda: "envs/plotting.yaml"
+    notebook: "notebooks/plotting/null-predictions.r.ipynb"
 
 rule learning_curves_by_sample_size:
     input:
