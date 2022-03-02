@@ -112,6 +112,7 @@ rule empirical_window_features:
         normalization_stats = config['stats-file-location']
     output:
         npy = 'output/empirical-windows/npy/{window}.npy',
+        log_npy = 'output/empirical-windows/npy-log-scale/{window}.npy',
         ms = temp('output/empirical-windows/ms/{window}.ms'),
         features = temp('output/empirical-windows/features/{window}.tsv'),
         stats = 'output/empirical-windows/features/{window}-stats.tsv',
