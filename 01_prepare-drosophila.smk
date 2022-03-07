@@ -32,6 +32,7 @@ rule all:
             stats=['', '-stats']
         ),
         "output/dgrp2/dgrp-population-parameters.txt",
+        "output/dgrp2/sfs.txt",
         "output/empirical-windows/data.tar",
         "output/empirical-windows/logdata.tar"
 

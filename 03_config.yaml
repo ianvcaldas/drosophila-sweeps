@@ -2,7 +2,7 @@
 raw_sim_folder: "raw-simulations/20211004_simulations"
 additional_sim_folder: "raw-simulations/20220204_supporting-simulations"
 epochs_for_model_training: 50
-num_overfitting_replicates: 10
+num_overfitting_replicates: 5
 epochs_for_overfitting_analyses: 60
 
 num_gradient_boosting_estimators: 500

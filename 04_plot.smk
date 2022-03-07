@@ -3,8 +3,6 @@ configfile: '03_config.yaml'
 
 rule all:
     input:
-        expand("fig/overfitting-learning-curves_{training}.pdf",
-               training=config["training_ids"]),
         "fig/subwindow-diagram.pdf",
         "fig/fixed-sweeps-validation.pdf",
         "fig/fixed-sweeps-validation-selection-brackets.pdf",

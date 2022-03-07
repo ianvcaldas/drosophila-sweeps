@@ -1408,3 +1408,57 @@ CLOSED: [2022-02-11 Fri 16:12]
 - [X] Bring back supplement part about overall Drosophila windows.
 - [X] Desai citation: https://doi.org/10.1534/genetics.106.067678
 
+*** 2022-02-18 Friday
+**** DONE Results in Drosophila manuscript [3/3]
+CLOSED: [2022-02-18 Fri 15:45] DEADLINE: <2022-02-18 Fri>
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-03 Thu 18:19
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_ITAGS: project
+:ARCHIVE_OLPATH: PhD/Drosophila sweeps
+:END:
+- State "DONE"       from              [2022-02-18 Fri 15:45]
+***** DONE Re-train Drosophila models with 50 epochs. [4/4]
+CLOSED: [2022-02-15 Tue 09:11]
+- State "DONE"       from "DOING"      [2022-02-15 Tue 09:11]
+- State "DOING"      from "TODO"       [2022-02-14 Mon 15:46]
+- State "SOON"       from              [2022-02-14 Mon 10:37]
+- [X] Backup output files somewhere.
+- [X] Dry run to see that everything will be OK.
+- [X] No need to run overfitting replicates.
+- [X] Run overnight.
+  
+***** DONE Re-run plots and numbers.
+CLOSED: [2022-02-15 Tue 12:25]
+- State "DONE"       from "TODO"       [2022-02-15 Tue 12:25]
+- State "SOON"       from              [2022-02-14 Mon 10:37]
+- Overfitting plots don't need to be redone.
+  
+***** DONE Non-CNN model training in Drosophila [20/20]
+CLOSED: [2022-02-18 Fri 15:45]
+
+- State "DONE"       from "DOING"      [2022-02-18 Fri 15:45]
+- State "DOING"      from "SOON"       [2022-02-18 Fri 11:51]
+- State "SOON"       from              [2022-02-14 Mon 10:37]
+- [X] Copy rule and notebook for fitting deep learning.
+- [X] Add gradient boosting parameters to =project_parameters.py=
+- [X] Create training/validation SweepsDatasets.
+- [X] Flatten and load X and y arrays for training and validation.
+- [X] Train for the right targets.
+- [X] Produce an output dataframe of predictions.
+  - [X] Get predictions for classification.
+  - [X] Change classification column names.
+  - [X] Add true column to predictions.
+  - [X] Repeat for training and validation.
+  - [X] Get predictions for regression.
+  - [X] Change regression column names.
+  - [X] Add true column to predictions.
+- [X] Run all with 1 estimator, test that it works.
+- [X] Git update.
+- [X] New rule for plotting gradient boosting validation; base it on main model.
+- [X] Do the plot.
+- [X] Save those metrics: MRE and RMSE of sel. strength for all, hard, RNM, SGV. Accuracy of sweep mode.
+- [X] Git update.
+- [X] Run all with 500 estimators.
