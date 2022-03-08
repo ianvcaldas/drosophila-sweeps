@@ -57,11 +57,9 @@ rule all:
             training=config["training_ids"],
             testing=["training", "validation"]
         ),
-        empirical_inference_replicates = expand(
-            "output/inferences-empirical-replicates/{target}_{training}_empirical_replicate-{k}.tsv",
+        empirical_inference_replicates = expand("output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
             target=config["inference_targets"],
-            training=config["training_ids"],
-            k=range(config["num_empirical_replicates"])
+            training=config["training_ids"]
         ),
         learning_curve_per_sample_size = expand(
             "output/model-fitting-learning-curve/{target}_{training}_fit_{k}.tsv",
@@ -74,6 +72,21 @@ rule all:
             target=config["inference_targets"],
             training=config["training_ids"]
         )
+
+
+rule replicate_empirical_inferences_table:
+    input:
+        expand(
+            "output/inferences-empirical-replicates/{{target}}_{{training}}_empirical_replicate-{k}.tsv",
+            k=range(config["num_empirical_replicates"])
+        )
+    output:
+        replicates_results = "output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
+        replicates_statistics = "output/metrics/empirical-inference-replicates/{target}_{training}_statistics.tsv"
+    conda:
+        "envs/simulate.yaml"
+    notebook: "notebooks/inference/empirical-inference-replicates.py.ipynb"
+
 
 
 rule apply_model_to_neutral_regions:

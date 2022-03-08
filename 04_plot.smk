@@ -20,11 +20,7 @@ rule all:
         "fig/gradientboost.pdf",
         "fig/main-fixedsweeps_learning-curves-by-sample-size.pdf",
         "fig/main-partialsweeps_learning-curves-by-sample-size.pdf",
-        "fig/null-predictions.pdf",
-        expand("output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
-            target=config["inference_targets"],
-            training=config["training_ids"]
-        )
+        "fig/null-predictions.pdf"
 
 rule null_predictions:
     input:
@@ -48,20 +44,6 @@ rule learning_curves_by_sample_size:
     output: "fig/{training}_learning-curves-by-sample-size.pdf"
     conda: "envs/plotting.yaml"
     notebook: "notebooks/plotting/learning-curves-by-sample-size.r.ipynb"
-
-
-rule replicate_empirical_inferences_table:
-    input:
-        expand(
-            "output/inferences-empirical-replicates/{{target}}_{{training}}_empirical_replicate-{k}.tsv",
-            k=range(config["num_empirical_replicates"])
-        )
-    output:
-        replicates_results = "output/metrics/empirical-inference-replicates/{target}_{training}.tsv",
-        replicates_statistics = "output/metrics/empirical-inference-replicates/{target}_{training}_statistics.tsv"
-    conda:
-        "envs/simulate.yaml"
-    notebook: "notebooks/plotting/empirical-inference-replicates.py.ipynb"
 
 
 rule fixed_sweeps_gradientboost_validation:
