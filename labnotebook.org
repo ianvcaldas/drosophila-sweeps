@@ -1462,3 +1462,246 @@ CLOSED: [2022-02-18 Fri 15:45]
 - [X] Save those metrics: MRE and RMSE of sel. strength for all, hard, RNM, SGV. Accuracy of sweep mode.
 - [X] Git update.
 - [X] Run all with 500 estimators.
+
+*** 2022-02-21 Monday
+**** DONE Better metrics
+CLOSED: [2022-02-21 Mon 13:16]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:26
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Last Drosophila results
+:END:
+
+- State "DONE"       from "DOING"      [2022-02-21 Mon 13:16]
+- State "DOING"      from "SOON"       [2022-02-21 Mon 12:40]
+- State "SOON"       from              [2022-02-21 Mon 11:50]
+- [X] Rename metrics output, make them consistent and understandable.
+- [X] Use metrics from gradient boost as basis to get main model metrics.
+- [X] Make sure everything connects with =-n=.
+- [X] Run everything.
+- [X] Git update.
+
+** 2022-03 March
+
+*** 2022-03-01 Tuesday
+**** DONE Make replicate empirical Drosophila inferences
+CLOSED: [2022-03-01 Tue 15:38]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:26
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Last Drosophila results
+:END:
+- State "DONE"       from "DOING"      [2022-03-01 Tue 15:38]
+- State "DOING"      from "DONE"       [2022-02-25 Fri 13:59]
+- State "DONE"       from "DOING"      [2022-02-25 Fri 11:54]
+- [X] Add replicates of training runs to =all= rule.
+- [X] Create a new rule. I don't think I need to change any notebooks or anything.
+- [X] Test it with =-n=.
+- [X] Git update.
+- [X] Run it.
+- [X] Look at replicates of predictions to tell Philipp.
+- [X] Make a rule with a script.
+- [X] Git update.
+
+*** 2022-03-02 Wednesday
+**** DONE Drosophila learning curve by sample size [22/22]
+CLOSED: [2022-03-02 Wed 13:59]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:26
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Last Drosophila results
+:END:
+
+- State "DONE"       from "DOING"      [2022-03-02 Wed 13:59]
+- State "DOING"      from "TODO"       [2022-03-02 Wed 13:04]
+Do a learning curve to see if we have enough training examples.
+
+- [X] Make a rule for each target.
+- [X] Test that everything works with =-n=.
+- [X] In a notebook per target:
+  - [X] Subset training and validation to a smaller size, rebalancing it.
+  - [X] Fit models at increasing sample sizes.
+  - [X] scikit learn user guide: do we use the same validation set, always?
+- [X] Collate all results into a table per target, including the employed sample size.
+- [X] Balance training datasets.
+- [X] Test the balancing with a hard vs. soft example.
+- [X] Run everything with tiny sample sizes, tiny epochs.
+- [X] Plotting rule: put results for each target together, make plot. Wildcard by training data, just like the other learning curves.
+- [X] Copy learning curve notebook.
+- [X] Then plot everything. Also, report the sample size somewhere.
+- [X] Run plotting rules to make sure they work.
+- [X] Add overfitting replicates to learning curve rule.
+- [X] Run again, make sure it works.
+- [X] Update input for learning curve plotting rule.
+- [X] Update plotting notebook for learning curve replicates.
+- [X] Remove all placeholder code and comments from fitting notebook.
+- [X] Config goes back to 10 overfitting replicates.
+- [X] Clear folder of temporary notebooks.
+- [X] Git update.
+  
+**** DONE Genome-wide Drosophila predictions [19/19]
+CLOSED: [2022-03-02 Wed 16:27]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:26
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Last Drosophila results
+:END:
+
+- State "DONE"       from "DOING"      [2022-03-02 Wed 16:27]
+- State "DOING"      from "TODO"       [2022-03-02 Wed 13:46]
+- State "SOON"       from              [2022-02-21 Mon 11:50]
+- [X] Review how we make empirical windows now
+- [X] Empirical window commands notebook
+- [X] Inspiration from previous notebook on empirical windows
+- [X] Run with smaller data: Make empirical windows
+- [X] Rule: apply model to empirical
+- [X] Rule: make neutral simulation parameter TSVs
+- [X] Rule: apply model to neutral simulations. Base on applying model to partial sweeps.
+- [X] Model application notebook
+- [X] Change num of epochs to 3
+- [X] Run neutral inferences
+- [X] Plot rule for genomewide predictions (only fixedsweeps selstren and sweep mode)
+- [X] Plot notebook based on previous plot
+  - [X] Plan the 2 cowplot components, what data do I need?
+  - [X] Load data separating between empirical and neutral cases
+  - [X] Make component 1
+  - [X] Make component 2
+- [X] Change num of epochs back in config
+- [X] Learning curves removing up to epoch 25
+- [X] Git update
+
+*** 2022-03-04 Friday
+**** DONE Manual cleaning of citations in Drosophila manuscript
+CLOSED: [2022-03-04 Fri 10:58]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:27
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Final Drosophila manuscript
+:END:
+
+- State "DONE"       from "DOING"      [2022-03-04 Fri 10:58]
+- State "DOING"      from "TODO"       [2022-03-04 Fri 10:27]
+- [X] Pull Overleaf locally
+- [X] What's wrong with the citations from my own point of view?
+- [X] Use the PLoS guidelines to create a citation todo list here.
+- [X] Species names formatted properly.
+- [X] All-caps in a row.
+- [X] Review all citations by eye.
+- [X] Update git and Overleaf.
+
+
+*** 2022-03-07 Monday
+**** DONE Run Drosophila [19/19]
+CLOSED: [2022-03-07 Mon 17:12]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:26
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Last Drosophila results
+:END:
+
+- State "DONE"       from "TODO"       [2022-03-07 Mon 17:12]
+- State "DOING"      from "TODO"       [2022-03-04 Fri 10:26]
+- State "DOING"      from "SOON"       [2022-03-02 Wed 16:44]
+- [X] Remove overfitting curves from inference and plotting.
+- [X] Something might go wrong now that we have more than just sweeps as our empirical results. Where do we use them?
+  - [X] Make table of empirical results
+  - [X] Prepare sweep signals
+- [X] Run preparation of data
+- [X] Run model training and inference
+- [X] Run plotting
+- [X] Confirm that everything looks good
+- [X] Plot for null predictions isn't working - why?
+- [X] All the predictions for the genome-wide data are the same. Fix it.
+  - [X] Are the genomewide data identical? Yes. How?
+  - [X] Change naming of empirical windows to =genomewide_chrom=
+- [X] Delete empirical windows.
+- [X] Re-run data preparation to remake empirical windows.
+- [X] Delete empirical inferences.
+- [X] Re-run empirical inferences.
+- [X] Re-run all plotting.
+- [X] Remove backup folders for output and figures
+- [X] Git update
+
+*** 2022-03-08 Tuesday
+**** DONE Put new plots/results/numbers in manuscript [21/21]
+CLOSED: [2022-03-08 Tue 16:09]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:27
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Final Drosophila manuscript
+:END:
+- State "DONE"       from "DOING"      [2022-03-08 Tue 16:09]
+- State "DOING"      from "TODO"       [2022-03-08 Tue 11:58]
+- [X] Pull Overleaf locally
+- [X] Fix empirical inference replicates
+  - [X] Save "statistics" files with an index.
+  - [X] Move rule to the inference workflow.
+  - [X] Move notebook to the inference folder.
+  - [X] Re-run.
+  - [X] Git update.
+- [X] Add empirical inference replicates
+  - [X] Remove Table 3.
+  - [X] Add sentence about making model training replicates.
+  - [X] Put sel. strength inferences in each locus's paragraph.
+  - [X] Add empirical inference error/replicates/uncertainty to the results, as a placeholder. Just put it in the text. Do this for each empirical inference.
+  - [X] Add IQR to empirical replicate summaries.
+  - [X] Clear temporary notebooks folder.
+  - [X] Git update.
+  - [X] Add the real empirical inference replicate numbers to the manuscript.
+- [X] Replace =WHY= tag of sweep duration with a placeholder explanation that Philipp can expand.
+- [X] Change all plots to current ones.
+- [X] Add subheadings to Supplementary paragraphs.
+- [X] Relegate offcenter robustness plot to the Supplementary.
+- [X] Add offcenter sweeps as paragraph of Robustness evaluation.
+  
+**** DONE Review Drosophila manuscript [100%]
+CLOSED: [2022-03-08 Tue 17:11]
+:PROPERTIES:
+:ARCHIVE_TIME: 2022-03-09 Wed 12:27
+:ARCHIVE_FILE: ~/pessoal/essencial/agenda.org
+:ARCHIVE_CATEGORY: PhD
+:ARCHIVE_TODO: DONE
+:ARCHIVE_OLPATH: PhD/Drosophila project/Final Drosophila manuscript
+:END:
+- State "DONE"       from "DOING"      [2022-03-08 Tue 17:11]
+- State "DOING"      from "TODO"       [2022-03-08 Tue 16:29]
+- [X] Page 3
+- [X] Page 4
+- [X] Page 5
+- [X] Page 6
+- [X] Page 7
+- [X] Page 8
+- [X] Page 9
+- [X] Page 10
+- [X] Page 11
+- [X] Page 12
+- [X] Page 13
+- [X] Page 14
+- [X] Page 15
+- [X] Page 16
+- [X] Page 17
+- [X] Page 18
+- [X] Page 19
+- [X] Page 20
+- [X] Page 21
+- [X] Page 22
+- [X] Page 23
+- [X] Page 24
+- [X] Change all numbers to current predictions.
+- [X] Move supporting figures and tables so they're in the same order as they appear in the text.
+- [X] Git and Overleaf update.
+- [X] Email Philipp when numbers are in place.

@@ -1,0 +1,76 @@
+initialize() {
+
+    setwd("/Users/ian/ciencia/projects_202109_drosophila-sweeps/adhoc/hard-sweeps");
+
+    defineConstant("simplification_interval", 500);
+    defineConstant("save_file", "temp/savefile.trees");
+    defineConstant("metrics_output", paste(c("outputs/", getSeed(), ".txt"), sep=""));
+    defineConstant("restart_limit", 1000);
+    defineConstant("h", 0.5);
+    defineConstant("L", 1);
+    defineConstant("selection_coordinate", 1);
+    defineConstant("s", 41.7);
+    defineConstant("f_desired", 1.0);
+    
+    cat("Initial random seed set to " + getSeed());
+    initializeTreeSeq(simplificationInterval=simplification_interval);
+    initializeMutationRate(0);
+    initializeMutationType('m1', h, 'f', s);
+    m1.convertToSubstitution = F;
+    initializeGenomicElementType('g1', m1, 1.0);
+    initializeGenomicElement(g1, 0, L);
+    initializeRecombinationRate(0);
+}
+
+1 late() {
+	 sim.setValue("num_restarts", 0);
+    sim.addSubpop("p1", 50000);
+}
+
+1 late() {
+    origin = sample(sim.subpopulations.genomes, 1);
+    origin.addNewDrawnMutation(m1, selection_coordinate);
+    sim.treeSeqOutput(save_file);
+}
+
+1:5000 late() {
+    freq = mutfreq();
+    if (freq >= f_desired) {
+        cat("Reached frequency " + freq + " >= " + f_desired + "; sampling.\n");
+        finalize_sim();
+    } else {
+        if (sum(sim.mutations.id == 0) == 0) {
+            cat("Focus mutation lost; restarting.\n");
+            restart_sim();
+        }
+    }
+}
+
+5000 late() {
+    cat("Still segregating at generation " + 5000 + "; restarting.\n");
+    restart_sim();
+}
+
+function (float)mutfreq(void) {
+    mut = sim.mutationsOfType(m1);
+    freq = sim.mutationFrequencies(NULL, mut);
+    return sum(freq);
+}
+
+function (void)restart_sim(void) {
+    sim.readFromPopulationFile(save_file);
+    setSeed(getSeed() + 1);
+    sim.setValue('num_restarts', sim.getValue('num_restarts') + 1);
+    if (sim.getValue('num_restarts') > restart_limit) {
+        cat("Restarted more than " + restart_limit + " times; aborting.\n");
+        writeFile(strsplit(output_file, '.')[0] + ".failed", "");
+        sim.simulationFinished();
+    }
+}
+
+function (void)finalize_sim(void) {
+    record = paste(c(s, sim.generation));
+    writeFile(metrics_output, record);
+    sim.simulationFinished();
+}
+
