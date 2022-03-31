@@ -1,6 +1,5 @@
 
-adhoc/hard-sweeps/outputs
-adhoc/hard-sweeps/temp
+adhoc
 benchmarks
 bin
 fig
@@ -13,6 +12,7 @@ backup*
 
 *.pdf
 *.tsv
+*~undo-tree~
 
 .DS_Store
 .ipynb_checkpoints

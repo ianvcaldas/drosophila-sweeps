@@ -1,6 +1,5 @@
 
 configfile: '01_config.yaml'
-report: 'captions/prepare-drosophila.rst'
 
 
 def wait_for_empirical_npy(wildcards):
@@ -41,11 +40,7 @@ rule dgrp_population_parameters:
     input:
         allele_counts = 'output/dgrp2/imputed-counts.frq.count',
         heterozygosity = 'output/dgrp2/imputed-heteroz.sites.pi'
-    output:
-        report(
-            "output/dgrp2/dgrp-population-parameters.txt",
-            caption="captions/dgrp-population-parameters.rst"
-        )
+    output: "output/dgrp2/dgrp-population-parameters.txt"
     conda: "envs/simulate.yaml"
     notebook: "notebooks/prepare-drosophila/dgrp-population-parameters.py.ipynb"
 
