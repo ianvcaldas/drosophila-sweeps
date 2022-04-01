@@ -19,7 +19,7 @@ The project is split between 4 Snakemake workflows, for each of the main steps o
 
 To simulate locally:
 
-    CONFIGFILES=$(ls simulation-parameters/training/*.yaml)
+    CONFIGFILES=$(ls resources/simulation-parameters/training/*.yaml)
 	NUM_SIMS=5
     
     for file in ${CONFIGFILES}
