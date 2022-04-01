@@ -3,6 +3,7 @@
 adhoc             
 bin
 fig
+logs
 output
 raw-data
 raw-simulations
