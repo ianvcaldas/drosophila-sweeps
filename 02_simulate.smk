@@ -76,6 +76,7 @@ rule all:
         OUTDIR/"logdata.tar",
         OUTDIR/"genotypes.tar.gz"
 
+
 rule logtar_npy:
     input:
         npy_files = successful_lognpy,
@@ -87,6 +88,7 @@ rule logtar_npy:
     conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
 
+
 rule tar_npy:
     input:
         npy_files = successful_npy,
@@ -97,6 +99,7 @@ rule tar_npy:
         npy_folder = OUTDIR/"npy",
     conda: "envs/simulate.yaml"
     script: "scripts/simulations/tar_npy.py"
+
 
 rule compress_genomes:
     input: successful_genomes
@@ -142,7 +145,6 @@ rule calculate_normalize_features:
         features = OUTDIR/"features/{sim_id}_features.tsv",
         stats = OUTDIR/"features/{sim_id}_feature-stats.tsv"
     conda: 'envs/simulate.yaml'
-    benchmark: 'benchmarks/' + str(OUTDIR_ID) + '/{sim_id}_features-and-normalization.tsv'
     script: "scripts/simulations/features-and-normalization.py"
 
 
@@ -154,7 +156,6 @@ rule drop_mutations:
         trees_file = OUTDIR/"{sim_id}_mutation-dropped.trees",
         metrics_file = OUTDIR/"{sim_id}_msprime-metrics.txt",
         ms_file = OUTDIR/"{sim_id}_genotypes.ms"
-    benchmark: 'benchmarks/' + str(OUTDIR_ID) + '/{sim_id}_drop-mutations.tsv'
     conda: "envs/simulate.yaml"
     script: "scripts/simulations/drop-mutations.py"
 
@@ -174,7 +175,6 @@ rule slim:
     params:
         slim = config['slim']
     log: 'logs/' + str(OUTDIR_ID) + '/{sim_id}_slim.log'
-    benchmark: 'benchmarks/' + str(OUTDIR_ID) + '/{sim_id}_slim.tsv'
     shell:
         "{params.slim} {input} &> {log}"
 
@@ -201,7 +201,6 @@ rule burnin:
     output:
         trees = OUTDIR/"{sim_id}_burnin.trees"
     conda: "envs/simulate.yaml"
-    benchmark: 'benchmarks/' + str(OUTDIR_ID) + '/{sim_id}_burnin.tsv'
     script: "scripts/simulations/simulation-burnin.py"
 
 

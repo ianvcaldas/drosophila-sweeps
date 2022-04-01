@@ -1,5 +1,5 @@
 
-configfile: '03_config.yaml'
+configfile: 'config.yaml'
 
 rule all:
     input:

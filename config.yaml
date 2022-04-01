@@ -1,14 +1,17 @@
 
+dgrp2-location: "raw-data/dgrp2.vcf.gz"
+jiggins-data: "resources/jiggins-data.txt"
 raw_sim_folder: "raw-simulations/20211004_simulations"
 additional_sim_folder: "raw-simulations/20220204_supporting-simulations"
+stats-file-location: "resources/normalization-stats.tsv"
+
+beagle-location: "bin/beagle.28Jun21.220.jar"
+
 epochs_for_model_training: 50
 num_overfitting_replicates: 5
 epochs_for_overfitting_analyses: 60
-
 num_gradient_boosting_estimators: 500
-
 num_empirical_replicates: 10
-
 validation_percentage: 0.2
 
 sims_per_regime: 5000

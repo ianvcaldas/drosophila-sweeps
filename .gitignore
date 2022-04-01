@@ -1,20 +1,20 @@
 
-adhoc
-benchmarks
+# Local folders
+adhoc             
 bin
 fig
-logs
 output
 raw-data
 raw-simulations
 fig-manual
-backup*
 
+# Data files
 *.pdf
 *.tsv
-*~undo-tree~
 
+# Various intermediate files
 .DS_Store
 .ipynb_checkpoints
 .snakemake
 __pycache__
+*~undo-tree~

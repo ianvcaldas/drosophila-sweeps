@@ -1,6 +1,5 @@
 
-configfile: '03_config.yaml'
-report: 'captions/inference.rst'
+configfile: 'config.yaml'
 
 def get_feature_subsets(num_features):
     """Feature subsets are coded as a string, where each character is "0" or "1" for
@@ -170,8 +169,6 @@ rule fit_gradient_boost:
         num_gb_estimators = config["num_gradient_boosting_estimators"],
         use_log_data = False
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/fit-gradient-boost_{target}_{training}.tsv"
-    log: "logs/inference/fit-gradient-boost_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/fit-gradient-boost.py.ipynb"
 
 
@@ -187,8 +184,6 @@ rule apply_model_to_empirical_data:
     params:
         application_type = "empirical"
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/apply-model-empirical_{target}_{training}.tsv"
-    log: "logs/inference/apply-model-empirical_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
@@ -205,8 +200,6 @@ rule apply_fixed_sweeps_model_to_partial_sweeps:
     params:
         application_type = "testing"
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/apply-model-testing_{target}_main-fixedsweeps_main-partialsweeps.tsv"
-    log: "logs/inference/apply-model-testing_{target}_main-fixedsweeps_main-partialsweeps.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
@@ -224,8 +217,6 @@ rule apply_model_to_testing_data:
     params:
         application_type = "testing"
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/apply-model-testing_{target}_{training}_{testing}.tsv"
-    log: "logs/inference/apply-model-testing_{target}_{training}_{testing}.py.ipynb"
     notebook: "notebooks/inference/apply-model.py.ipynb"
 
 
@@ -245,8 +236,6 @@ rule fit_model_feature_subset:
         use_log_data = False,
         epochs = config["epochs_for_model_training"]
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}_features-{features}.tsv"
-    log: "logs/inference/fit-neural-network_{target}_{training}_features-{features}.py.ipynb"
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
@@ -269,8 +258,6 @@ rule fit_model:
         use_log_data = False,
         epochs = config["epochs_for_model_training"]
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/fit-neural-network_{target}_{training}.tsv"
-    log: "logs/inference/fit-neural-network_{target}_{training}.py.ipynb"
     notebook: "notebooks/inference/fit-neural-network.py.ipynb"
 
 
@@ -284,7 +271,6 @@ rule balance_training_data:
     params:
         random_seed = 13
     conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/balance-training-data_{target}_{training}.tsv"
     script: "scripts/inference/balance-training-data.py"
 
     
@@ -298,7 +284,6 @@ rule train_validation_split:
     params:
         random_seed = 13
     conda: "envs/ml.yaml"
-    benchmark: "benchmarks/inference/train-validation-split_{training}.tsv"
     script: "scripts/inference/train-validation-split.py"
 
 
@@ -313,7 +298,6 @@ rule clean_datasets:
     params:
         random_seed = 13
     conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/clean-dataset_{sim_id}.tsv"
     script: "scripts/inference/clean-dataset.py"
 
 
@@ -325,6 +309,4 @@ rule combine_simulation_tasks:
         features = "output/simulation-data/{sim}/features.tar.gz",
         logdata  = "output/simulation-data/{sim}/logdata.tar"
     conda: "envs/simulate.yaml"
-    benchmark: "benchmarks/inference/combine-simulations_{sim}.tsv"
-    log: "logs/inference/combine-simulations_{sim}.py.ipynb"
     notebook: "notebooks/inference/combine-simulations.py.ipynb"
