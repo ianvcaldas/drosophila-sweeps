@@ -2,7 +2,7 @@
 Sel. sweep parameter inference
 ==============================
 
-This repository contains the entirety of the code used to infer sweep parameters in *Drosophila melanogaster* using machine learning. The code can be run to generate the output files and figures from the paper, though they will look slightly different due to the randomness of simulation and model fitting.
+This repository contains the entirety of the code used to infer sweep parameters in *Drosophila melanogaster* using machine learning. This code is part of an upcoming preprint. It can be run to generate the output files and figures from the manuscript, though they will look slightly different due to the randomness of simulation and model fitting.
 
 The project is split between 4 Snakemake workflows, for each of the main steps of the analysis:
 
@@ -34,13 +34,15 @@ The Snakemake workflows are set up to load the conda environments in `envs` auto
 
 To simulate locally:
 
-    CONFIGFILES=$(ls resources/simulation-parameters/training/*.yaml)
-	NUM_SIMS=5
-    
-    for file in ${CONFIGFILES}
-    do
-        snakemake --use-conda --snakefile 02_simulate.smk --configfile ${file} --config slim=bin/slim3.7 normalization_stats=resources/normalization-stats.tsv simulations=${NUM_SIMS} use_subdirectory=true
-    done
+```
+CONFIGFILES=$(ls resources/simulation-parameters/training/*.yaml)
+NUM_SIMS=5
+
+for file in ${CONFIGFILES}
+do
+	snakemake --use-conda --snakefile 02_simulate.smk --configfile ${file} --config slim=bin/slim3.7 normalization_stats=resources/normalization-stats.tsv simulations=${NUM_SIMS} use_subdirectory=true
+done
+```
 
 `slurm_simulate.sh` was the script used to perform simulations on a SLURM cluster. `slurm_submit.sh` was the script used to submit the jobs to the cluster.
 
