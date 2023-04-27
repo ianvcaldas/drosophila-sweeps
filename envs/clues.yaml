@@ -1,0 +1,10 @@
+
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - numba
+  - progressbar
+  - biopython
+  - scipy
+  - python=3.9

@@ -1,0 +1,3 @@
+[submodule "src/clues"]
+	path = bin/clues
+	url = https://github.com/standard-aaron/clues
