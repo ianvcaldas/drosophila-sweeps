@@ -10,6 +10,7 @@ dependencies:
   - pandas=1.2.5
   - pip
   - python=3.9
+  - scikit-allel
   - scipy=1.7.0
   - tskit=0.3.6
   - vcftools=0.1.16

@@ -9,6 +9,8 @@ raw-data
 raw-simulations
 fig-manual
 
+test.sh
+
 # Data files
 *.pdf
 *.tsv
@@ -17,5 +19,6 @@ fig-manual
 .DS_Store
 .ipynb_checkpoints
 .snakemake
+._*
 __pycache__
 *~undo-tree~
